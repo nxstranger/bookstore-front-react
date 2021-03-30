@@ -33,7 +33,7 @@ function CategoryList(): JSX.Element {
   useEffect(() => {
     setTimeout(() => {
       getCategories();
-    }, 1000);
+    }, 200);
   }, []);
 
   return (

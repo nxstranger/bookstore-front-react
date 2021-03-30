@@ -19,9 +19,8 @@ function App() {
         <Route path="/profile/:id" component={Profile} />
         <Route path="/wishlist" component={Wishlist} />
         <Route path="/login" component={LoginForm} />
-        <Route path="/book/:slug" component={Book} />
-        <Route path="/categories/:catslug/:bookslug" component={Home} />
-        <Route path="/categories/:catslug" component={Home} />
+        <Route exact path="/book/:catSlug/:bookSlug" component={Book} />
+        <Route exact path="/book/:catSlug" component={Home} />
         <Route exact path="/" component={Home} />
       </Switch>
       <Footer />

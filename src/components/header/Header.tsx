@@ -16,7 +16,6 @@ function Header() {
     <StyledHeader>
       Header
       <Link to="/">Home</Link>
-      <Link to="/book/12">Book</Link>
       <Link to="/login">Login</Link>
       <Link to="/wishlist">Wishlist</Link>
       <Link to="/profile/123">Profile</Link>

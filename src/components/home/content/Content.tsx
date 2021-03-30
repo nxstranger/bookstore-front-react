@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import React from 'react';
 import styled from 'styled-components';
 import ContentBoth from './ContentBoth';
@@ -10,10 +11,11 @@ const StyledContent = styled.div`
 `;
 
 function Content() {
+  const { catSlug } = useParams<{ catSlug: string }>();
   return (
     <StyledContent>
       <ContentHead />
-      <ContentMain />
+      <ContentMain categoryBook={catSlug} />
       <ContentBoth />
     </StyledContent>
   );

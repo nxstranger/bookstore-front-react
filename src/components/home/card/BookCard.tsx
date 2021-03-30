@@ -17,13 +17,22 @@ interface bookProps {
 }
 
 function BookCard({ bookObj }:bookProps) {
-  const detailLinc = `/categories/${bookObj.Category.slug}/${bookObj.slug}`;
+  const detailLinc = `/book/${bookObj.Category.slug}/${bookObj.id}_${bookObj.slug}`;
+  const titleImageLink = `/media/${bookObj.image}/Title.jpg`;
   return (
     <Card>
       <Link to={detailLinc}>
         <span>{bookObj.title}</span>
       </Link>
-      <img src="/src/logo.svg" alt="BookImage" />
+      <span>
+        {'Author: '}
+        {bookObj.BookAuthor.name}
+      </span>
+      <span>
+        {'Price: '}
+        {bookObj.price}
+      </span>
+      <img src={titleImageLink} alt="BookImage" />
       <span>{bookObj.description}</span>
     </Card>
   );

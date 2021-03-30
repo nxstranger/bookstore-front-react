@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Link,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface CategoryInterface{
   categoryName: string
@@ -9,7 +7,7 @@ interface CategoryInterface{
 }
 
 function Category({ slug, categoryName }:CategoryInterface) {
-  const link = `/categories/${slug}`;
+  const link = `/book/${slug}`;
   return (
     <Link to={link}>
       <span>{categoryName}</span>

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
-
 import BookCard from '../card/BookCard';
 import axios from '../../../modules/axios/config';
 import { bookInterface } from '../../../modules/interfaces/bookInterface';
@@ -12,16 +10,11 @@ const Main = styled.main`
   flex-wrap: wrap;
 `;
 
-function ContentMain() {
-  const { catslug, bookslug } = useParams<{ catslug: string, bookslug: string }>();
-
+function ContentMain({ categoryBook } :{categoryBook: string}) {
   const [books, setBooks] = useState<Array<bookInterface>>([]);
-  console.log(catslug, bookslug);
 
-  const link: string = (bookslug) ? `${catslug}/${bookslug}` : catslug || '';
-
-  function getBooks() {
-    axios.get(`/book/${link}`)
+  function getBooks(slug: string = '') {
+    axios.get(`/book/${slug}`)
       .then((data) => {
         setBooks(data.data);
       })
@@ -29,10 +22,9 @@ function ContentMain() {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      getBooks();
-    }, 500);
-  }, []);
+    // setLink(catSlug);
+    getBooks(categoryBook);
+  }, [categoryBook]);
   return (
     <Main>
       {
