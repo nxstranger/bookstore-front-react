@@ -3,30 +3,25 @@ import {
   withFormik,
   FormikProps,
   FormikErrors,
-  Form,
   Field,
 } from 'formik';
 import axios from 'axios';
+import { StyledForm } from '../styled/styledForm';
 
 interface FormValues {
   email: string;
   password: string;
 }
 
-interface OtherProps {
-  message: string;
-}
-
-const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
+const InnerForm = (props: FormikProps<FormValues>) => {
   const {
     touched,
     errors,
     isSubmitting,
-    message,
+    handleSubmit,
   } = props;
   return (
-    <Form>
-      <h1>{message}</h1>
+    <StyledForm onSubmit={handleSubmit}>
       <Field type="email" name="email" />
       {touched.email && errors.email && <div>{errors.email}</div>}
 
@@ -36,7 +31,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
       <button type="submit" disabled={isSubmitting}>
         Submit
       </button>
-    </Form>
+    </StyledForm>
   );
 };
 

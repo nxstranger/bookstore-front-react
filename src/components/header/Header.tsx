@@ -16,7 +16,8 @@ function Header() {
     <StyledHeader>
       Header
       <Link to="/">Home</Link>
-      <Link to="/login">Login</Link>
+      <Link to="/auth/login">Login</Link>
+      <Link to="/auth/registration">registration</Link>
       <Link to="/wishlist">Wishlist</Link>
       <Link to="/profile/123">Profile</Link>
     </StyledHeader>

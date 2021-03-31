@@ -9,7 +9,8 @@ import Wishlist from './components/wishlist/Wishlist';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Book from './components/book/Book';
-import LoginForm from './components/login/LoginForm';
+import Login from './components/auth/login/Login';
+import Registration from './components/auth/registration/Registration';
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
       <Switch>
         <Route path="/profile/:id" component={Profile} />
         <Route path="/wishlist" component={Wishlist} />
-        <Route path="/login" component={LoginForm} />
+        <Route path="/auth/login" component={Login} />
+        <Route path="/auth/registration" component={Registration} />
         <Route exact path="/book/:catSlug/:bookSlug" component={Book} />
         <Route exact path="/book/:catSlug" component={Home} />
         <Route exact path="/" component={Home} />

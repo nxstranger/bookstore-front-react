@@ -18,9 +18,9 @@ interface categoryObject {
 }
 
 function CategoryList(): JSX.Element {
-  const [categories, setCategories] = useState<Array<categoryObject>>([]);
-  function getCategories():Array<categoryObject> {
-    const catArray: Array<categoryObject> = [];
+  const [categories, setCategories] = useState<categoryObject[]>([]);
+  function getCategories(): categoryObject[] {
+    const catArray: categoryObject[] = [];
     axios.get('/categories')
       .then((data) => {
         setCategories(data.data);
