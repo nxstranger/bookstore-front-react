@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import axios from '../../../modules/axios/config';
-
 import Category from './Category';
+
+import { CategoriesInterface } from '../../../modules/interfaces/categoriesInterface';
+import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
+import { asyncLoadCategories, getAllCategories } from '../../../modules/redux/categoriesSlice';
 
 const StyledCategories = styled.span`
   display: flex;
@@ -11,42 +13,34 @@ const StyledCategories = styled.span`
   margin: 10px;
 `;
 
-interface categoryObject {
-  id: number,
-  title: string,
-  slug: string
-}
-
 function CategoryList(): JSX.Element {
-  const [categories, setCategories] = useState<categoryObject[]>([]);
-  function getCategories(): categoryObject[] {
-    const catArray: categoryObject[] = [];
-    axios.get('/categories')
-      .then((data) => {
-        setCategories(data.data);
-        return [];
-      })
-      .catch(() => []);
-    return catArray;
-  }
+  const dispatch = useAppDispatch();
+  const selector: CategoriesInterface[] = useAppSelector(getAllCategories);
+  const [categories, setCat] = useState<CategoriesInterface[]>(useAppSelector(getAllCategories));
 
   useEffect(() => {
-    setTimeout(() => {
-      getCategories();
-    }, 200);
-  }, []);
+    console.log('categories draw tick');
+    if (!selector.length) {
+      dispatch(asyncLoadCategories());
+    }
+    setCat(selector);
+  }, [selector]);
 
   return (
     <StyledCategories>
+      categories
       {
-        categories.map((obj:categoryObject) => (
-          <Category
-            slug={obj.slug}
-            categoryName={obj.title}
-            key={obj.slug}
-          />
-        ))
+        (categories.length)
+          ? categories.map((obj:CategoriesInterface) => (
+            <Category
+              slug={obj.slug}
+              categoryName={obj.title}
+              key={obj.slug}
+            />
+          ))
+          : (<div> no catt </div>)
       }
+
     </StyledCategories>
   );
 }

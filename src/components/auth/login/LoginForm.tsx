@@ -5,8 +5,12 @@ import {
   FormikErrors,
   Field,
 } from 'formik';
-import axios from 'axios';
+import axios from '../../../modules/axios/config';
 import { StyledForm } from '../styled/styledForm';
+import {
+  emailValidate,
+  passwordValidate,
+} from '../../../modules/fieldsValidator/fieldsValidator';
 
 interface FormValues {
   email: string;
@@ -53,6 +57,8 @@ const LoginForm = withFormik<MyFormProps, FormValues>({
     if (!values.email) {
       errors.email = 'Required';
     }
+    passwordValidate(values.password, errors);
+    emailValidate(values.email, errors);
     return errors;
   },
 
@@ -60,11 +66,10 @@ const LoginForm = withFormik<MyFormProps, FormValues>({
     // do submitting things
     const postHeaders = {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'http://localhost:8080',
     };
     alert(`@:${values.email}\nP:${values.password}`);
     axios.post(
-      'http://localhost:8080/api/auth/login',
+      '/auth/login',
       JSON.stringify(values), {
         headers: postHeaders,
       },

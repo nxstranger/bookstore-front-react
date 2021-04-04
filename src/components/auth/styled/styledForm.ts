@@ -12,9 +12,15 @@ export const StyledForm = styled(Form)`
 export const ErrDiv = styled.div`
   font-size: 10px;
   position: relative;
-  z-index: 9999;
+`;
+
+export const InputAndErrorWrapper = styled.div`
+  font-size: 10px;
+  width: 100%;
 `;
 
 export const InputStyled = styled(Field)`
-  margin-bottom: 10px;
+  margin-top: 20px;
+  width: auto;
+  box-sizing: content-box;
 `;

@@ -1,24 +1,36 @@
+import { FormikErrors, FormikValues } from 'formik';
+
+const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
 const nameRegex = /^([a-z]+)|([а-я]+)$/i;
 const dateOfBirthdayRegex = /^(0[1-9]|1[012])[-/.](0[1-9]|[12][0-9]|3[01])[-/.](19|20)\d\d$/g;
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
 
-export const passwordValidate = (password: string) => {
-  if (!(password.match(passwordRegex))) {
-    return 'password must contain digits and letters in upper and lower case';
+export const emailValidate = (email: string, errors: FormikErrors<FormikValues>) => {
+  if (!(email.match(emailRegex))) {
+    return Object.assign(errors, { email: 'please enter a valid email' });
   }
-  return undefined;
+  return errors;
 };
 
-export const dateOfBirthdayValidate = (dateOfBirth: string) => {
+export const dateOfBirthdayValidate = (dateOfBirth: string, errors: FormikErrors<FormikValues>) => {
   if (!(dateOfBirth.match(dateOfBirthdayRegex))) {
-    return 'date of birthday: mm.dd.yyyy separated . - /';
+    console.log('errors');
+    console.log(errors);
+    return Object.assign(errors, { dateOfBirthday: 'date of birthday: mm.dd.yyyy separated . - /' });
   }
-  return undefined;
+  return errors;
 };
 
-export const usernameValidate = (username : string) => {
+export const usernameValidate = (username: string, errors: FormikErrors<FormikValues>) => {
   if (!(username.match(nameRegex))) {
-    return 'empty field name, supported lang en, ru';
+    return Object.assign(errors, { name: 'empty field name, supported lang en, ru' });
   }
-  return undefined;
+  return errors;
+};
+
+export const passwordValidate = (password: string, errors: FormikErrors<FormikValues>) => {
+  if (!(password.match(passwordRegex))) {
+    return Object.assign(errors, { password: 'password must contain digits and letters in upper and lower case' });
+  }
+  return errors;
 };
