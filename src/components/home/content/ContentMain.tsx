@@ -14,7 +14,7 @@ function ContentMain({ categoryBook } :{categoryBook: string}) {
   const [books, setBooks] = useState<Array<bookInterface>>([]);
 
   function getBooks(slug: string = '') {
-    axios.get(`/book/${slug}`)
+    axios.get(`/book/slug/${slug}`)
       .then((data) => {
         setBooks(data.data);
       })

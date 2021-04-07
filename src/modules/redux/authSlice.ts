@@ -3,10 +3,12 @@ import { RootState } from './store';
 
 interface authState {
   isAuth: boolean,
+  authJwt: string,
 }
 
 const initialState: authState = {
   isAuth: false,
+  authJwt: '',
 };
 
 export const authSlice = createSlice({

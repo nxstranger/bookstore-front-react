@@ -17,8 +17,8 @@ interface bookProps {
 }
 
 function BookCard({ bookObj }:bookProps) {
-  const detailLinc = `/book/${bookObj.Category.slug}/${bookObj.id}_${bookObj.slug}`;
-  const titleImageLink = `/media/${bookObj.image}/Title.jpg`;
+  const detailLinc = `/book/slug/${bookObj.Category.slug}/${bookObj.id}_${bookObj.slug}`;
+  const titleImageLink = `/media/${bookObj.media}/Title.jpg`;
   return (
     <Card>
       <Link to={detailLinc}>

@@ -6,7 +6,7 @@ import {
   Field,
 } from 'formik';
 import axios from '../../../modules/axios/config';
-import { StyledForm } from '../styled/styledForm';
+import { StyledForm } from '../../../modules/styled/styledForm';
 import {
   emailValidate,
   passwordValidate,

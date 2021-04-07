@@ -16,7 +16,7 @@ import {
   ErrDiv,
   StyledForm,
   InputStyled,
-} from '../styled/styledForm';
+} from '../../../modules/styled/styledForm';
 
 interface FormValues {
   name: string;
@@ -34,7 +34,7 @@ const RegisterFormLayout = (props: FormikProps<FormValues>) => {
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <InputStyled required name="name" type="text" invalid="false" placeholder="username" />
+      <InputStyled required name="name" type="text" placeholder="username" />
       {touched.name && errors.name && <ErrDiv>{errors.name}</ErrDiv>}
 
       <InputStyled required name="email" type="text" placeholder="email" />

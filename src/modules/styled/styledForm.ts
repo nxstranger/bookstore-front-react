@@ -24,3 +24,14 @@ export const InputStyled = styled(Field)`
   width: auto;
   box-sizing: content-box;
 `;
+
+export const TextareaStyled = styled(Field)`
+  margin-top: 20px;
+  width: auto;
+  box-sizing: content-box;
+  resize: none;
+`;
+
+export const CheckboxStyled = styled(Field)`
+  margin-top: 20px;
+`;
