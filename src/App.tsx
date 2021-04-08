@@ -27,7 +27,7 @@ function App() {
         <Route exact path="/admin/book-edit/:id" component={EditBookMain} />
         <Route exact path="/auth/login" component={Login} />
         <Route exact path="/auth/registration" component={Registration} />
-        <Route exact path="/book/:catSlug/:bookSlug" component={Book} />
+        <Route exact path="/book/slug/:catSlug/:bookSlug" component={Book} />
         <Route exact path="/book/:catSlug" component={Home} />
         <Route exact path="/" component={Home} />
       </Switch>

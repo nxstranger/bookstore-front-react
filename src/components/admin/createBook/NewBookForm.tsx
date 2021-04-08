@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import {
   FormikErrors,
   Formik,
+  ErrorMessage,
 } from 'formik';
 import {
   fieldNotFilledValidator,
@@ -11,7 +12,7 @@ import {
   bookSlugValidator,
 } from '../../../modules/fieldsValidator/fieldsValidator';
 import {
-  StyledForm,
+  StyledColumnForm,
   InputStyled,
   TextareaStyled,
 } from '../../../modules/styled/styledForm';
@@ -67,15 +68,18 @@ const RegisterFormLayout = () => {
       onSubmit={handleSubmit}
       validate={validate}
     >
-      <StyledForm>
+      <StyledColumnForm>
+        <ErrorMessage name="titlt" />
         <InputStyled required name="title" type="text" placeholder="title" />
 
+        <ErrorMessage name="slug" />
         <InputStyled required name="slug" type="text" placeholder="slug" />
 
+        <ErrorMessage name="description" />
         <TextareaStyled required name="description" component="textarea" placeholder="description" />
 
         <button type="submit">Add book</button>
-      </StyledForm>
+      </StyledColumnForm>
     </Formik>
 
   );

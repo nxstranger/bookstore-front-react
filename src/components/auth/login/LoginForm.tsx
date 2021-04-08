@@ -6,7 +6,7 @@ import {
   Field,
 } from 'formik';
 import axios from '../../../modules/axios/config';
-import { StyledForm } from '../../../modules/styled/styledForm';
+import { StyledRowForm } from '../../../modules/styled/styledForm';
 import {
   emailValidate,
   passwordValidate,
@@ -25,7 +25,7 @@ const InnerForm = (props: FormikProps<FormValues>) => {
     handleSubmit,
   } = props;
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledRowForm onSubmit={handleSubmit}>
       <Field type="email" name="email" />
       {touched.email && errors.email && <div>{errors.email}</div>}
 
@@ -35,7 +35,7 @@ const InnerForm = (props: FormikProps<FormValues>) => {
       <button type="submit" disabled={isSubmitting}>
         Submit
       </button>
-    </StyledForm>
+    </StyledRowForm>
   );
 };
 

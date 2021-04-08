@@ -20,9 +20,10 @@ function Book() {
   const [book, setBook] = useState<bookInterface>();
   const [bookImage, setBookImage] = useState<string>('');
   const link: string = (bookSlug) ? `${catSlug}/${bookSlug}` : catSlug || '';
+  console.log(link);
 
   function getBook() {
-    axios.get(`/book/${link}`)
+    axios.get(`/book/slug/${link}`)
       .then((data) => {
         setBook(data.data);
         console.log(data.data);

@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
+import { DropdownInput, DropdownLabel } from '../../../modules/styled/dropDownStyled';
 import AuthorInputHelper from './AuthorInputHelper';
 
 const AuthorInput = () => {
-  const authors: string = 'authors';
+  const [visibility, changeVisibility] = useState<boolean>(true);
   const [fieldValue, setFieldValue] = useState<string>('');
   return (
-    <div>
-      {authors}
-      <label htmlFor="author-input">
-        <input id="author-input" onChange={(e: any) => setFieldValue(e.target.value)} />
-        {
-          (fieldValue.length > 2)
-            ? <AuthorInputHelper search={fieldValue} />
-            : <span>enter the text</span>
-        }
-      </label>
-    </div>
+    <DropdownLabel htmlFor="author-input">
+      <DropdownInput
+        placeholder="author"
+        id="author-input"
+        onChange={(e: any) => setFieldValue(e.target.value)}
+        onBlur={() => setTimeout(() => changeVisibility(false), 300)}
+        onFocus={() => changeVisibility(true)}
+      />
+      {
+        (fieldValue.length > 2 && visibility)
+          ? <AuthorInputHelper search={fieldValue} />
+          : ''
+      }
+    </DropdownLabel>
   );
 };
 

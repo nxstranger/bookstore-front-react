@@ -15,11 +15,21 @@ export interface bookInterface {
 export interface bookInterfaceAdmin {
   id: string,
   title: string,
-  price: string | null,
-  description: string | null,
+  price?: number,
+  description: string,
   media: string,
   slug: string,
-  category:string | null,
-  author: string | null,
+  category?: number,
+  author?: number,
   publish: true | false,
+}
+
+export interface bookUpdateDataInterface {
+  title: string,
+  slug: string,
+  description: string,
+  publish: true | false,
+  price: number,
+  category?: number,
+  author?: number,
 }

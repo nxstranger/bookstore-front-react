@@ -23,6 +23,13 @@
         "@typescript-eslint"
     ],
     "rules":  {
+        "jsx-a11y/label-has-associated-control": [ 2, {
+            "labelComponents": ["label"],
+            "labelAttributes": ["inputLabel"],
+            "controlComponents": ["CheckboxStyled"],
+            "assert": "both",
+            "depth": 3
+        }],
         "import/extensions": [
             "error",
             "ignorePackages",

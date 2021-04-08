@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
-import { bookInterfaceAdmin } from '../interfaces/bookInterface';
+import { bookInterfaceAdmin, bookUpdateDataInterface } from '../interfaces/bookInterface';
 import axios from '../axios/config';
 
 export const asyncLoadBookById = createAsyncThunk(
@@ -25,6 +25,29 @@ export const adminPanelSlice = createSlice({
   reducers: {
     editableBook: (state, action: PayloadAction<bookInterfaceAdmin>) => (
       { ...state, book: action.payload }),
+    setBookCategory: (state, action: PayloadAction<number>) => {
+      if (state.book) {
+        const book: bookInterfaceAdmin = { ...state.book };
+        book.category = action.payload;
+        return { ...state, book };
+      }
+      return { ...state };
+    },
+    setBookAuthor: (state, action: PayloadAction<number>) => {
+      if (state.book) {
+        const book: bookInterfaceAdmin = { ...state.book };
+        book.author = action.payload;
+        return { ...state, book };
+      }
+      return { ...state };
+    },
+    setBookInfo: (state, action: PayloadAction<bookUpdateDataInterface>) => {
+      if (state.book) {
+        const book: bookInterfaceAdmin = { ...state.book };
+        return { ...state, book: { ...book, ...action.payload } };
+      }
+      return { ...state };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(asyncLoadBookById.fulfilled, (state, action) => {
@@ -34,7 +57,12 @@ export const adminPanelSlice = createSlice({
   },
 });
 
-export const { editableBook } = adminPanelSlice.actions;
+export const {
+  editableBook,
+  setBookCategory,
+  setBookAuthor,
+  setBookInfo,
+} = adminPanelSlice.actions;
 
 export const selectAdminPanel = (state: RootState) => state.adminPanel;
 

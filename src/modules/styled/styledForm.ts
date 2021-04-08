@@ -1,12 +1,20 @@
-import { Field, Form } from 'formik';
+import { Field, ErrorMessage, Form } from 'formik';
 import styled from 'styled-components';
 
-export const StyledForm = styled(Form)`
+export const StyledColumnForm = styled(Form)`
   margin: auto;
   display: flex;
   flex-direction: column;
   background: antiquewhite;
-  width: 300px;
+  width: 500px;
+`;
+
+export const StyledRowForm = styled(Form)`
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  background: antiquewhite;
+  width: 500px;
 `;
 
 export const ErrDiv = styled.div`
@@ -14,9 +22,13 @@ export const ErrDiv = styled.div`
   position: relative;
 `;
 
-export const InputAndErrorWrapper = styled.div`
+export const FormSectionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ErrorMsgStyled = styled(ErrorMessage)`
   font-size: 10px;
-  width: 100%;
 `;
 
 export const InputStyled = styled(Field)`

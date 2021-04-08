@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../../../modules/axios/config';
 import { AuthorInterface } from '../../../modules/interfaces/authorInterface';
+import { StyledUl } from '../../../modules/styled/dropDownStyled';
+import { setBookAuthor as dispatchAuthor } from '../../../modules/redux/adminPanelSlice';
+import { useAppDispatch } from '../../../modules/redux/hooks';
 
 interface helperProps {
   search: string
@@ -8,9 +11,13 @@ interface helperProps {
 
 const AuthorInputHelper = (props: helperProps) => {
   const { search } = props;
+  const dispatch = useAppDispatch();
   const [textField, setTextField] = useState<AuthorInterface[]>([]);
   console.log('tick AuthorInputHelper');
   console.log(search);
+  const setBookAuthor = (authorId: number) => {
+    dispatch(dispatchAuthor(authorId));
+  };
   useEffect(() => {
     axios.get(`/author/search/${search}`)
       .then((data) => {
@@ -22,11 +29,17 @@ const AuthorInputHelper = (props: helperProps) => {
       .catch(() => setTextField([]));
   }, [search]);
   return (
-    <div>
-      <ul>
-        {textField.map((obj) => <li key={obj.id}>{obj.name}</li>)}
-      </ul>
-    </div>
+    <StyledUl>
+      {
+        textField.map((obj) => (
+          <li key={obj.id}>
+            <button type="button" onClick={() => setBookAuthor(obj.id)}>
+              {obj.name}
+            </button>
+          </li>
+        ))
+      }
+    </StyledUl>
   );
 };
 

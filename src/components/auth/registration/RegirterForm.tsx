@@ -14,7 +14,7 @@ import {
 import axios from '../../../modules/axios/config';
 import {
   ErrDiv,
-  StyledForm,
+  StyledColumnForm,
   InputStyled,
 } from '../../../modules/styled/styledForm';
 
@@ -33,7 +33,7 @@ const RegisterFormLayout = (props: FormikProps<FormValues>) => {
   } = props;
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledColumnForm onSubmit={handleSubmit}>
       <InputStyled required name="name" type="text" placeholder="username" />
       {touched.name && errors.name && <ErrDiv>{errors.name}</ErrDiv>}
 
@@ -47,7 +47,7 @@ const RegisterFormLayout = (props: FormikProps<FormValues>) => {
       {touched.dateOfBirthday && errors.dateOfBirthday && <ErrDiv>{errors.dateOfBirthday}</ErrDiv>}
 
       <button type="submit">Register</button>
-    </StyledForm>
+    </StyledColumnForm>
   );
 };
 
