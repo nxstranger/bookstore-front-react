@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../../../modules/axios/config';
-import { AuthorInterface } from '../../../modules/interfaces/authorInterface';
-import { StyledUl } from '../../../modules/styled/dropDownStyled';
-import { setBookAuthor as dispatchAuthor } from '../../../modules/redux/adminPanelSlice';
-import { useAppDispatch } from '../../../modules/redux/hooks';
+import axios from '../../../../modules/axios/config';
+import { AuthorInterface } from '../../../../modules/interfaces/authorInterface';
+import { StyledUl } from '../../../../modules/styled/dropDownStyled';
+import { setBookAuthor as dispatchAuthor } from '../../../../modules/redux/adminPanelSlice';
+import { useAppDispatch } from '../../../../modules/redux/hooks';
 
 interface helperProps {
   search: string

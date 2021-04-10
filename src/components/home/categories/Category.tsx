@@ -7,7 +7,7 @@ interface CategoryInterface{
 }
 
 function Category({ slug, categoryName }:CategoryInterface) {
-  const link = `/book/${slug}`;
+  const link = `/book/category/${slug}`;
   return (
     <Link to={link}>
       <span>{categoryName}</span>

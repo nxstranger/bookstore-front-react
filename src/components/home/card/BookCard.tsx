@@ -17,16 +17,18 @@ interface bookProps {
 }
 
 function BookCard({ bookObj }:bookProps) {
-  const detailLinc = `/book/slug/${bookObj.Category.slug}/${bookObj.id}_${bookObj.slug}`;
+  const detailLink = `/book/detail/${bookObj.id}_${bookObj.slug}`;
   const titleImageLink = `/media/${bookObj.media}/Title.jpg`;
   return (
     <Card>
-      <Link to={detailLinc}>
+      <Link to={detailLink}>
         <span>{bookObj.title}</span>
       </Link>
       <span>
         {'Author: '}
-        {bookObj.BookAuthor.name}
+        { (bookObj.BookAuthor)
+          ? bookObj.BookAuthor.name
+          : 'undefined'}
       </span>
       <span>
         {'Price: '}

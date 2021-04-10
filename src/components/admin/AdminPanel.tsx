@@ -7,7 +7,10 @@ const AdminPanel = () => {
   return (
     <div>
       Admin panel
+      <br />
       <Link to="/admin/create-book">New book</Link>
+      <br />
+      <Link to="/admin/book-edit/1">Edit Book</Link>
     </div>
   );
 };

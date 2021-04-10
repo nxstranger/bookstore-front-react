@@ -9,7 +9,6 @@ import axios from '../../../modules/axios/config';
 import { StyledRowForm } from '../../../modules/styled/styledForm';
 import {
   emailValidate,
-  passwordValidate,
 } from '../../../modules/fieldsValidator/fieldsValidator';
 
 interface FormValues {
@@ -48,7 +47,7 @@ const LoginForm = withFormik<MyFormProps, FormValues>({
   mapPropsToValues: (props) => (
     {
       email: props.initialEmail || 'lolo@pepe.lo',
-      password: 'lolkeklol',
+      password: 'Lolkeklol1',
     }),
 
   // Add a custom validation function (this can be async too!)
@@ -57,7 +56,6 @@ const LoginForm = withFormik<MyFormProps, FormValues>({
     if (!values.email) {
       errors.email = 'Required';
     }
-    passwordValidate(values.password, errors);
     emailValidate(values.email, errors);
     return errors;
   },

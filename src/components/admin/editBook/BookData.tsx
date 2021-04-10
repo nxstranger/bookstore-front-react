@@ -11,8 +11,8 @@ import {
   TextareaStyled,
   FormSectionWrapper,
 } from '../../../modules/styled/styledForm';
-import CategoriesInput from './CategoryInput';
-import AuthorInput from './AuthorInput';
+import CategoriesInput from './categoryInput/CategoryInput';
+import AuthorInput from './authorInput/AuthorInput';
 import { useAppSelector } from '../../../modules/redux/hooks';
 import axios from '../../../modules/axios/config';
 import {
@@ -20,7 +20,8 @@ import {
   bookSlugValidator,
   fieldNotFilledValidator,
 } from '../../../modules/fieldsValidator/fieldsValidator';
-// import { setBookInfo } from '../../../modules/redux/adminPanelSlice';
+import ImageManager from './imageManager/ImageManager';
+import { FlexColumnDiv, FlexRowDiv } from '../../../modules/styled/simpleStyledComponents';
 
 interface bookProps {
   book: bookInterfaceAdmin,
@@ -28,10 +29,8 @@ interface bookProps {
 
 const BookData = (props: bookProps) => {
   const stateHook = useAppSelector((state) => state.adminPanel.book);
-  // const dispatch = useAppDispatch();
   const { book } = props;
   const bookDefaultValues = {
-    // rework it !!!!!!!!!!!!!!
     id: book?.id,
     title: book?.title || '',
     slug: book?.slug || '',
@@ -53,12 +52,6 @@ const BookData = (props: bookProps) => {
       category: stateHook?.category,
       author: stateHook?.author,
     };
-    console.log('payloadData');
-    console.log(payloadData);
-    // dispatch(setBookInfo(payloadData));
-    console.log('stateHook');
-    console.log(stateHook);
-
     console.log('tick bookdata');
     axios.put(`/book/id/${book.id}`, payloadData)
       .then((res) => {
@@ -67,64 +60,60 @@ const BookData = (props: bookProps) => {
       .catch((err) => alert(err));
   };
   useEffect(() => {
-    console.log('stateHook');
-    console.log(stateHook);
   }, [stateHook]);
   const validate = (values: bookInterfaceAdmin) => {
     const errors: FormikErrors<bookInterfaceAdmin> = {};
     bookNameValidator(values.title, errors);
     bookSlugValidator(values.slug, errors);
     fieldNotFilledValidator(values, errors, ['publish', 'category', 'author']);
-    console.log('errors');
-    console.log(errors);
     return errors;
   };
   const { id } = { ...book };
   return (
-    <div>
-      <Formik
-        initialValues={bookDefaultValues}
-        onSubmit={handleSubmit}
-        validate={validate}
-      >
-        <StyledRowForm>
-          <FormSectionWrapper>
-            <span>
-              id_
-              {id || 'undefined'}
-            </span>
-            <InputStyled name="title" type="text" placeholder="title" />
-            <ErrorMessage name="title" />
-
-            <InputStyled name="slug" type="text" placeholder="slug" />
-            <ErrorMessage name="slug" />
-
-            <TextareaStyled name="description" type="text" placeholder="description" component="textarea" />
-            <ErrorMessage name="description" />
-
-            <InputStyled name="price" type="number" placeholder="price" />
-            <ErrorMessage name="price" />
-            <label htmlFor="publish">
-              Publish:
-              <CheckboxStyled name="publish" id="publish" type="checkbox" />
-            </label>
-          </FormSectionWrapper>
-          <FormSectionWrapper>
-            <span>
-              category:
-              {book.category}
-            </span>
-            <CategoriesInput />
-            <span>
-              author:
-              {book.author}
-            </span>
-            <AuthorInput />
-          </FormSectionWrapper>
-          <button type="submit">Submit</button>
-        </StyledRowForm>
-      </Formik>
-    </div>
+    <FlexRowDiv>
+      <ImageManager />
+      <FlexColumnDiv>
+        <Formik
+          initialValues={bookDefaultValues}
+          onSubmit={handleSubmit}
+          validate={validate}
+        >
+          <StyledRowForm>
+            <FormSectionWrapper>
+              <span>
+                id_
+                {id || 'undefined'}
+              </span>
+              <InputStyled name="title" type="text" placeholder="title" />
+              <ErrorMessage name="title" />
+              <InputStyled name="slug" type="text" placeholder="slug" />
+              <ErrorMessage name="slug" />
+              <TextareaStyled name="description" type="text" placeholder="description" component="textarea" />
+              <ErrorMessage name="description" />
+              <InputStyled name="price" type="number" placeholder="price" />
+              <ErrorMessage name="price" />
+              <label htmlFor="publish">
+                Publish:
+                <CheckboxStyled name="publish" id="publish" type="checkbox" />
+              </label>
+            </FormSectionWrapper>
+            <FormSectionWrapper>
+              <span>
+                category:
+                {book.category}
+              </span>
+              <CategoriesInput />
+              <span>
+                author:
+                {book.author}
+              </span>
+              <AuthorInput />
+            </FormSectionWrapper>
+            <button type="submit">Submit</button>
+          </StyledRowForm>
+        </Formik>
+      </FlexColumnDiv>
+    </FlexRowDiv>
   );
 };
 

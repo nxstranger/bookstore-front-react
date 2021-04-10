@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../../../modules/axios/config';
-import { StyledUl } from '../../../modules/styled/dropDownStyled';
-import { CategoriesInterface } from '../../../modules/interfaces/categoriesInterface';
-import { useAppDispatch } from '../../../modules/redux/hooks';
-import { setBookCategory as dispatchCategory } from '../../../modules/redux/adminPanelSlice';
+import axios from '../../../../modules/axios/config';
+import { StyledUl } from '../../../../modules/styled/dropDownStyled';
+import { CategoriesInterface } from '../../../../modules/interfaces/categoriesInterface';
+import { useAppDispatch } from '../../../../modules/redux/hooks';
+import { setBookCategory as dispatchCategory } from '../../../../modules/redux/adminPanelSlice';
 
 interface helperProps {
   search: string

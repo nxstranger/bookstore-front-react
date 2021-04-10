@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { DropdownInput, DropdownLabel } from '../../../modules/styled/dropDownStyled';
+import { DropdownInput, DropdownLabel } from '../../../../modules/styled/dropDownStyled';
 import AuthorInputHelper from './AuthorInputHelper';
 
 const AuthorInput = () => {
