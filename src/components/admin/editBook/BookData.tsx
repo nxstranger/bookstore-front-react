@@ -35,11 +35,11 @@ const BookData = (props: bookProps) => {
     title: book?.title || '',
     slug: book?.slug || '',
     description: book?.description || '',
-    publish: book?.publish || false,
-    price: book?.price || 0,
+    publish: book?.publish,
+    price: book?.price || 1,
     media: book?.media,
-    category: book?.category,
-    author: book.author,
+    category: book?.category || 1,
+    author: book.author || 1,
   };
   console.log('tick');
   const handleSubmit = (submitValues: bookInterfaceAdmin) => {
@@ -47,7 +47,7 @@ const BookData = (props: bookProps) => {
       title: submitValues.title,
       slug: submitValues.slug,
       description: submitValues.description,
-      price: submitValues.price || 0,
+      price: submitValues.price || 1,
       publish: submitValues.publish,
       category: stateHook?.category,
       author: stateHook?.author,

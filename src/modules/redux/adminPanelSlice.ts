@@ -59,6 +59,10 @@ export const adminPanelSlice = createSlice({
       }
       return { ...state };
     },
+    removeImage: (state, action: PayloadAction<number>) => {
+      const images : ImagesInterface[] = state.images.filter((obj) => obj.id !== action.payload);
+      return { ...state, images };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(asyncLoadBookById.fulfilled, (state, action) => {
@@ -77,6 +81,7 @@ export const {
   setBookCategory,
   setBookAuthor,
   setBookInfo,
+  removeImage,
 } = adminPanelSlice.actions;
 
 export const selectAdminPanel = (state: RootState) => state.adminPanel;

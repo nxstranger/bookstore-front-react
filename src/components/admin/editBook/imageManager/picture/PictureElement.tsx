@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ImagesInterface } from '../../../../../modules/interfaces/imagesInterface';
-import { useAppSelector } from '../../../../../modules/redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../../modules/redux/hooks';
 import axios from '../../../../../modules/axios/config';
+import { removeImage } from '../../../../../modules/redux/adminPanelSlice';
 
 const StyledPictureWrapper = styled.div`
   width: 150px;
@@ -23,21 +24,24 @@ interface prop {
 
 const PictureElement = (elem: prop) => {
   const { image } = elem;
+  const dispatch = useAppDispatch();
   const selector = useAppSelector((state) => state.adminPanel.book?.media);
   const [bookMedia, setMedia] = useState<string | undefined>('');
-  const link = `http://localhost:8080/${bookMedia}/${image.name}_thumbnail.jpg`;
-  console.log(link);
+  const link = `http://localhost:8080/${bookMedia}/${image.name}_small.jpg`;
   useEffect(() => {
     setMedia(selector);
   }, []);
   const delImage = () => {
     axios.delete(`images/id/${elem.image.id}`)
-      .then(() => console.log('deleted'))
+      .then(() => {
+        dispatch(removeImage(elem.image.id));
+        console.log('deleted');
+      })
       .catch((err) => console.log(err));
   };
   return (
     <StyledPictureWrapper>
-      { (selector)
+      { (bookMedia)
         ? (<img src={link} alt="text" />)
         : '' }
       <DelImageButton onClick={delImage}>del</DelImageButton>

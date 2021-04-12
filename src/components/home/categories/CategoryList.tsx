@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Category from './Category';
+import { Link } from 'react-router-dom';
 
+import Category from './Category';
 import { CategoriesInterface } from '../../../modules/interfaces/categoriesInterface';
 import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
 import { asyncLoadCategories, getAllCategories } from '../../../modules/redux/categoriesSlice';
@@ -28,7 +29,10 @@ function CategoryList(): JSX.Element {
 
   return (
     <StyledCategories>
-      categories
+      categories:
+      <Link to="/">
+        Все книги
+      </Link>
       {
         (categories.length)
           ? categories.map((obj:CategoriesInterface) => (

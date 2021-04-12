@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
+// eslint-disable-next-line no-unused-vars
 import { useParams, Link } from 'react-router-dom';
+
+// eslint-disable-next-line no-unused-vars
 import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
 import BookData from './BookData';
-import { asyncLoadBookById } from '../../../modules/redux/adminPanelSlice';
+// eslint-disable-next-line no-unused-vars
+import { asyncLoadBookById, asyncLoadImagesBookId } from '../../../modules/redux/adminPanelSlice';
 import { bookInterfaceAdmin } from '../../../modules/interfaces/bookInterface';
 
 interface bookLinkInterface {
-  id?: number,
-  slug?: string,
+  id: number,
+  slug: string,
 }
 
 const linkToBook = (bookSlug: bookLinkInterface) => {
@@ -24,23 +28,28 @@ const linkToBook = (bookSlug: bookLinkInterface) => {
 
 const EditBookMain = () => {
   const selector: bookInterfaceAdmin | undefined = useAppSelector((state) => state.adminPanel.book);
+  const [bookInfo, setBookInfo] = useState<bookInterfaceAdmin | undefined>(undefined);
   const bookId = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-    if (!selector) {
-      console.log('book not found in redux');
-      dispatch(asyncLoadBookById(bookId.id));
-    }
+    dispatch(asyncLoadBookById(bookId.id));
+    setBookInfo(selector);
+  }, []);
+  useEffect(() => {
+    console.log('book not found in redux');
+    // dispatch(asyncLoadBookById(bookId.id));
+    setBookInfo(selector);
   }, [selector]);
   return (
     <div>
       Edit book main
       <br />
       <br />
-      { (selector) ? (<BookData book={selector} key={selector.id} />) : 'invalid book id' }
+      { (bookInfo) ? (<BookData book={bookInfo} key={bookInfo.id} />) : 'invalid book id' }
       <br />
       <div>
-        {linkToBook({ id: 1, slug: selector?.slug })}
+        { (selector && selector.publish) ? linkToBook({ id: +selector?.id, slug: selector?.slug }) : ''}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { bookInterface } from '../../modules/interfaces/bookInterface';
 import axios from '../../modules/axios/config';
 import BooKCardDetail from './BookCardDetail';
@@ -27,6 +27,7 @@ function Book() {
   }, [catSlug]);
   return (
     <section>
+      <Link to={`/admin/book-edit/${book?.id}`}>edit</Link>
       { (book)
         ? <BooKCardDetail book={book} />
         : 'book not found' }
