@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
 import { bookInterfaceAdmin, bookUpdateDataInterface } from '../interfaces/bookInterface';
 import axios from '../axios/config';
+import { ImagesInterface } from '../interfaces/imagesInterface';
 
 export const asyncLoadBookById = createAsyncThunk(
   'adminPanel/asyncLoadBookById',
@@ -11,12 +12,22 @@ export const asyncLoadBookById = createAsyncThunk(
   },
 );
 
+export const asyncLoadImagesBookId = createAsyncThunk(
+  'adminPanel/asyncLoadImagesByBookId',
+  async (id:number) => {
+    const resp = await axios.get(`images/book/${id}`);
+    return (resp.status === 200) ? resp.data : undefined;
+  },
+);
+
 interface adminPanelInterface {
   book: bookInterfaceAdmin | undefined,
+  images: ImagesInterface[];
 }
 
 const initialState: adminPanelInterface = {
   book: undefined,
+  images: [],
 };
 
 export const adminPanelSlice = createSlice({
@@ -54,6 +65,10 @@ export const adminPanelSlice = createSlice({
       console.log('asyncLoadBook tick');
       return { ...state, book: action.payload };
     });
+    builder.addCase(asyncLoadImagesBookId.fulfilled, (state, action) => {
+      console.log('asyncLoadImages tick');
+      return { ...state, images: action.payload };
+    });
   },
 });
 
@@ -65,5 +80,7 @@ export const {
 } = adminPanelSlice.actions;
 
 export const selectAdminPanel = (state: RootState) => state.adminPanel;
+
+export const getBookImages = (state: RootState) => state.adminPanel.images;
 
 export default adminPanelSlice.reducer;
