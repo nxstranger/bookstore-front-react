@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Switch,
   Route,
 } from 'react-router-dom';
+import styled from 'styled-components';
 import Home from './components/home/Home';
 import Profile from './components/profile/Profile';
 import Wishlist from './components/wishlist/Wishlist';
@@ -14,25 +15,47 @@ import Registration from './components/auth/registration/Registration';
 import AdminPanel from './components/admin/AdminPanel';
 import CreateBookMain from './components/admin/createBook/CreateBookMain';
 import EditBookMain from './components/admin/editBook/EditBookMain';
+import IsAuthWrapper from './components/authWrapper/IsAuthRouteWrapper';
+import Logout from './components/auth/Logout/Logout';
+import { useAppDispatch, useAppSelector } from './modules/redux/hooks';
+import { asyncLoadUserInfo, setJwt } from './modules/redux/authSlice';
+import IsAdminRouteWrapper from './components/authWrapper/IsAdminRouteWrapper';
+
+const StyledApp = styled.div`
+  max-width: 1200px;
+  margin: auto;
+`;
 
 function App() {
+  const dispatch = useAppDispatch();
+  const jwtSelector = useAppSelector((state) => state.auth.authJwt);
+  useEffect(() => {
+    const token = localStorage.getItem('AccessToken');
+    if (token) {
+      dispatch(asyncLoadUserInfo(token));
+      dispatch(setJwt(token));
+    } else {
+      dispatch(setJwt(''));
+    }
+  }, [jwtSelector]);
   return (
-    <div className="App">
+    <StyledApp className="App">
       <Header />
       <Switch>
-        <Route exact path="/profile/:id" component={Profile} />
-        <Route exact path="/wishlist" component={Wishlist} />
-        <Route exact path="/admin" component={AdminPanel} />
-        <Route exact path="/admin/create-book" component={CreateBookMain} />
-        <Route exact path="/admin/book-edit/:id" component={EditBookMain} />
-        <Route exact path="/auth/login" component={Login} />
-        <Route exact path="/auth/registration" component={Registration} />
+        <IsAuthWrapper itTrue exact path="/profile/" component={Profile} />
+        <IsAuthWrapper itTrue exact path="/wishlist" component={Wishlist} />
+        <IsAdminRouteWrapper itTrue exact path="/admin" component={AdminPanel} />
+        <IsAdminRouteWrapper itTrue exact path="/admin/create-book" component={CreateBookMain} />
+        <IsAdminRouteWrapper itTrue exact path="/admin/book-edit/:id" component={EditBookMain} />
+        <IsAuthWrapper itTrue={false} exact path="/auth/login" component={Login} />
+        <IsAuthWrapper itTrue exact path="/auth/logout" component={Logout} />
+        <IsAuthWrapper itTrue={false} exact path="/auth/registration" component={Registration} />
         <Route exact path="/book/detail/:bookSlug" component={Book} />
         <Route exact path="/book/category/:catSlug" component={Home} />
         <Route exact path="/" component={Home} />
       </Switch>
       <Footer />
-    </div>
+    </StyledApp>
   );
 }
 

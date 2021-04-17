@@ -1,71 +1,44 @@
 import React from 'react';
 import {
-  withFormik,
-  FormikProps,
   FormikErrors,
-  Field,
+  Formik,
+  ErrorMessage,
 } from 'formik';
 import axios from '../../../modules/axios/config';
-import { StyledRowForm } from '../../../modules/styled/styledForm';
 import {
+  InputStyled,
+  StyledColumnForm,
+} from '../../../modules/styled/styledForm';
+
+import {
+  fieldNotFilledValidator,
   emailValidate,
 } from '../../../modules/fieldsValidator/fieldsValidator';
+import { useAppDispatch } from '../../../modules/redux/hooks';
+import { setJwt } from '../../../modules/redux/authSlice';
 
 interface FormValues {
   email: string;
   password: string;
 }
 
-const InnerForm = (props: FormikProps<FormValues>) => {
-  const {
-    touched,
-    errors,
-    isSubmitting,
-    handleSubmit,
-  } = props;
-  return (
-    <StyledRowForm onSubmit={handleSubmit}>
-      <Field type="email" name="email" />
-      {touched.email && errors.email && <div>{errors.email}</div>}
+const LoginForm = () => {
+  const initialValues = {
+    email: 'lolo@pepe.lo',
+    password: 'Lolkeklol1',
+  };
+  const dispatch = useAppDispatch();
 
-      <Field type="password" name="password" />
-      {touched.password && errors.password && <div>{errors.password}</div>}
-
-      <button type="submit" disabled={isSubmitting}>
-        Submit
-      </button>
-    </StyledRowForm>
-  );
-};
-
-interface MyFormProps {
-  initialEmail?: string;
-  message: string; // if this passed all the way through you might do this or make a union type
-}
-
-const LoginForm = withFormik<MyFormProps, FormValues>({
-  mapPropsToValues: (props) => (
-    {
-      email: props.initialEmail || 'lolo@pepe.lo',
-      password: 'Lolkeklol1',
-    }),
-
-  // Add a custom validation function (this can be async too!)
-  validate: (values: FormValues) => {
+  const validate = (values: FormValues) => {
     const errors: FormikErrors<FormValues> = {};
-    if (!values.email) {
-      errors.email = 'Required';
-    }
+    fieldNotFilledValidator(values, errors);
     emailValidate(values.email, errors);
     return errors;
-  },
-
-  handleSubmit: (values) => {
-    // do submitting things
+  };
+  const handleSubmit = (values: FormValues) => {
     const postHeaders = {
       'Content-Type': 'application/json',
     };
-    alert(`@:${values.email}\nP:${values.password}`);
     axios.post(
       '/auth/login',
       JSON.stringify(values), {
@@ -73,13 +46,35 @@ const LoginForm = withFormik<MyFormProps, FormValues>({
       },
     )
       .then((result) => {
-        alert(result.data.access);
-        localStorage.setItem('token', JSON.stringify(result.data.access));
+        if (result.data) {
+          dispatch(setJwt(result.data.access));
+          localStorage.setItem('AccessToken', result.data.access);
+          localStorage.setItem('RefreshToken', result.data.refresh);
+        } else {
+          alert('cannot get access');
+        }
       })
       .catch((err) => {
         alert(err);
       });
-  },
-})(InnerForm);
+  };
+  return (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validate={validate}
+    >
+      <StyledColumnForm>
+        <ErrorMessage name="email" />
+        <InputStyled type="email" name="email" autoFocus />
+        <ErrorMessage name="password" />
+        <InputStyled type="password" name="password" />
+        <button type="submit">
+          Submit
+        </button>
+      </StyledColumnForm>
+    </Formik>
+  );
+};
 
 export default LoginForm;

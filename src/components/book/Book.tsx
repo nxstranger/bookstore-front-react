@@ -1,33 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { bookInterface } from '../../modules/interfaces/bookInterface';
-import axios from '../../modules/axios/config';
 import BooKCardDetail from './BookCardDetail';
+import { useAppDispatch, useAppSelector } from '../../modules/redux/hooks';
+import { asyncLoadBookInfo } from '../../modules/redux/contentSlice';
 
 function Book() {
-  const { bookSlug, catSlug } = useParams<{ bookSlug: string, catSlug: string}>();
-  const [book, setBook] = useState<bookInterface>();
+  const { bookSlug } = useParams<{ bookSlug: string}>();
+  const selector = useAppSelector((state) => state.content.book);
+  const [book, setBook] = useState<bookInterface | undefined>(undefined);
   const link: string = (bookSlug) ? `${bookSlug}` : '';
-  console.log('link');
-  console.log(link);
-  console.log('tick book');
+  const dispatch = useAppDispatch();
   console.log('book');
   console.log(book);
-  function getBook() {
-    axios.get(`/book/detail/${link}`)
-      .then((data) => {
-        if (data.data) {
-          setBook(data.data);
-          console.log(data.data);
-        }
-      });
-  }
   useEffect(() => {
-    getBook();
-  }, [catSlug]);
+    if (link) {
+      console.log('use effect asyncLoadBookInfo');
+      dispatch(asyncLoadBookInfo(link));
+      setBook(selector);
+    }
+  }, []);
+  useEffect(() => {
+    if (link) {
+      setBook(selector);
+    }
+  }, [selector]);
   return (
     <section>
-      <Link to={`/admin/book-edit/${book?.id}`}>edit</Link>
+      <Link to={`/admin/book-edit/${book?.id}`}>admin: edit</Link>
       { (book)
         ? <BooKCardDetail book={book} />
         : 'book not found' }

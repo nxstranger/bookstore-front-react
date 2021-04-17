@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 // eslint-disable-next-line no-unused-vars
 import { useParams, Link } from 'react-router-dom';
-
 // eslint-disable-next-line no-unused-vars
 import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
 import BookData from './BookData';
 // eslint-disable-next-line no-unused-vars
-import { asyncLoadBookById, asyncLoadImagesBookId } from '../../../modules/redux/adminPanelSlice';
+import { asyncLoadBookById } from '../../../modules/redux/adminPanelSlice';
 import { bookInterfaceAdmin } from '../../../modules/interfaces/bookInterface';
 
 interface bookLinkInterface {
@@ -15,8 +14,9 @@ interface bookLinkInterface {
   slug: string,
 }
 
-const linkToBook = (bookSlug: bookLinkInterface) => {
-  const link: string = (bookSlug.id && bookSlug.slug) ? `/book/id/${bookSlug.id}_${bookSlug.slug}` : '';
+const LinkToBook = (bookSlug: bookLinkInterface) => {
+  const { id, slug } = bookSlug;
+  const link: string = (id && slug) ? `/book/detail/${id}_${slug}` : '';
   return (
     <div>
       { (link)
@@ -49,7 +49,7 @@ const EditBookMain = () => {
       { (bookInfo) ? (<BookData book={bookInfo} key={bookInfo.id} />) : 'invalid book id' }
       <br />
       <div>
-        { (selector && selector.publish) ? linkToBook({ id: +selector?.id, slug: selector?.slug }) : ''}
+        { (selector && selector.publish) ? LinkToBook({ id: +selector?.id, slug: selector?.slug }) : ''}
       </div>
     </div>
   );

@@ -7,27 +7,65 @@ interface BookDetail {
   book: bookInterface
 }
 const Card = styled.div`
-  width: 500px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   border: 1px darkgreen solid;
   margin: 10px;
-  padding: 10px;
+  padding: 20px;
+`;
+
+const BookInfoDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  color: #333;
+  background: #efefef;
+`;
+
+const StyledSpanAuthor = styled.span`
+  padding: 0 20px 0 20px;
+`;
+const StyledSpanTitle = styled.span`
+  font-size: 30px;
+  font-weight: 500;
+  padding: 0 20px 20px 20px;
+`;
+const StyledSpanDescription = styled.span`
+  padding: 0 20px 20px 20px;
+`;
+const StyledSpanPrice = styled.span`
+  padding: 0 0 20px 20px;
+  font-size: 20px;
+  color: #c00;
+  font-weight: 500;
 `;
 
 const BooKCardDetail = (props: BookDetail) => {
   const { book } = props;
+  console.log('book.BookImage');
+  console.log(book.BookImages);
+  const { BookImages, media } = book;
   return (
     <Card>
-      <span>{book?.title}</span>
-      <span>{(book?.BookAuthor) ? book?.BookAuthor.name : 'author: undefined'}</span>
-      <img src={`/media/${book.media}/Title.jpg`} alt="BookImage" />
-      <Gallery img={`/media/${book.media}/images/${book?.slug}_1.jpg`} />
-      <span>{book?.description}</span>
-      <span>
-        {'price: '}
-        {book?.price}
-      </span>
+      <Gallery media={media} mediaArray={BookImages} />
+      <BookInfoDiv>
+        <StyledSpanAuthor>
+          {(book?.BookAuthor) ? book?.BookAuthor.name : ' undefined'}
+        </StyledSpanAuthor>
+        <StyledSpanTitle>
+          {book?.title}
+        </StyledSpanTitle>
+        <StyledSpanDescription>
+          {book?.description}
+        </StyledSpanDescription>
+        <button type="button">
+          <StyledSpanPrice>
+            {'BUY   '}
+            {book?.price}
+            {'Ъ '}
+          </StyledSpanPrice>
+        </button>
+      </BookInfoDiv>
     </Card>
   );
 };

@@ -1,16 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
+import { shortImagesInterface } from '../../modules/interfaces/imagesInterface';
+import GallerySwiper from './GallerySwiper';
 
 const GalleryDiv = styled.div`
-  background: #f0f0f0;
-  width: 500px;
+  width: 600px;
   height: 500px;
+  margin: auto;
 `;
 
-function Gallery({ img }: {img:string}) {
+interface galleryInterface {
+  media: string,
+  mediaArray: shortImagesInterface[] | undefined,
+}
+
+function Gallery({ media, mediaArray } : galleryInterface) {
+  console.log('media mediaArray');
+  console.log(media);
+  console.log(mediaArray?.length);
   return (
     <GalleryDiv>
-      <img src={`${img}`} alt="" />
+      {
+        (media && mediaArray)
+          ? <GallerySwiper media={media} mediaArray={mediaArray} key={media} />
+          : ''
+      }
     </GalleryDiv>
   );
 }

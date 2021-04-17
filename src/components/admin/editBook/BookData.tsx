@@ -13,7 +13,7 @@ import {
 } from '../../../modules/styled/styledForm';
 import CategoriesInput from './categoryInput/CategoryInput';
 import AuthorInput from './authorInput/AuthorInput';
-import { useAppSelector } from '../../../modules/redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
 import axios from '../../../modules/axios/config';
 import {
   bookNameValidator,
@@ -22,6 +22,7 @@ import {
 } from '../../../modules/fieldsValidator/fieldsValidator';
 import ImageManager from './imageManager/ImageManager';
 import { FlexColumnDiv, FlexRowDiv } from '../../../modules/styled/simpleStyledComponents';
+import { setBookInfo } from '../../../modules/redux/adminPanelSlice';
 
 interface bookProps {
   book: bookInterfaceAdmin,
@@ -29,6 +30,7 @@ interface bookProps {
 
 const BookData = (props: bookProps) => {
   const stateHook = useAppSelector((state) => state.adminPanel.book);
+  const dispatch = useAppDispatch();
   const { book } = props;
   const bookDefaultValues = {
     id: book?.id,
@@ -56,6 +58,7 @@ const BookData = (props: bookProps) => {
     axios.put(`/book/id/${book.id}`, payloadData)
       .then((res) => {
         if (res.status === 200) alert('updated');
+        dispatch(setBookInfo(payloadData));
       })
       .catch((err) => alert(err));
   };

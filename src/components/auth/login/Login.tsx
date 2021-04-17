@@ -1,12 +1,11 @@
 import React from 'react';
 import LoginForm from './LoginForm';
 
-const Basic = () => (
+const Login = () => (
   <div>
-    <h1>My App</h1>
-    <p>This can be anywhere in your application</p>
-    <LoginForm message="Sign up" />
+    <p>Hello I`m login wrapper</p>
+    <LoginForm />
   </div>
 );
 
-export default Basic;
+export default Login;

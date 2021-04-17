@@ -1,25 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DropdownInput, DropdownLabel } from '../../../../modules/styled/dropDownStyled';
-import CategoryInputHelper from './CategoryInputHelper';
+import { useAppDispatch, useAppSelector } from '../../../../modules/redux/hooks';
+import { categoriesInterface } from '../../../../modules/interfaces/categoriesInterface';
+import { asyncLoadCategories } from '../../../../modules/redux/contentSlice';
+import { setBookCategory } from '../../../../modules/redux/adminPanelSlice';
 
 const CategoriesInput = () => {
-  const [visibility, changeVisibility] = useState<boolean>(true);
-  const categories: string = 'categories';
-  const [categoryValue, setCategory] = useState<string>('');
+  const placeholder: string = 'categories';
+  const dispatch = useAppDispatch();
+  const currentCategorySelector = useAppSelector((state) => state.adminPanel.book?.category);
+  const categoriesSelector = useAppSelector((state) => state.content.categories);
+  const [categories, setCategories] = useState<categoriesInterface[]>([]);
+  useEffect(() => {
+    dispatch(asyncLoadCategories());
+  }, []);
+  useEffect(() => {
+    setCategories(categoriesSelector);
+  }, [categoriesSelector]);
   return (
     <DropdownLabel htmlFor="cat-input" defaultValue="categories">
       <DropdownInput
-        placeholder={categories}
+        placeholder={placeholder}
         id="cat-input"
-        onChange={(e: any) => setCategory(e.target.value)}
-        onBlur={() => setTimeout(() => changeVisibility(false), 300)}
-        onFocus={() => changeVisibility(true)}
-      />
-      {
-        (categoryValue.length > 2 && visibility)
-          ? <CategoryInputHelper search={categoryValue} />
-          : ''
-      }
+        as="select"
+        value={(currentCategorySelector) || 1}
+        onChange={(value: any) => {
+          dispatch(setBookCategory(value.target.value));
+        }}
+      >
+        {
+          categories.map((obj) => (
+            <option key={obj.id} value={obj.id}>
+              {obj.title}
+            </option>
+          ))
+        }
+      </DropdownInput>
+
     </DropdownLabel>
   );
 };

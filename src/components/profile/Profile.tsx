@@ -1,14 +1,32 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import Basic from './ProfileEditForm';
+import styled from 'styled-components';
+import ProfileEditForm from './ProfileEditForm';
+import { useAppSelector } from '../../modules/redux/hooks';
+import ProfileLogo from './ProfileLogo';
+import ProfileInfo from './ProfileInfo';
+
+const StyledDivFlex = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  width: 400px;
+  border: 1px solid red;
+  
+`;
 
 function Profile() {
-  const { id } = useParams<{id: string}>();
+  const user = useAppSelector((state) => state.auth.user);
   return (
     <section>
       Profile ID :
-      { id }
-      <Basic />
+      { user && user.id ? user.id : '' }
+      <StyledDivFlex>
+        <ProfileLogo />
+        { user
+          ? <ProfileInfo user={user} key={user.id} />
+          : '' }
+      </StyledDivFlex>
+      <ProfileEditForm />
     </section>
   );
 }

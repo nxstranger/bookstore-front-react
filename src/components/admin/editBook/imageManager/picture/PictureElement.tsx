@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ImagesInterface } from '../../../../../modules/interfaces/imagesInterface';
+import { imagesInterface } from '../../../../../modules/interfaces/imagesInterface';
 import { useAppDispatch, useAppSelector } from '../../../../../modules/redux/hooks';
 import axios from '../../../../../modules/axios/config';
 import { removeImage } from '../../../../../modules/redux/adminPanelSlice';
@@ -19,12 +19,13 @@ const DelImageButton = styled.button`
 `;
 
 interface prop {
-  image: ImagesInterface,
+  image: imagesInterface,
 }
 
 const PictureElement = (elem: prop) => {
   const { image } = elem;
   const dispatch = useAppDispatch();
+  const jwt = useAppSelector((state) => state.auth.authJwt);
   const selector = useAppSelector((state) => state.adminPanel.book?.media);
   const [bookMedia, setMedia] = useState<string | undefined>('');
   const link = `http://localhost:8080/${bookMedia}/${image.name}_small.jpg`;
@@ -32,7 +33,14 @@ const PictureElement = (elem: prop) => {
     setMedia(selector);
   }, []);
   const delImage = () => {
-    axios.delete(`images/id/${elem.image.id}`)
+    axios.delete(
+      `images/id/${elem.image.id}`,
+      {
+        headers: {
+          Authorization: jwt,
+        },
+      },
+    )
       .then(() => {
         dispatch(removeImage(elem.image.id));
         console.log('deleted');

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
 import { bookInterfaceAdmin, bookUpdateDataInterface } from '../interfaces/bookInterface';
 import axios from '../axios/config';
-import { ImagesInterface } from '../interfaces/imagesInterface';
+import { imagesInterface } from '../interfaces/imagesInterface';
 
 export const asyncLoadBookById = createAsyncThunk(
   'adminPanel/asyncLoadBookById',
@@ -22,7 +22,7 @@ export const asyncLoadImagesBookId = createAsyncThunk(
 
 interface adminPanelInterface {
   book: bookInterfaceAdmin | undefined,
-  images: ImagesInterface[];
+  images: imagesInterface[];
 }
 
 const initialState: adminPanelInterface = {
@@ -60,7 +60,7 @@ export const adminPanelSlice = createSlice({
       return { ...state };
     },
     removeImage: (state, action: PayloadAction<number>) => {
-      const images : ImagesInterface[] = state.images.filter((obj) => obj.id !== action.payload);
+      const images : imagesInterface[] = state.images.filter((obj) => obj.id !== action.payload);
       return { ...state, images };
     },
   },

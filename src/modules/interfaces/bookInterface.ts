@@ -1,3 +1,5 @@
+import { shortImagesInterface } from './imagesInterface';
+
 export interface bookInterface {
   id: number,
   title: string,
@@ -11,6 +13,7 @@ export interface bookInterface {
   BookAuthor: {
     name: string,
   }
+  BookImages: shortImagesInterface[],
 }
 export interface bookInterfaceAdmin {
   id: string,

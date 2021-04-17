@@ -1,78 +1,52 @@
 import React from 'react';
-
 import {
-  withFormik,
-  FormikProps,
   FormikErrors,
-  Form,
-  Field,
+  Formik, ErrorMessage,
 } from 'formik';
+import { userInfoInterface } from '../../modules/interfaces/userInfoInterface';
+import {
+  InputStyled,
+  StyledColumnForm,
+} from '../../modules/styled/styledForm';
+import { useAppSelector } from '../../modules/redux/hooks';
 
-interface FormValues {
-  email: string;
-  password: string;
-}
-
-interface OtherProps {
-  message: string;
-}
-
-const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
-  const {
-    touched,
-    errors,
-    isSubmitting,
-    message,
-  } = props;
-  return (
-    <Form>
-      <h1>{message}</h1>
-      <Field type="email" name="email" />
-      {touched.email && errors.email && <div>{errors.email}</div>}
-
-      <Field type="password" name="password" />
-      {touched.password && errors.password && <div>{errors.password}</div>}
-
-      <button type="submit" disabled={isSubmitting}>
-        Submit
-      </button>
-    </Form>
-  );
-};
-
-interface MyFormProps {
-  initialEmail?: string;
-  message: string; // if this passed all the way through you might do this or make a union type
-}
-
-const ProfileEditForm = withFormik<MyFormProps, FormValues>({
-  mapPropsToValues: (props) => (
-    {
-      email: props.initialEmail || '',
-      password: '',
-    }),
-
-  // Add a custom validation function (this can be async too!)
-  validate: (values: FormValues) => {
-    const errors: FormikErrors<FormValues> = {};
+const ProfileEditForm = () => {
+  const selector = useAppSelector((state) => state.auth.user);
+  const initialValues: userInfoInterface = {
+    id: selector?.id || 0,
+    name: selector?.name || 'name',
+    email: selector?.email || 'email',
+    dateOfBirthday: selector?.dateOfBirthday || '00-00-0000',
+  };
+  const handleSubmit = (values: userInfoInterface) => {
+    alert(values.email);
+  };
+  const validate = (values: userInfoInterface) => {
+    const errors: FormikErrors<userInfoInterface> = {};
     if (!values.email) {
       errors.email = 'Required';
     }
     return errors;
-  },
+  };
+  return (
+    <Formik
+      initialValues={initialValues}
+      validate={validate}
+      onSubmit={handleSubmit}
+    >
+      <StyledColumnForm>
+        <InputStyled type="text" name="name" />
+        <ErrorMessage name="name" />
+        <ErrorMessage name="email" />
+        <InputStyled type="email" name="email" />
+        <ErrorMessage name="dateOfBirthday" />
+        <InputStyled type="text" name="dateOfBirthday" />
+        <button type="submit">
+          Submit
+        </button>
+      </StyledColumnForm>
+    </Formik>
+  );
+};
 
-  handleSubmit: (values) => {
-    // do submitting things
-    alert(values.email);
-  },
-})(InnerForm);
-
-const Basic = () => (
-  <div>
-    <h1>My App</h1>
-    <p>This can be anywhere in your application</p>
-    <ProfileEditForm message="Edit Profile" />
-  </div>
-);
-
-export default Basic;
+export default ProfileEditForm;

@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { bookSlice } from './bookSlice';
 import { authSlice } from './authSlice';
-import { categoriesSlice } from './categoriesSlice';
+import { contentSlice } from './contentSlice';
 import { adminPanelSlice } from './adminPanelSlice';
 
 export const store = configureStore({
   reducer: {
     books: bookSlice.reducer,
     auth: authSlice.reducer,
-    categories: categoriesSlice.reducer,
+    content: contentSlice.reducer,
     adminPanel: adminPanelSlice.reducer,
   },
 });

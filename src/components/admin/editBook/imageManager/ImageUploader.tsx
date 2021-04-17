@@ -17,6 +17,7 @@ const UploaderWrapper = styled.div`
 
 const ImageUploader = () => {
   const dispatch = useAppDispatch();
+  const jwt = useAppSelector((state) => state.auth.authJwt);
   const { id } = useParams<{id: string}>();
   const componentName: string = 'ImageUploader';
   const [image, setImage] = useState<string | Blob>('');
@@ -26,26 +27,25 @@ const ImageUploader = () => {
   const formOnSubmit = (values: FormikValues) => {
     console.log('values.file');
     console.log(values.file);
-    const file = new FormData();
-    console.log('selector');
-    console.log(selector);
-    file.append('image', image);
-    if (selector?.media) {
+    if (image && selector?.media) {
+      const file = new FormData();
+      file.append('image', image);
       file.append('folder', selector?.media);
+      axios.post(`/images/load/${id}`,
+        file,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: jwt,
+          },
+        })
+        .then((data) => {
+          console.log(data.data);
+          console.log(id);
+          dispatch(asyncLoadImagesBookId(+id));
+        })
+        .catch((er) => console.log(er));
     }
-    console.log('file');
-    console.log(file.values());
-    console.log('image123213');
-    console.log(image);
-    axios.post(`/images/load/${id}`,
-      file,
-      { headers: { 'Content-Type': 'multipart/form-data' } })
-      .then((data) => {
-        console.log(data.data);
-        console.log(id);
-        dispatch(asyncLoadImagesBookId(+id));
-      })
-      .catch((er) => console.log(er));
   };
   const changeImageInput = (e : React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.files?.length) {

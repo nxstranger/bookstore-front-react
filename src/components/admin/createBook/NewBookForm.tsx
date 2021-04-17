@@ -18,6 +18,7 @@ import {
 } from '../../../modules/styled/styledForm';
 import axios from '../../../modules/axios/config';
 import { editableBook } from '../../../modules/redux/adminPanelSlice';
+import { useAppSelector } from '../../../modules/redux/hooks';
 
 interface FormValues {
   title: string;
@@ -41,10 +42,18 @@ const RegisterFormLayout = () => {
     fieldNotFilledValidator(values, errors);
     return errors;
   };
-
+  const jwt = useAppSelector((state) => state.auth.authJwt);
   const handleSubmit = (values: FormValues) => {
     console.log('submit');
-    axios.post('/book/', JSON.stringify(values))
+    axios.post(
+      '/book/',
+      JSON.stringify(values),
+      {
+        headers: {
+          Authorization: jwt,
+        },
+      },
+    )
       .then((result) => {
         alert('U push button');
         console.log('result');
@@ -69,7 +78,7 @@ const RegisterFormLayout = () => {
       validate={validate}
     >
       <StyledColumnForm>
-        <ErrorMessage name="titlt" />
+        <ErrorMessage name="title" />
         <InputStyled required name="title" type="text" placeholder="title" />
 
         <ErrorMessage name="slug" />

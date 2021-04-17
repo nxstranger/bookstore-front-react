@@ -6,7 +6,7 @@ import PictureElement from './picture/PictureElement';
 import { useAppDispatch, useAppSelector } from '../../../../modules/redux/hooks';
 // eslint-disable-next-line no-unused-vars
 import { getBookImages, asyncLoadImagesBookId } from '../../../../modules/redux/adminPanelSlice';
-import { ImagesInterface } from '../../../../modules/interfaces/imagesInterface';
+import { imagesInterface } from '../../../../modules/interfaces/imagesInterface';
 
 const GalleryWrapper = styled.div`
   padding: 10px;
@@ -19,8 +19,8 @@ const GalleryWrapper = styled.div`
 
 const EditBookGallery = () => {
   const dispatch = useAppDispatch();
-  const selector: ImagesInterface[] = useAppSelector(getBookImages);
-  const [images, setImages] = useState<ImagesInterface[]>(useAppSelector(getBookImages));
+  const selector: imagesInterface[] = useAppSelector(getBookImages);
+  const [images, setImages] = useState<imagesInterface[]>(useAppSelector(getBookImages));
   const { id } = useParams<{id: string }>();
 
   useEffect(() => {
@@ -30,14 +30,13 @@ const EditBookGallery = () => {
 
   useEffect(() => {
     console.log('EditBookGallery tick');
-    // dispatch(asyncLoadImagesBookId(+id));
     setImages(selector);
   }, [selector]);
   return (
     <GalleryWrapper>
       {
         (images.length)
-          ? images.map((obj:ImagesInterface) => (
+          ? images.map((obj:imagesInterface) => (
             <PictureElement
               image={obj}
               key={obj.id}

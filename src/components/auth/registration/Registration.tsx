@@ -7,7 +7,7 @@ function Registration() {
   const selector = useSelector(selectAuth);
   return (
     <div>
-      <span>{(selector.isAuth) ? 'isAuth' : 'Unauthorized' }</span>
+      <span>{(selector) ? 'isAuth' : 'Unauthorized' }</span>
       <RegisterForm />
     </div>
   );

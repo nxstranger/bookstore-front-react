@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../../../../modules/axios/config';
-import { AuthorInterface } from '../../../../modules/interfaces/authorInterface';
+import { authorInterface } from '../../../../modules/interfaces/authorInterface';
 import { StyledUl } from '../../../../modules/styled/dropDownStyled';
 import { setBookAuthor as dispatchAuthor } from '../../../../modules/redux/adminPanelSlice';
 import { useAppDispatch } from '../../../../modules/redux/hooks';
@@ -12,7 +12,7 @@ interface helperProps {
 const AuthorInputHelper = (props: helperProps) => {
   const { search } = props;
   const dispatch = useAppDispatch();
-  const [textField, setTextField] = useState<AuthorInterface[]>([]);
+  const [textField, setTextField] = useState<authorInterface[]>([]);
   console.log('tick AuthorInputHelper');
   console.log(search);
   const setBookAuthor = (authorId: number) => {
