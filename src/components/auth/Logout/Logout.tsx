@@ -10,6 +10,7 @@ const Logout = () => {
     localStorage.removeItem('AccessToken');
     dispatch(setJwt(''));
   }, []);
+  console.log('LogOut');
   return (
     <div>
       <Redirect to="/" />

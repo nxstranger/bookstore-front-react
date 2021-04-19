@@ -12,6 +12,11 @@ const StyledPictureWrapper = styled.div`
   margin: 10px;
   display: flex;
   flex-direction: column;
+  img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
 `;
 
 const DelImageButton = styled.button`

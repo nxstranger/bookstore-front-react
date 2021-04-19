@@ -29,6 +29,7 @@ interface bookProps {
 }
 
 const BookData = (props: bookProps) => {
+  const jwt = useAppSelector((state) => state.auth.authJwt);
   const stateHook = useAppSelector((state) => state.adminPanel.book);
   const dispatch = useAppDispatch();
   const { book } = props;
@@ -43,7 +44,6 @@ const BookData = (props: bookProps) => {
     category: book?.category || 1,
     author: book.author || 1,
   };
-  console.log('tick');
   const handleSubmit = (submitValues: bookInterfaceAdmin) => {
     const payloadData: bookUpdateDataInterface = {
       title: submitValues.title,
@@ -54,8 +54,13 @@ const BookData = (props: bookProps) => {
       category: stateHook?.category,
       author: stateHook?.author,
     };
-    console.log('tick bookdata');
-    axios.put(`/book/id/${book.id}`, payloadData)
+    axios.put(`/book/id/${book.id}`,
+      payloadData,
+      {
+        headers: {
+          Authorization: jwt,
+        },
+      })
       .then((res) => {
         if (res.status === 200) alert('updated');
         dispatch(setBookInfo(payloadData));

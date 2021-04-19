@@ -18,6 +18,32 @@ export const asyncLoadUserInfo = createAsyncThunk(
   },
 );
 
+interface updateUserInterface {
+  values: userInfoInterface,
+  token: string,
+}
+
+export const asyncUpdateUserInfo = createAsyncThunk(
+  'auth/asyncUpdateUserInfo',
+  async ({ values, token } : updateUserInterface) => {
+    const updateData = {
+      name: values.name,
+      email: values.email,
+      dateOfBirthday: values.dateOfBirthday,
+    };
+    const resp = await axios.put(
+      `users/${values.id}`,
+      updateData,
+      {
+        headers: {
+          Authorization: token,
+        },
+      },
+    );
+    return (resp.status === 200) ? values : undefined;
+  },
+);
+
 interface authState {
   authJwt: string,
   user: userInfoInterface | undefined,
@@ -46,10 +72,14 @@ export const authSlice = createSlice({
       console.log('asyncLoadUserInfo tick');
       return { ...state, user: action.payload };
     });
+    builder.addCase(asyncUpdateUserInfo.fulfilled, (state, action) => {
+      console.log('asyncLoadUserInfo tick');
+      return { ...state, user: action.payload };
+    });
   },
 });
 
-export const { setJwt, cleanUserInfo } = authSlice.actions;
+export const { setJwt } = authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth.authJwt;
 

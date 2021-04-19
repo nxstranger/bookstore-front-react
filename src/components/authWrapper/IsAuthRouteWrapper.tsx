@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import { useAppSelector } from '../../modules/redux/hooks';
 
@@ -8,8 +8,16 @@ interface PrivateRouteProps extends RouteProps {
 }
 
 const IsAuthWrapper = (props: PrivateRouteProps) => {
-  const { itTrue, component: Component, ...rest } = props;
+  const {
+    itTrue,
+    component: Component,
+    ...rest
+  } = props;
   const jwt = useAppSelector((state) => state.auth.authJwt);
+  useEffect(() => {
+    console.log('selectorJwt');
+    console.log(jwt);
+  }, [jwt]);
   return (
     <Route
       {...rest}

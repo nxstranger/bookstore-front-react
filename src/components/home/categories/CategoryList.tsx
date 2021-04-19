@@ -3,15 +3,16 @@ import styled from 'styled-components';
 
 import Category from './Category';
 import { categoriesInterface } from '../../../modules/interfaces/categoriesInterface';
-import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
-import { asyncLoadCategories, getAllCategories } from '../../../modules/redux/contentSlice';
+import { useAppSelector } from '../../../modules/redux/hooks';
+import { getAllCategories } from '../../../modules/redux/contentSlice';
 
 const StyledCategories = styled.ul`
+  margin: 0;
+  padding: 0;
+  width: 300px;
   display: flex;
   flex-direction: column;
   color: #46c3d2;
-  padding: 10px;
-  margin: 10px;
   a, a:link {
     text-decoration: none;
     color: #46c3d2;
@@ -24,18 +25,9 @@ const CategoriesSpan = styled.span`
 `;
 
 function CategoryList(): JSX.Element {
-  const dispatch = useAppDispatch();
   const selector: categoriesInterface[] = useAppSelector(getAllCategories);
   const [categories, setCat] = useState<categoriesInterface[]>(useAppSelector(getAllCategories));
-
   useEffect(() => {
-    dispatch(asyncLoadCategories());
-  }, []);
-  useEffect(() => {
-    if (!selector.length) {
-      console.log('categories draw tick');
-      dispatch(asyncLoadCategories());
-    }
     setCat(selector);
   }, [selector]);
 

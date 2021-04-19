@@ -26,6 +26,7 @@ const StyledSlideWrapper = styled(SwiperSlide)`
 
 const StyledImage = styled.img`
   margin: auto;
+  max-height: 500px;
 `;
 
 const GallerySwiper = (prop :galleryProp) => {

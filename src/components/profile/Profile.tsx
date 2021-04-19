@@ -9,9 +9,7 @@ const StyledDivFlex = styled.div`
   display: flex;
   flex-direction: row;
   padding: 20px;
-  width: 400px;
   border: 1px solid red;
-  
 `;
 
 function Profile() {

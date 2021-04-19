@@ -36,7 +36,7 @@ function Header() {
   return (
     <StyledHeader>
       <h1>
-        Header
+        LOGO
       </h1>
       <HeaderLinkWrapper>
         <Link to="/">Home</Link>

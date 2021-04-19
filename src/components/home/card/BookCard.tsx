@@ -1,44 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import {
+  AuthorSpan,
+  BookImageStyled,
+  BookNameSpan,
+  BookPriceSpan,
+  ButtonStyledAddToCart,
+  Card,
+  DivBookInfo,
+  DivFlexRow,
+  StyledDivForImage,
+  WishlistAddStyledDiv,
+} from './stylesBookCard';
 import { bookInterface } from '../../../modules/interfaces/bookInterface';
-
-const Card = styled.div`
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  padding: 10px;
-  //border: 1px darkgreen solid;
-`;
-const BookImageStyled = styled.img`
-  width: 150px;
-  object-fit: cover;
-  align-self: center;
-`;
-
-const WishlistAddStyledDiv = styled.div`
-  width: 40px;
-  height: 40px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background: gray;
-`;
-
-const ButtonStyledAddToCart = styled.button`
-  border: none;
-  background: #f64444;
-  mso-border-shadow: ;
-`;
-
-const DivFlexRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
 
 interface bookProps {
   bookObj: bookInterface;
@@ -50,17 +24,23 @@ function BookCard({ bookObj }:bookProps) {
   return (
     <Card>
       <Link to={detailLink}>
-        <BookImageStyled src={titleImageLink} alt="BookImage" />
-        <span>
-          { (bookObj.BookAuthor)
-            ? bookObj.BookAuthor.name
-            : 'undefined'}
-        </span>
-        <span>{bookObj.title}</span>
-        <span>
-          {'Price: '}
-          {bookObj.price}
-        </span>
+        <StyledDivForImage>
+          <BookImageStyled src={titleImageLink} alt="BookImage" />
+        </StyledDivForImage>
+        <DivBookInfo>
+          <AuthorSpan>
+            { (bookObj.BookAuthor)
+              ? bookObj.BookAuthor.name
+              : 'undefined'}
+          </AuthorSpan>
+          <BookNameSpan>
+            {bookObj.title}
+          </BookNameSpan>
+          <BookPriceSpan>
+            {bookObj.price}
+            {' Ъ'}
+          </BookPriceSpan>
+        </DivBookInfo>
       </Link>
       <DivFlexRow>
         <ButtonStyledAddToCart type="button">Add to cart</ButtonStyledAddToCart>

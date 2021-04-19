@@ -7,8 +7,9 @@ interface PrivateRouteProps extends RouteProps {
   itTrue: boolean
 }
 
-const IsAdminWrapper = (props: PrivateRouteProps) => {
-  const { itTrue, component: Component, ...rest } = props;
+const IsAdminWrapper = ({ itTrue, component: Component, ...rest }: PrivateRouteProps) => {
+  // const { itTrue, component: Component, ...rest } = props;
+
   const jwt = useAppSelector((state) => state.auth.authJwt);
   const [admin, setAdmin] = useState(!!jwt);
   useEffect(() => {

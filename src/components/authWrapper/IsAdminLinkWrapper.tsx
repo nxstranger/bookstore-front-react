@@ -14,7 +14,7 @@ const IsAuthLinkWrapper = (props: wrapperProps) => {
     if (jwt) {
       setAdmin(true);
     } else {
-      console.log('LINK: no have jwt');
+      setAdmin(false);
     }
   }, [jwt]);
   return (

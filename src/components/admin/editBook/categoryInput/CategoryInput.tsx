@@ -6,7 +6,6 @@ import { asyncLoadCategories } from '../../../../modules/redux/contentSlice';
 import { setBookCategory } from '../../../../modules/redux/adminPanelSlice';
 
 const CategoriesInput = () => {
-  const placeholder: string = 'categories';
   const dispatch = useAppDispatch();
   const currentCategorySelector = useAppSelector((state) => state.adminPanel.book?.category);
   const categoriesSelector = useAppSelector((state) => state.content.categories);
@@ -20,7 +19,6 @@ const CategoriesInput = () => {
   return (
     <DropdownLabel htmlFor="cat-input" defaultValue="categories">
       <DropdownInput
-        placeholder={placeholder}
         id="cat-input"
         as="select"
         value={(currentCategorySelector) || 1}
@@ -36,7 +34,6 @@ const CategoriesInput = () => {
           ))
         }
       </DropdownInput>
-
     </DropdownLabel>
   );
 };

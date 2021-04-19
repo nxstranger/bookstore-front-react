@@ -20,14 +20,31 @@ export const asyncLoadImagesBookId = createAsyncThunk(
   },
 );
 
+export const asyncLoadUnpublishedBooks = createAsyncThunk(
+  'adminPanel/asyncLoadUnpublishedBooks',
+  async (token: string) => {
+    const resp = await axios.get(
+      'book/unpublished',
+      {
+        headers: {
+          Authorization: token,
+        },
+      },
+    );
+    return (resp.status === 200) ? resp.data : [];
+  },
+);
+
 interface adminPanelInterface {
   book: bookInterfaceAdmin | undefined,
   images: imagesInterface[];
+  unpublishedBooks : bookInterfaceAdmin[];
 }
 
 const initialState: adminPanelInterface = {
   book: undefined,
   images: [],
+  unpublishedBooks: [],
 };
 
 export const adminPanelSlice = createSlice({
@@ -72,6 +89,10 @@ export const adminPanelSlice = createSlice({
     builder.addCase(asyncLoadImagesBookId.fulfilled, (state, action) => {
       console.log('asyncLoadImages tick');
       return { ...state, images: action.payload };
+    });
+    builder.addCase(asyncLoadUnpublishedBooks.fulfilled, (state, action) => {
+      console.log('asyncLoadImages tick');
+      return { ...state, unpublishedBooks: action.payload };
     });
   },
 });
