@@ -54,7 +54,7 @@ const CreateAuthorForm = ({ jwt, authors } : prop) => {
         <ErrorMessage name="name" />
         <StyledInputDiv>
           name
-          <InputStyled type="text" name="name" autoFocus />
+          <InputStyled type="text" name="name" />
         </StyledInputDiv>
         <button type="submit">
           Submit

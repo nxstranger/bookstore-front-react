@@ -59,12 +59,12 @@ export default ({ jwt, categories } : prop) => {
         <StyledInputDiv>
           title
           <ErrorMessage name="title" />
-          <InputStyled type="text" name="title" autoFocus />
+          <InputStyled type="text" name="title" />
         </StyledInputDiv>
         <StyledInputDiv>
           slug
           <ErrorMessage name="slug" />
-          <InputStyled type="text" name="slug" autoFocus />
+          <InputStyled type="text" name="slug" />
         </StyledInputDiv>
         <button type="submit">
           Submit

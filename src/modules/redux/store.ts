@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { bookSlice } from './bookSlice';
+import { booksSlice } from './booksSlice';
 import { authSlice } from './authSlice';
 import { contentSlice } from './contentSlice';
 import { adminPanelSlice } from './adminPanelSlice';
 
 export const store = configureStore({
   reducer: {
-    books: bookSlice.reducer,
+    books: booksSlice.reducer,
     auth: authSlice.reducer,
     content: contentSlice.reducer,
     adminPanel: adminPanelSlice.reducer,

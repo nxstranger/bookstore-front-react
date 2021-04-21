@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CategoryList from './categories/CategoryList';
 import Content from './content/Content';
-import BookFilter from './filters/BookFilter';
+import FilterWrapper from './filter/FilterWrapper';
 
 const Main = styled.main`
   display: flex;
@@ -16,7 +16,7 @@ function Home() {
     <Main>
       <div>
         <CategoryList />
-        <BookFilter />
+        <FilterWrapper />
       </div>
       <Content />
     </Main>

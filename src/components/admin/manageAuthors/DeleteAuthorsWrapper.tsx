@@ -6,12 +6,13 @@ import DeleteAuthorForm from './DeleteAuthorForm';
 import { authorInterface } from '../../../modules/interfaces/authorInterface';
 
 const Styled = styled.div`
-padding: 20px;
-  border: 1px solid gray;
+  height: 100px;
+  padding: 20px;
+  color: gray;
 `;
 
 export default () => {
-  const text = '';
+  const text = 'Delete';
   const jwt = useAppSelector((state) => state.auth.authJwt);
   const authorsState = useAppSelector((state) => state.content.authors);
   const [authors, setAuthors] = useState<authorInterface[]>([]);

@@ -6,11 +6,12 @@ import {
   BookNameSpan,
   BookPriceSpan,
   ButtonStyledAddToCart,
-  Card,
+  StyledCard,
   DivBookInfo,
   DivFlexRow,
   StyledDivForImage,
   WishlistAddStyledDiv,
+  StyledCardWrapper,
 } from './stylesBookCard';
 import { bookInterface } from '../../../modules/interfaces/bookInterface';
 
@@ -22,31 +23,33 @@ function BookCard({ bookObj }:bookProps) {
   const detailLink = `/book/detail/${bookObj.id}_${bookObj.slug}`;
   const titleImageLink = `http://localhost:8080/${bookObj.media}/${bookObj.BookImages[0].name}_small.jpg`;
   return (
-    <Card>
-      <Link to={detailLink}>
-        <StyledDivForImage>
-          <BookImageStyled src={titleImageLink} alt="BookImage" />
-        </StyledDivForImage>
-        <DivBookInfo>
-          <AuthorSpan>
-            { (bookObj.BookAuthor)
-              ? bookObj.BookAuthor.name
-              : 'undefined'}
-          </AuthorSpan>
-          <BookNameSpan>
-            {bookObj.title}
-          </BookNameSpan>
-          <BookPriceSpan>
-            {bookObj.price}
-            {' Ъ'}
-          </BookPriceSpan>
-        </DivBookInfo>
-      </Link>
-      <DivFlexRow>
-        <ButtonStyledAddToCart type="button">Add to cart</ButtonStyledAddToCart>
-        <WishlistAddStyledDiv>WL</WishlistAddStyledDiv>
-      </DivFlexRow>
-    </Card>
+    <StyledCardWrapper>
+      <StyledCard>
+        <Link to={detailLink}>
+          <StyledDivForImage>
+            <BookImageStyled src={titleImageLink} alt="BookImage" />
+          </StyledDivForImage>
+          <DivBookInfo>
+            <AuthorSpan>
+              { (bookObj.BookAuthor)
+                ? bookObj.BookAuthor.name
+                : 'undefined'}
+            </AuthorSpan>
+            <BookNameSpan>
+              {bookObj.title}
+            </BookNameSpan>
+            <BookPriceSpan>
+              {bookObj.price}
+              {' Ъ'}
+            </BookPriceSpan>
+          </DivBookInfo>
+        </Link>
+        <DivFlexRow>
+          <ButtonStyledAddToCart type="button">Add to cart</ButtonStyledAddToCart>
+          <WishlistAddStyledDiv>WL</WishlistAddStyledDiv>
+        </DivFlexRow>
+      </StyledCard>
+    </StyledCardWrapper>
   );
 }
 

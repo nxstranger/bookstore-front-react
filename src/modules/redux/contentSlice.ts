@@ -37,7 +37,7 @@ export const asyncDeleteCategory = createAsyncThunk(
 export const asyncCreateCategory = createAsyncThunk(
   'content/asyncCreateCategory',
   async ({ token, title, slug }: {token: string, title: string, slug: string}) => {
-    const resp = await axios.post('/category',
+    const resp = await axios.post('/categories',
       { title, slug },
       {
         headers: {

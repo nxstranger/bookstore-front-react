@@ -6,6 +6,9 @@ export const FlexColumnDiv = styled.div`
 `;
 
 export const FlexRowDiv = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
+  align-items: baseline;
+  justify-content: space-around;
 `;

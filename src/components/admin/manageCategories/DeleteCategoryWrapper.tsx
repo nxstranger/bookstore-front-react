@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../../modules/redux/hooks';
@@ -6,12 +5,13 @@ import { categoriesInterface } from '../../../modules/interfaces/categoriesInter
 import DeleteCategoryForm from './DeleteCategoryForm';
 
 const Styled = styled.div`
-padding: 20px;
-  border: 1px solid gray;
+  height: 100px;
+  padding: 20px;
+  color: gray;
 `;
 
 export default () => {
-  const text = '';
+  const text = 'Delete';
   const jwt = useAppSelector((state) => state.auth.authJwt);
   const categoriesState = useAppSelector((state) => state.content.categories);
   const [categories, setCategories] = useState<categoriesInterface[]>([]);

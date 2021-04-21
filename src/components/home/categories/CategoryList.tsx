@@ -17,6 +17,9 @@ const StyledCategories = styled.ul`
     text-decoration: none;
     color: #46c3d2;
   }
+  a:hover {
+    color: #24a1b0;
+  }
 `;
 
 const CategoriesSpan = styled.span`
@@ -30,13 +33,12 @@ function CategoryList(): JSX.Element {
   useEffect(() => {
     setCat(selector);
   }, [selector]);
-
   return (
     <StyledCategories>
       <CategoriesSpan>
         Categories:
       </CategoriesSpan>
-      <Category categoryName="Все книги" slug="" key="01234" />
+      <Category categoryName="Все книги" slug="" />
       {
         (categories.length)
           ? categories.map((obj:categoriesInterface) => (

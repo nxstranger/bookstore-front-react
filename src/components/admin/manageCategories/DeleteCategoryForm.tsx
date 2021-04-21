@@ -17,7 +17,7 @@ export default ({ categories, jwt } : prop) => {
   const dispatch = useAppDispatch();
   const [selectedCat, setCategory] = useState<number>((categories.length) ? categories[0].id : 0);
   const initialValues = {
-    author: (categories.length) ? categories[0].id : 0,
+    category: (categories.length) ? categories[0].id : 0,
   };
   const handleSubmit = () => {
     console.log('deletedValue');

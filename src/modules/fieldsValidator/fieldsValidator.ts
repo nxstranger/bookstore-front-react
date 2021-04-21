@@ -1,7 +1,7 @@
 import { FormikErrors, FormikValues } from 'formik';
 
 const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
-const bookNameRegex = /^([a-z0-9]+)([a-z\s\-0-9]+)([a-z0-9]+)$/i;
+const bookNameRegex = /^([a-zа-я0-9]+)([a-zа-я\s\-0-9]+)([а-яa-z0-9]+)$/i;
 const bookSlugRegex = /^([a-z0-9]+)([a-z\-0-9]+)([a-z0-9]+)$/i;
 const usernameRegex = /^([a-z]+)|([а-я]+)$/i;
 const dateOfBirthdayRegex = /^(0[1-9]|1[012])[-/.](0[1-9]|[12][0-9]|3[01])[-/.](19|20)\d\d$/g;

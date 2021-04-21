@@ -4,8 +4,7 @@ import { userInfoInterface } from '../interfaces/userInfoInterface';
 import axios from '../axios/config';
 
 export const asyncLoadUserInfo = createAsyncThunk(
-  'auth/asyncLoadUserInfo',
-  async (token: string) => {
+  'content/asyncLoadUserInfo', async (token: string) => {
     const resp = await axios.get(
       'auth/token/user-info',
       {
@@ -14,7 +13,10 @@ export const asyncLoadUserInfo = createAsyncThunk(
         },
       },
     );
-    return (resp.status === 200) ? resp.data : undefined;
+    if (resp.status === 200) {
+      return resp.data;
+    }
+    return undefined;
   },
 );
 
@@ -40,7 +42,10 @@ export const asyncUpdateUserInfo = createAsyncThunk(
         },
       },
     );
-    return (resp.status === 200) ? values : undefined;
+    if (resp.status === 200) {
+      return values;
+    }
+    return undefined;
   },
 );
 
@@ -69,8 +74,15 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(asyncLoadUserInfo.fulfilled, (state, action) => {
-      console.log('asyncLoadUserInfo tick');
-      return { ...state, user: action.payload };
+      console.log('asyncLoadUserInfo fulfilled tick');
+
+      return action.payload ? { ...state, user: action.payload } : { ...state, authJwt: '' };
+    });
+    builder.addCase(asyncLoadUserInfo.rejected, (state) => {
+      console.log('asyncLoadUserInfo rejected tick');
+      localStorage.removeItem('RefreshToken');
+      localStorage.removeItem('AccessToken');
+      return { ...state, authJwt: '' };
     });
     builder.addCase(asyncUpdateUserInfo.fulfilled, (state, action) => {
       console.log('asyncLoadUserInfo tick');

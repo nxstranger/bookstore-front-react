@@ -16,7 +16,7 @@ import AdminPanel from './components/admin/AdminPanel';
 import CreateBookMain from './components/admin/createBook/CreateBookMain';
 import EditBookMain from './components/admin/editBook/EditBookMain';
 import IsAuthWrapper from './components/authWrapper/IsAuthRouteWrapper';
-import Logout from './components/auth/Logout/Logout';
+import Logout from './components/auth/logout/Logout';
 import { useAppDispatch, useAppSelector } from './modules/redux/hooks';
 import { asyncLoadUserInfo, setJwt } from './modules/redux/authSlice';
 import IsAdminRouteWrapper from './components/authWrapper/IsAdminRouteWrapper';
@@ -25,15 +25,18 @@ import { asyncLoadAuthors, asyncLoadCategories } from './modules/redux/contentSl
 const StyledAppWrapper = styled.div`
   max-width: 1200px;
   margin: auto;
+  min-width: 768px;
 `;
 
 function App() {
   const dispatch = useAppDispatch();
   const jwtSelector = useAppSelector((state) => state.auth.authJwt);
   useEffect(() => {
-    const token = localStorage.getItem('AccessToken');
     dispatch(asyncLoadCategories());
     dispatch(asyncLoadAuthors());
+  }, []);
+  useEffect(() => {
+    const token = localStorage.getItem('AccessToken');
     if (token) {
       dispatch(asyncLoadUserInfo(token));
       dispatch(setJwt(token));

@@ -1,6 +1,17 @@
 import styled from 'styled-components';
 
-export const Card = styled.div`
+export const StyledCardWrapper = styled.div`
+  width: 25%;
+  @media (max-width: 1199px) {
+  width: 33%;
+  }
+  @media (max-width: 999px) {
+    width: 50%;
+  }
+  min-width: 198px;
+`;
+
+export const StyledCard = styled.div`
   width: 198px;
   height: 350px;
   display: flex;

@@ -4,12 +4,13 @@ import { useAppSelector } from '../../../modules/redux/hooks';
 import CreateAuthorForm from './CreateCategoryForm';
 
 const Styled = styled.div`
-padding: 20px;
-  border: 1px solid gray;
+  height: 160px;
+  padding: 20px;
+  color: gray;
 `;
 
 export default () => {
-  const text = '';
+  const text = 'Create';
   const jwt = useAppSelector((state) => state.auth.authJwt);
   const categories = useAppSelector((state) => state.content.categories);
   return (

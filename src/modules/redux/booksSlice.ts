@@ -13,13 +13,15 @@ export const asyncLoadBooks = createAsyncThunk(
 
 interface BookState {
   books: bookInterface[],
+  sort: '' | 'authorASC' | 'authorDESC' | 'priceASC' | 'priceDESC',
 }
 
 const initialState: BookState = {
   books: [],
+  sort: '',
 };
 
-export const bookSlice = createSlice({
+export const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
@@ -29,8 +31,8 @@ export const bookSlice = createSlice({
   },
 });
 
-export const { saveBooks } = bookSlice.actions;
+export const { saveBooks } = booksSlice.actions;
 
 export const selectBooks = (state: RootState) => state.books;
 
-export default bookSlice.reducer;
+export default booksSlice.reducer;

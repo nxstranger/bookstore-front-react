@@ -6,8 +6,7 @@ import ContentHead from './ContentHead';
 import ContentMain from './ContentMain';
 
 const StyledContent = styled.div`
-  //margin: 10px;
-  padding: 0 10px;
+  width: 100%;
 `;
 
 function Content() {
