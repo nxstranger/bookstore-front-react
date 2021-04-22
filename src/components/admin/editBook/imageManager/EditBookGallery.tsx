@@ -6,7 +6,7 @@ import PictureElement from './picture/PictureElement';
 import { useAppDispatch, useAppSelector } from '../../../../modules/redux/hooks';
 // eslint-disable-next-line no-unused-vars
 import { getBookImages, asyncLoadImagesBookId } from '../../../../modules/redux/adminPanelSlice';
-import { imagesInterface } from '../../../../modules/interfaces/imagesInterface';
+import { imagesInterface } from '../../../../modules/interfaces/modelInterfaces';
 
 const GalleryWrapper = styled.div`
   padding: 10px;

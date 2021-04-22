@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { bookInterface } from '../../modules/interfaces/bookInterface';
+import { bookInterface } from '../../modules/interfaces/modelInterfaces';
 import BooKCardDetail from './BookCardDetail';
 import { useAppDispatch, useAppSelector } from '../../modules/redux/hooks';
 import { asyncLoadBookInfo } from '../../modules/redux/contentSlice';

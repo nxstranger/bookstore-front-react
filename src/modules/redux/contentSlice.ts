@@ -1,9 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { categoriesInterface } from '../interfaces/categoriesInterface';
+import { categoriesInterface, bookInterface, authorInterface } from '../interfaces/modelInterfaces';
 import axios from '../axios/config';
 import { RootState } from './store';
-import { bookInterface } from '../interfaces/bookInterface';
-import { authorInterface } from '../interfaces/authorInterface';
 
 export const asyncLoadBookInfo = createAsyncThunk(
   'content/asyncLoadBookInfo',

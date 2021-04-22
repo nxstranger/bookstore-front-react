@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import {
   bookInterfaceAdmin,
   bookUpdateDataInterface,
-} from '../../../modules/interfaces/bookInterface';
+} from '../../../modules/interfaces/modelInterfaces';
 import {
   CheckboxStyled,
   InputStyled,

@@ -5,7 +5,7 @@ import SwiperCore, {
 } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
-import { shortImagesInterface } from '../../modules/interfaces/imagesInterface';
+import { shortImagesInterface } from '../../modules/interfaces/modelInterfaces';
 
 SwiperCore.use([Navigation, Pagination, A11y]);
 

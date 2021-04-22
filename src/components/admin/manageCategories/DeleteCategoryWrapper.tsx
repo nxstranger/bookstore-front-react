@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../../modules/redux/hooks';
-import { categoriesInterface } from '../../../modules/interfaces/categoriesInterface';
+import { categoriesInterface } from '../../../modules/interfaces/modelInterfaces';
 import DeleteCategoryForm from './DeleteCategoryForm';
 
 const Styled = styled.div`

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { bookInterfaceAdmin } from '../../../modules/interfaces/bookInterface';
+import { bookInterfaceAdmin } from '../../../modules/interfaces/modelInterfaces';
 
 interface bookArray {
   books: bookInterfaceAdmin[],

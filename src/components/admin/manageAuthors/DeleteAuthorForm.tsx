@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { DropdownInput, DropdownLabel } from '../../../modules/styled/dropDownStyled';
 import { StyledColumnForm, StyledInputDiv } from '../../../modules/styled/styledForm';
-import { authorInterface } from '../../../modules/interfaces/authorInterface';
+import { authorInterface } from '../../../modules/interfaces/modelInterfaces';
 import { useAppDispatch } from '../../../modules/redux/hooks';
 
 import { asyncDeleteAuthor } from '../../../modules/redux/contentSlice';

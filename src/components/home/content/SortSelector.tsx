@@ -12,7 +12,7 @@ const allowedValues = [
   'priceDESC',
 ];
 
-export default () => {
+export default ({ ordering } : { ordering: string | undefined}) => {
   const handleSelect = (ev: any) => {
     console.log(ev.target.value);
   };
@@ -21,6 +21,7 @@ export default () => {
       name="sort"
       id="books-sort"
       onChange={handleSelect}
+      value={ordering}
     >
       {
         allowedValues.map((obj) => (

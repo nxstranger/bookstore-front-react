@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Category from './Category';
-import { categoriesInterface } from '../../../modules/interfaces/categoriesInterface';
+import { categoriesInterface } from '../../../modules/interfaces/modelInterfaces';
 import { useAppSelector } from '../../../modules/redux/hooks';
 import { getAllCategories } from '../../../modules/redux/contentSlice';
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { bookInterfaceAdmin } from '../../../modules/interfaces/bookInterface';
+import { bookInterfaceAdmin } from '../../../modules/interfaces/modelInterfaces';
 import { asyncLoadUnpublishedBooks } from '../../../modules/redux/adminPanelSlice';
 import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
 import UnpublishedBooks from './UnpublishedBooks';

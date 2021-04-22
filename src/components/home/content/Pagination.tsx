@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import PaginationLink from './PaginationLink';
 
@@ -9,10 +8,14 @@ const DivRow = styled.div`
   margin: auto;
 `;
 
-export default () => {
-  const { search } = useLocation();
-  const page = new URLSearchParams(search).get('page');
-  console.log(page);
+interface paginationPropsInterface {
+  page?: number,
+  count?: number
+}
+
+export default (paginationProps: paginationPropsInterface) => {
+  const { count, page } = paginationProps;
+  console.log(count, page);
   return (
     <DivRow>
       <PaginationLink edge="start" value={1} />

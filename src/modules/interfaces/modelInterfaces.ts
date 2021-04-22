@@ -1,4 +1,30 @@
-import { shortImagesInterface } from './imagesInterface';
+export interface authorInterface {
+  id: number,
+  name: string,
+}
+
+export interface userInfoInterface {
+  id: number,
+  dateOfBirthday: string,
+  name: string,
+  email: string
+}
+
+export interface categoriesInterface {
+  id: number,
+  title: string,
+  slug: string
+}
+
+export interface imagesInterface {
+  id: number,
+  bookId: number,
+  name: string,
+}
+
+export interface shortImagesInterface {
+  name: string,
+}
 
 export interface bookInterface {
   id: number,

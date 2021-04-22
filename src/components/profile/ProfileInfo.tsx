@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { userInfoInterface } from '../../modules/interfaces/userInfoInterface';
+import { userInfoInterface } from '../../modules/interfaces/modelInterfaces';
 
 const StyledProfileInfo = styled.div`
   display: flex;

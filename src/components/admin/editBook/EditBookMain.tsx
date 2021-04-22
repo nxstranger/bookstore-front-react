@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
 import BookData from './BookData';
 // eslint-disable-next-line no-unused-vars
 import { asyncLoadBookById } from '../../../modules/redux/adminPanelSlice';
-import { bookInterfaceAdmin } from '../../../modules/interfaces/bookInterface';
+import { bookInterfaceAdmin } from '../../../modules/interfaces/modelInterfaces';
 
 interface bookLinkInterface {
   id: number,

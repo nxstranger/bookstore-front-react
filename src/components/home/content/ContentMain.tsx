@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import BookCard from '../card/BookCard';
 import axios from '../../../modules/axios/config';
-import { bookInterface } from '../../../modules/interfaces/bookInterface';
+import { bookInterface } from '../../../modules/interfaces/modelInterfaces';
+import { useAppSelector } from '../../../modules/redux/hooks';
+import { queryInterface } from '../../../modules/interfaces/filterInterface';
 
 const Main = styled.main`
   display: flex;
@@ -11,46 +13,26 @@ const Main = styled.main`
   flex-wrap: wrap;
 `;
 
-const getQueryValue = (param:string) => new URLSearchParams(useLocation().search).get(param);
+const StyledDivNoContent = styled.div`
+  margin: auto;
+`;
 
-function ContentMain({ categoryBook } :{categoryBook: string}) {
-  const [books, setBooks] = useState<Array<bookInterface>>([]);
-
-  const ordering = getQueryValue('ordering');
-  const category = getQueryValue('category');
-  const author = getQueryValue('author');
-  const priceFrom = getQueryValue('price_from');
-  const priceTo = getQueryValue('price_to');
-  const page = getQueryValue('page');
-  console.log(ordering);
-  console.log(category);
-  console.log(author);
-  console.log(priceFrom);
-  console.log(priceTo);
-  console.log(page);
-  function getBooks(slug: string = '') {
-    const link = (slug) ? `/book/category/${slug}` : '/book/';
-    axios.get(link)
-      .then((data) => {
-        setBooks(data.data);
-      })
-      .catch(() => setBooks([]));
-  }
-
-  useEffect(() => {
-    // setLink(catSlug);
-    getBooks(categoryBook);
-  }, [categoryBook]);
+function ContentMain() {
+  const booksSelector = useAppSelector((state) => state.books.books);
   return (
     <Main>
-      {
-        books.map((obj:bookInterface) => (
+      { booksSelector.length
+        ? (booksSelector.map((obj:bookInterface) => (
           <BookCard
             bookObj={obj}
             key={obj.id}
           />
-        ))
-      }
+        )))
+        : (
+          <StyledDivNoContent>
+            No have books
+          </StyledDivNoContent>
+        )}
     </Main>
   );
 }

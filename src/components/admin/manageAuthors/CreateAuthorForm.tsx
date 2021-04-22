@@ -15,7 +15,7 @@ import {
 } from '../../../modules/fieldsValidator/fieldsValidator';
 import { useAppDispatch } from '../../../modules/redux/hooks';
 import { asyncCreateAuthor } from '../../../modules/redux/contentSlice';
-import { authorInterface } from '../../../modules/interfaces/authorInterface';
+import { authorInterface } from '../../../modules/interfaces/modelInterfaces';
 
 interface FormValues {
   name: string;

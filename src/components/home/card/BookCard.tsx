@@ -13,7 +13,7 @@ import {
   WishlistAddStyledDiv,
   StyledCardWrapper,
 } from './stylesBookCard';
-import { bookInterface } from '../../../modules/interfaces/bookInterface';
+import { bookInterface } from '../../../modules/interfaces/modelInterfaces';
 
 interface bookProps {
   bookObj: bookInterface;

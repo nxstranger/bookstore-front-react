@@ -1,50 +1,46 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React from 'react';
 import { Field, Formik, FormikProps } from 'formik';
+import { useHistory, useLocation } from 'react-router-dom';
 import { DropdownLabel } from '../../../modules/styled/dropDownStyled';
 import { StyledColumnForm, StyledInputDiv, StyledSlider } from '../../../modules/styled/styledForm';
 import { useAppDispatch } from '../../../modules/redux/hooks';
-
-import { categoriesInterface } from '../../../modules/interfaces/categoriesInterface';
-import { authorInterface } from '../../../modules/interfaces/authorInterface';
+import { categoriesInterface, authorInterface } from '../../../modules/interfaces/modelInterfaces';
+import { filterInterface } from '../../../modules/interfaces/filterInterface';
 import { FlexRowDiv } from '../../../modules/styled/simpleStyledComponents';
 
 interface prop {
+  queryValues: filterInterface,
   categories : categoriesInterface[],
   authors : authorInterface[],
 }
 
-interface filterValues {
-  author?: number,
-  category?: string,
-  priceFrom?: number,
-  priceTo?: number,
-}
-
-export default ({ categories, authors } : prop) => {
+export default ({ queryValues, categories, authors } : prop) => {
   const dispatch = useAppDispatch();
-  const priceRange = { min: 0, max: 3000 };
+  console.log(queryValues);
+  const history = useHistory();
+  const priceRange = { min: 1, max: 3000 };
   const initialValues = {
-    author: 0,
-    category: 'All',
-    priceFrom: priceRange.min,
-    priceTo: priceRange.max,
+    author: (queryValues.author) ? queryValues.author : 'all',
+    category: queryValues.category || 'all',
+    priceFrom: queryValues.priceFrom || priceRange.min,
+    priceTo: queryValues.priceTo || priceRange.max,
   };
-  const handleSubmit = (values: filterValues) => {
+  const handleSubmit = (values: filterInterface) => {
     console.log('values');
     console.log(values);
-    let query = '&';
-    if (values.author) query += `author=${values}`;
-    if (values.category) query += `category=${values}`;
-    if (values.author) query += `author=${values}`;
-    if (values.author) query += `author=${values}`;
+    let query = '';
+    if (values.author) query += `author_id=${values.author}&`;
+    if (values.category) query += `category=${values.category}&`;
+    if (values.priceFrom) query += `price_from=${values.priceFrom}&`;
+    if (values.priceTo) query += `price_to=${values.priceTo}&`;
+    if (query) {
+      query = `/?${query.slice(0, -1)}`;
+      history.push(query);
+    }
+    console.log('query');
+    console.log(query);
   };
-  // const handleCatSelect = (value: any) => {
-  //   setCategory(value.target.value);
-  // };
-  // const handleAuthorSelect = (value: any) => {
-  //   setAuthor(value.target.value);
-  // };
   return (
     <div>
       <Formik
@@ -61,7 +57,7 @@ export default ({ categories, authors } : prop) => {
                   id="category-filter"
                   as="select"
                 >
-                  <option key={0} value="All">0:   All</option>
+                  <option key={0} value="all">0:   All</option>
                   {
                     categories.map((obj) => (
                       <option key={obj.id} value={obj.slug}>
@@ -82,7 +78,7 @@ export default ({ categories, authors } : prop) => {
                   id="author-filter"
                   as="select"
                 >
-                  <option key={0} value="0">0:   All</option>
+                  <option key={0} value="all">0:   All</option>
                   {
                     authors.map((obj) => (
                       <option key={obj.id} value={+obj.id}>

@@ -6,7 +6,7 @@ import { StyledColumnForm, StyledInputDiv } from '../../../modules/styled/styled
 import { useAppDispatch } from '../../../modules/redux/hooks';
 
 import { asyncDeleteCategory } from '../../../modules/redux/contentSlice';
-import { categoriesInterface } from '../../../modules/interfaces/categoriesInterface';
+import { categoriesInterface } from '../../../modules/interfaces/modelInterfaces';
 
 interface prop {
   jwt: string,

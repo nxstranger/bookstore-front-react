@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
-import { userInfoInterface } from '../interfaces/userInfoInterface';
+import { userInfoInterface } from '../interfaces/modelInterfaces';
 import axios from '../axios/config';
 
 export const asyncLoadUserInfo = createAsyncThunk(
@@ -75,7 +75,6 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(asyncLoadUserInfo.fulfilled, (state, action) => {
       console.log('asyncLoadUserInfo fulfilled tick');
-
       return action.payload ? { ...state, user: action.payload } : { ...state, authJwt: '' };
     });
     builder.addCase(asyncLoadUserInfo.rejected, (state) => {

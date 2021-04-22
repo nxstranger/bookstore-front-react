@@ -1,24 +1,29 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
-import { bookInterface } from '../interfaces/bookInterface';
+import { bookInterface } from '../interfaces/modelInterfaces';
 import axios from '../axios/config';
+import { filterInterface } from '../interfaces/filterInterface';
 
 export const asyncLoadBooks = createAsyncThunk(
   'books/asyncLoadBooks',
-  async (identifier: string) => {
-    const resp = await axios.get(`/book/detail/${identifier}`);
+  async (query: string) => {
+    const resp = await axios.get(`/book/${query}`);
     return (resp.status === 200) ? resp.data : undefined;
   },
 );
 
 interface BookState {
   books: bookInterface[],
-  sort: '' | 'authorASC' | 'authorDESC' | 'priceASC' | 'priceDESC',
+  ordering: '' | 'authorASC' | 'authorDESC' | 'priceASC' | 'priceDESC',
+  queryFilter: filterInterface,
+  page: number,
 }
 
 const initialState: BookState = {
   books: [],
-  sort: '',
+  ordering: '',
+  queryFilter: {},
+  page: 0,
 };
 
 export const booksSlice = createSlice({

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DropdownInput, DropdownLabel } from '../../../../modules/styled/dropDownStyled';
 import { useAppDispatch, useAppSelector } from '../../../../modules/redux/hooks';
-import { categoriesInterface } from '../../../../modules/interfaces/categoriesInterface';
+import { categoriesInterface } from '../../../../modules/interfaces/modelInterfaces';
 import { asyncLoadCategories } from '../../../../modules/redux/contentSlice';
 import { setBookCategory } from '../../../../modules/redux/adminPanelSlice';
 

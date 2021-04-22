@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { imagesInterface } from '../../../../../modules/interfaces/imagesInterface';
+import { imagesInterface } from '../../../../../modules/interfaces/modelInterfaces';
 import { useAppDispatch, useAppSelector } from '../../../../../modules/redux/hooks';
 import axios from '../../../../../modules/axios/config';
 import { removeImage } from '../../../../../modules/redux/adminPanelSlice';

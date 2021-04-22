@@ -4,7 +4,7 @@ import {
   Formik,
   ErrorMessage,
 } from 'formik';
-import { userInfoInterface } from '../../modules/interfaces/userInfoInterface';
+import { userInfoInterface } from '../../modules/interfaces/modelInterfaces';
 import {
   InputStyled,
   StyledColumnForm,

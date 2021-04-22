@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { bookInterface } from '../../modules/interfaces/bookInterface';
+import { bookInterface } from '../../modules/interfaces/modelInterfaces';
 import Gallery from './Gallery';
 
 interface BookDetail {

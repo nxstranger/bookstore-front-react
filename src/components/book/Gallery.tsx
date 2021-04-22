@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { shortImagesInterface } from '../../modules/interfaces/imagesInterface';
+import { shortImagesInterface } from '../../modules/interfaces/modelInterfaces';
 import GallerySwiper from './GallerySwiper';
 
 const GalleryDiv = styled.div`

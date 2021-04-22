@@ -16,7 +16,7 @@ import {
 } from '../../../modules/fieldsValidator/fieldsValidator';
 import { useAppDispatch } from '../../../modules/redux/hooks';
 import { asyncCreateCategory } from '../../../modules/redux/contentSlice';
-import { categoriesInterface } from '../../../modules/interfaces/categoriesInterface';
+import { categoriesInterface } from '../../../modules/interfaces/modelInterfaces';
 
 interface FormValues {
   title: string;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../../../../modules/axios/config';
-import { authorInterface } from '../../../../modules/interfaces/authorInterface';
+import { authorInterface } from '../../../../modules/interfaces/modelInterfaces';
 import { StyledUl } from '../../../../modules/styled/dropDownStyled';
 import { setBookAuthor as dispatchAuthor } from '../../../../modules/redux/adminPanelSlice';
 import { useAppDispatch } from '../../../../modules/redux/hooks';

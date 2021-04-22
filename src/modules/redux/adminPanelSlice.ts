@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
-import { bookInterfaceAdmin, bookUpdateDataInterface } from '../interfaces/bookInterface';
+import { imagesInterface, bookInterfaceAdmin, bookUpdateDataInterface } from '../interfaces/modelInterfaces';
 import axios from '../axios/config';
-import { imagesInterface } from '../interfaces/imagesInterface';
 
 export const asyncLoadBookById = createAsyncThunk(
   'adminPanel/asyncLoadBookById',
