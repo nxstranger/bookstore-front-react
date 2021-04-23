@@ -1,5 +1,5 @@
 export interface filterInterface {
-  author?: string | number,
+  authorId?: string | number,
   category?: string,
   priceFrom?: number,
   priceTo?: number,
@@ -11,11 +11,10 @@ export interface queryInterface {
   authorId?: string,
   category?: string,
   page?: number,
-  ordering?: string,
+  ordering?: '' | 'authorASC' | 'authorDESC' | 'priceASC' | 'priceDESC',
 }
 
 export interface pageAndOrderInterface {
-  bookCount?: number,
   page?: number,
   ordering?: string
 }

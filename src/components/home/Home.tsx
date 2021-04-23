@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import CategoryList from './categories/CategoryList';
 import Content from './content/Content';
 import FilterWrapper from './filter/FilterWrapper';
 import { filterInterface, queryInterface } from '../../modules/interfaces/filterInterface';
+import { useAppDispatch } from '../../modules/redux/hooks';
+import { setFilterQuery, setOrdering, setPage } from '../../modules/redux/booksSlice';
 
 const Main = styled.main`
   display: flex;
@@ -23,31 +25,47 @@ const getQueryObject = () => {
   const priceFrom = getQueryValue('price_from');
   const priceTo = getQueryValue('price_to');
   const page = getQueryValue('page');
-  if (ordering) query.ordering = ordering;
+  if (ordering) {
+    // @ts-ignore
+    query.ordering = (
+      ['',
+        'authorASC',
+        'authorDESC',
+        'priceASC',
+        'priceDESC',
+      ].includes(ordering)) ? ordering : undefined;
+  }
   if (category) query.category = category;
   if (author) query.authorId = author;
   if (priceFrom) query.priceFrom = +priceFrom;
   if (priceTo) query.priceTo = +priceTo;
   if (page) query.page = +page;
-  console.log(ordering);
-  console.log(category);
-  console.log(author);
-  console.log(priceFrom);
-  console.log(priceTo);
-  console.log(page);
+  // console.log(ordering);
+  // console.log(category);
+  // console.log(author);
+  // console.log(priceFrom);
+  // console.log(priceTo);
+  // console.log(page);
   return query;
 };
 
 function Home() {
+  const selectLocation = useLocation();
   const queryObject = getQueryObject();
-  console.log('queryObject');
-  console.log(queryObject);
+  const dispatch = useAppDispatch();
+  // console.log('queryObject');
+  // console.log(queryObject);
   const filter: filterInterface = {
     category: queryObject.category,
-    author: queryObject.authorId,
+    authorId: queryObject.authorId,
     priceFrom: queryObject.priceFrom,
     priceTo: queryObject.priceTo,
   };
+  useEffect(() => {
+    dispatch(setFilterQuery(filter));
+    if (queryObject.page) dispatch(setPage(queryObject.page));
+    if (queryObject.ordering) dispatch(setOrdering(queryObject.ordering));
+  }, [selectLocation]);
   return (
     <Main>
       <div>
@@ -56,7 +74,7 @@ function Home() {
           filter={filter}
         />
       </div>
-      <Content query={queryObject} />
+      <Content />
     </Main>
   );
 }

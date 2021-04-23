@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import PaginationLink from './PaginationLink';
 
 const DivRow = styled.div`
@@ -13,9 +14,27 @@ interface paginationPropsInterface {
   count?: number
 }
 
+const calculatePagination = ({
+  page,
+  count,
+}: paginationPropsInterface) => {
+  if (!page) {
+    // redundant
+    console.log('not page');
+  }
+  if (count && count < 5) {
+    return [];
+  }
+  return [];
+};
+
 export default (paginationProps: paginationPropsInterface) => {
   const { count, page } = paginationProps;
-  console.log(count, page);
+  // console.log(count, page);
+  const tryToChangeQueryParam = useLocation().search;
+  console.log(tryToChangeQueryParam);
+  const pagination = calculatePagination({ page, count });
+  console.log(pagination);
   return (
     <DivRow>
       <PaginationLink edge="start" value={1} />

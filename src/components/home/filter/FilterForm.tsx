@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { Field, Formik, FormikProps } from 'formik';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { DropdownLabel } from '../../../modules/styled/dropDownStyled';
 import { StyledColumnForm, StyledInputDiv, StyledSlider } from '../../../modules/styled/styledForm';
 import { useAppDispatch } from '../../../modules/redux/hooks';
@@ -17,29 +17,30 @@ interface prop {
 
 export default ({ queryValues, categories, authors } : prop) => {
   const dispatch = useAppDispatch();
-  console.log(queryValues);
+  const { catSlug } = useParams<{ catSlug: string }>();
+  // console.log(queryValues);
   const history = useHistory();
-  const priceRange = { min: 1, max: 3000 };
+  const priceRange = { min: 1, max: 1000 };
   const initialValues = {
-    author: (queryValues.author) ? queryValues.author : 'all',
+    authorId: (queryValues.authorId) ? queryValues.authorId : 'all',
     category: queryValues.category || 'all',
     priceFrom: queryValues.priceFrom || priceRange.min,
     priceTo: queryValues.priceTo || priceRange.max,
   };
   const handleSubmit = (values: filterInterface) => {
-    console.log('values');
-    console.log(values);
+    // console.log('values');
+    // console.log(values);
     let query = '';
-    if (values.author) query += `author_id=${values.author}&`;
+    if (values.authorId) query += `author_id=${values.authorId}&`;
     if (values.category) query += `category=${values.category}&`;
     if (values.priceFrom) query += `price_from=${values.priceFrom}&`;
     if (values.priceTo) query += `price_to=${values.priceTo}&`;
     if (query) {
       query = `/?${query.slice(0, -1)}`;
-      history.push(query);
+      history.push(catSlug ? `/book/category/${catSlug}${query}` : query);
     }
-    console.log('query');
-    console.log(query);
+    // console.log('query');
+    // console.log(query);
   };
   return (
     <div>
@@ -74,7 +75,7 @@ export default ({ queryValues, categories, authors } : prop) => {
               <StyledInputDiv>
                 authors
                 <Field
-                  name="author"
+                  name="authorId"
                   id="author-filter"
                   as="select"
                 >
@@ -96,7 +97,7 @@ export default ({ queryValues, categories, authors } : prop) => {
                 {'price from:   '}
                 {props.values.priceFrom}
                 <FlexRowDiv>
-                  <span>0</span>
+                  <span>{priceRange.min}</span>
                   <StyledSlider
                     id="price-from-filter"
                     name="priceFrom"
@@ -104,7 +105,7 @@ export default ({ queryValues, categories, authors } : prop) => {
                     min={priceRange.min}
                     max={priceRange.max}
                   />
-                  <span>3000</span>
+                  <span>{priceRange.max}</span>
                 </FlexRowDiv>
               </StyledInputDiv>
             </DropdownLabel>
@@ -113,7 +114,7 @@ export default ({ queryValues, categories, authors } : prop) => {
                 {'price to:   '}
                 {props.values.priceTo}
                 <FlexRowDiv>
-                  <span>0</span>
+                  <span>{priceRange.min}</span>
                   <StyledSlider
                     id="price-to-filter"
                     name="priceTo"
@@ -121,7 +122,7 @@ export default ({ queryValues, categories, authors } : prop) => {
                     min={priceRange.min}
                     max={priceRange.max}
                   />
-                  <span>3000</span>
+                  <span>{priceRange.max}</span>
                 </FlexRowDiv>
               </StyledInputDiv>
             </DropdownLabel>

@@ -1,27 +1,39 @@
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ContentBoth from './ContentBoth';
 import ContentHead from './ContentHead';
 import ContentMain from './ContentMain';
-import { queryInterface } from '../../../modules/interfaces/filterInterface';
 import { useAppDispatch } from '../../../modules/redux/hooks';
-import { asyncLoadBooks } from '../../../modules/redux/booksSlice';
+import { asyncLoadBooks, getQueryString } from '../../../modules/redux/booksSlice';
 
 const StyledContent = styled.div`
   width: 100%;
 `;
 
-function Content({ query }: { query: queryInterface}) {
-  // const { catSlug } = useParams<{ catSlug: string }>();
-  const queryString = useLocation().search;
+function Content() {
+  const { catSlug } = useParams<{ catSlug: string }>();
+  // const queryString = useLocation().search;
   const dispatch = useAppDispatch();
+  const selector = useSelector;
+  const queryString = selector(getQueryString);
   useEffect(() => {
-    dispatch(asyncLoadBooks(queryString));
+    dispatch(asyncLoadBooks({ queryString, catSlug }));
   }, []);
+  // useEffect(() => {
+  //   console.log('queryStringSelector1');
+  //   console.log(queryStringSelector);
+  // }, [queryStringSelector]);
+  useEffect(() => {
+    // console.log(queryString);
+    console.log('queryStringSelector');
+    console.log(queryString);
+    dispatch(asyncLoadBooks({ queryString, catSlug }));
+  }, [queryString, catSlug]);
   return (
     <StyledContent>
-      <ContentHead bookCount={100} page={query.page} ordering={query.ordering} />
+      <ContentHead />
       <ContentMain />
       <ContentBoth />
     </StyledContent>

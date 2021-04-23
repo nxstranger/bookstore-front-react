@@ -28,7 +28,7 @@ export default (linkProp: paginationLinkInterface) => {
   let text = '';
   const { catSlug } = useParams<{ catSlug: string }>();
   const { value, edge } = linkProp;
-  console.log(catSlug);
+  // console.log(catSlug);
   const link = catSlug ? `/book/category/${catSlug}/?page=${value}` : `/?page=${value}`;
   if (edge) {
     switch (edge) {

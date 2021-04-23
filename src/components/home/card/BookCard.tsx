@@ -12,6 +12,7 @@ import {
   StyledDivForImage,
   WishlistAddStyledDiv,
   StyledCardWrapper,
+  BookIdSpan,
 } from './stylesBookCard';
 import { bookInterface } from '../../../modules/interfaces/modelInterfaces';
 
@@ -26,6 +27,10 @@ function BookCard({ bookObj }:bookProps) {
     <StyledCardWrapper>
       <StyledCard>
         <Link to={detailLink}>
+          <BookIdSpan>
+            bookId :
+            {bookObj.id}
+          </BookIdSpan>
           <StyledDivForImage>
             <BookImageStyled src={titleImageLink} alt="BookImage" />
           </StyledDivForImage>

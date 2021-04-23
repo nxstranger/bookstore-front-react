@@ -103,3 +103,13 @@ export const BookPriceSpan = styled.span`
   font-size: 20px;
   color: red;
 `;
+
+export const BookIdSpan = styled.span`
+  position: absolute;
+  float: top;
+  font-size: 14px;
+  font-weight: 500;
+  color: cornflowerblue;
+  text-decoration: none;
+  margin-bottom: 5px;
+`;
