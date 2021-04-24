@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
-// eslint-disable-next-line no-unused-vars
 import { useParams, Link } from 'react-router-dom';
-// eslint-disable-next-line no-unused-vars
 import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
 import BookData from './BookData';
-// eslint-disable-next-line no-unused-vars
 import { asyncLoadBookById } from '../../../modules/redux/adminPanelSlice';
 import { bookInterfaceAdmin } from '../../../modules/interfaces/modelInterfaces';
 

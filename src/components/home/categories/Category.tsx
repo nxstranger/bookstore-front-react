@@ -4,10 +4,12 @@ import styled from 'styled-components';
 
 const StyledCategory = styled.li`
   color: #46c3d2;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 400;
   list-style: none;
-  border: 1px solid red;
+  margin-top: 5px;
+  padding-right: 20px;
+  //border: 1px solid red;
 `;
 
 interface CategoryInterface{

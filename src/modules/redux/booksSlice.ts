@@ -51,7 +51,7 @@ export const booksSlice = createSlice({
     setOrdering: (
       state,
       action: PayloadAction<'' | 'authorASC' | 'authorDESC' | 'priceASC' | 'priceDESC'>,
-    ) => ({ ...state, ordering: action.payload }),
+    ) => ({ ...state, ordering: action.payload, page: 0 }),
   },
   extraReducers: (builder) => {
     builder.addCase(asyncLoadBooks.fulfilled, (state, action) => {
@@ -60,6 +60,14 @@ export const booksSlice = createSlice({
         ...state,
         pageCount: action.payload.count,
         books: action.payload.data,
+      };
+    });
+    builder.addCase(asyncLoadBooks.rejected, (state) => {
+      console.log('asyncLoadBooks tick');
+      return {
+        ...state,
+        pageCount: 0,
+        books: [],
       };
     });
   },

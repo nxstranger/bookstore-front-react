@@ -36,10 +36,10 @@ export const DropdownLabel = styled.label`
 
 export const StyledSelector = styled.select`
   font-family: Roboto, sans-serif;
-  width: 120px;
   font-size: 14px;
-  font-weight: 700;
-  color: #777;
+  font-weight: 400;
+  color: gray;
+  width: 120px;
   padding: 0 0 0 10px;
   max-width: 100%; 
   margin: 0;
@@ -60,12 +60,12 @@ export const StyledSelector = styled.select`
 `;
 
 export const StyledOption = styled.option`
-  color: #777;;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: gray;
   
   &:hover, &:focus {
-    color: #777;
-    border: 3px solid red;
-    //background: white;
-    //box-shadow: 0 0 10px 100px orange inset;
+    color: gray;
   }
 `;

@@ -10,17 +10,17 @@ const HeaderTopContent = styled.div`
 `;
 
 const SelectWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  color: #777;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: gray;
 `;
 
 const UrCitySpan = styled.span`
   font-family: Roboto, sans-serif;
   font-size: 14px;
-  font-weight: 700;
-  color: #777;
+  font-weight: 400;
+  color: gray;
 `;
 
 export default () => {

@@ -1,13 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import styled from 'styled-components';
 import { Field, Formik, FormikProps } from 'formik';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { DropdownLabel } from '../../../modules/styled/dropDownStyled';
-import { StyledColumnForm, StyledInputDiv, StyledSlider } from '../../../modules/styled/styledForm';
+import {
+  StyledColumnForm,
+  StyledInputDiv,
+  StyledSlider,
+} from '../../../modules/styled/styledForm';
 import { useAppDispatch } from '../../../modules/redux/hooks';
 import { categoriesInterface, authorInterface } from '../../../modules/interfaces/modelInterfaces';
 import { filterInterface } from '../../../modules/interfaces/filterInterface';
 import { FlexRowDiv } from '../../../modules/styled/simpleStyledComponents';
+import { setOrdering, setPage } from '../../../modules/redux/booksSlice';
 
 interface prop {
   queryValues: filterInterface,
@@ -15,10 +21,15 @@ interface prop {
   authors : authorInterface[],
 }
 
+const SubmitButton = styled.button`
+  margin: 20px 0 0 auto;
+  width: fit-content;
+  padding: 5px 20px;
+`;
+
 export default ({ queryValues, categories, authors } : prop) => {
   const dispatch = useAppDispatch();
   const { catSlug } = useParams<{ catSlug: string }>();
-  // console.log(queryValues);
   const history = useHistory();
   const priceRange = { min: 1, max: 1000 };
   const initialValues = {
@@ -28,8 +39,6 @@ export default ({ queryValues, categories, authors } : prop) => {
     priceTo: queryValues.priceTo || priceRange.max,
   };
   const handleSubmit = (values: filterInterface) => {
-    // console.log('values');
-    // console.log(values);
     let query = '';
     if (values.authorId) query += `author_id=${values.authorId}&`;
     if (values.category) query += `category=${values.category}&`;
@@ -38,9 +47,9 @@ export default ({ queryValues, categories, authors } : prop) => {
     if (query) {
       query = `/?${query.slice(0, -1)}`;
       history.push(catSlug ? `/book/category/${catSlug}${query}` : query);
+      dispatch(setOrdering(''));
+      dispatch(setPage(0));
     }
-    // console.log('query');
-    // console.log(query);
   };
   return (
     <div>
@@ -126,7 +135,7 @@ export default ({ queryValues, categories, authors } : prop) => {
                 </FlexRowDiv>
               </StyledInputDiv>
             </DropdownLabel>
-            <button type="submit">Show</button>
+            <SubmitButton type="submit">Show</SubmitButton>
           </StyledColumnForm>
         )}
       </Formik>

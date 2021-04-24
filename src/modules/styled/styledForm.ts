@@ -12,7 +12,6 @@ export const StyledRowForm = styled(Form)`
   margin: auto;
   display: flex;
   flex-direction: row;
-  width: 200px;
 `;
 
 export const ErrDiv = styled.div`
@@ -21,8 +20,10 @@ export const ErrDiv = styled.div`
 `;
 
 export const FormSectionWrapper = styled.div`
+  padding: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: stretch;
 `;
 
 export const InputStyled = styled(Field)`
@@ -38,9 +39,16 @@ export const StyledInputDiv = styled.div`
   flex-direction: column;
 `;
 
+export const TextareaStyledDiv = styled.div`
+  font-size: 12px;
+  color: gray;
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+`;
+
 export const TextareaStyled = styled(Field)`
-  margin-top: 20px;
-  height: 50px;
+  height: 130px;
   width: auto;
   box-sizing: content-box;
   resize: none;
@@ -57,7 +65,7 @@ export const CheckboxStyled = styled(Field)`
 `;
 
 export const StyledSubmitButton = styled.button`
-  margin: auto;
+  margin: 20px auto 0;
   width: fit-content;
   padding: 0;
 `;

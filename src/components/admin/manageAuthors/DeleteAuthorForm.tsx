@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { DropdownInput, DropdownLabel } from '../../../modules/styled/dropDownStyled';
-import { StyledColumnForm, StyledInputDiv } from '../../../modules/styled/styledForm';
+import { StyledColumnForm, StyledInputDiv, StyledSubmitButton } from '../../../modules/styled/styledForm';
 import { authorInterface } from '../../../modules/interfaces/modelInterfaces';
 import { useAppDispatch } from '../../../modules/redux/hooks';
 
@@ -61,7 +61,7 @@ export default ({ authors, jwt } : prop) => {
               </DropdownInput>
             </StyledInputDiv>
           </DropdownLabel>
-          <button type="submit">delete</button>
+          <StyledSubmitButton type="submit">delete</StyledSubmitButton>
         </StyledColumnForm>
       </Formik>
     </div>

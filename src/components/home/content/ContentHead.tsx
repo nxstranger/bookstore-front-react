@@ -7,7 +7,12 @@ import { useAppSelector } from '../../../modules/redux/hooks';
 const DivFlexRow = styled.div`
 display: flex;
 flex-direction: row;
-justify-content: flex-end;
+justify-content: space-between;
+`;
+
+const StyledFoundBooksSpan = styled.span`
+  color: gray;
+  font-size: 14px;
 `;
 
 function ContentHead() {
@@ -17,12 +22,14 @@ function ContentHead() {
   return (
     <DivFlexRow>
       <div>
-        <span>
+        <StyledFoundBooksSpan>
           {title}
           {countSelector}
-        </span>
+        </StyledFoundBooksSpan>
       </div>
-      <Pagination count={countSelector} page={page} />
+      { countSelector
+        ? <Pagination count={countSelector} page={page} />
+        : '' }
       <SortSelector />
     </DivFlexRow>
   );

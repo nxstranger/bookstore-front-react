@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, LinkProps } from 'react-router-dom';
-import { useAppSelector } from '../../modules/redux/hooks';
+import { useAppSelector } from '../../../modules/redux/hooks';
 
 interface wrapperProps extends LinkProps{
   itTrue: boolean
@@ -9,17 +9,9 @@ interface wrapperProps extends LinkProps{
 const IsAuthLinkWrapper = (props: wrapperProps) => {
   const { children, itTrue, ...rest } = props;
   const jwt = useAppSelector((state) => state.auth.authJwt);
-  const [admin, setAdmin] = useState(!!jwt);
-  useEffect(() => {
-    if (jwt) {
-      setAdmin(true);
-    } else {
-      setAdmin(false);
-    }
-  }, [jwt]);
   return (
     <>
-      { (jwt && itTrue && admin) || (!jwt && !itTrue && admin)
+      { (jwt && itTrue) || (!jwt && !itTrue)
         ? (<Link {...rest}>{children}</Link>)
         : ('')}
     </>

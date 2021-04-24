@@ -8,6 +8,7 @@ import { setBookCategory } from '../../../../modules/redux/adminPanelSlice';
 const CategoriesInput = () => {
   const dispatch = useAppDispatch();
   const currentCategorySelector = useAppSelector((state) => state.adminPanel.book?.category);
+  console.log(currentCategorySelector);
   const categoriesSelector = useAppSelector((state) => state.content.categories);
   const [categories, setCategories] = useState<categoriesInterface[]>([]);
   useEffect(() => {
@@ -21,7 +22,7 @@ const CategoriesInput = () => {
       <DropdownInput
         id="cat-input"
         as="select"
-        value={(currentCategorySelector) || 1}
+        value={4 || currentCategorySelector}
         onChange={(value: any) => {
           dispatch(setBookCategory(value.target.value));
         }}

@@ -1,5 +1,6 @@
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import {
   bookInterfaceAdmin,
   bookUpdateDataInterface,
@@ -10,6 +11,8 @@ import {
   StyledRowForm,
   TextareaStyled,
   FormSectionWrapper,
+  StyledInputDiv,
+  TextareaStyledDiv,
 } from '../../../modules/styled/styledForm';
 import CategoriesInput from './categoryInput/CategoryInput';
 import AuthorInput from './authorInput/AuthorInput';
@@ -21,12 +24,24 @@ import {
   fieldNotFilledValidator,
 } from '../../../modules/fieldsValidator/fieldsValidator';
 import ImageManager from './imageManager/ImageManager';
-import { FlexColumnDiv, FlexRowDiv } from '../../../modules/styled/simpleStyledComponents';
+import { FlexRowDiv } from '../../../modules/styled/simpleStyledComponents';
 import { setBookInfo } from '../../../modules/redux/adminPanelSlice';
 
 interface bookProps {
   book: bookInterfaceAdmin,
 }
+
+const StyledFormDiv = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledSubmitButton = styled.button`
+  margin: 20px auto 0;
+  width: fit-content;
+  padding: 0;
+`;
 
 const BookData = (props: bookProps) => {
   const jwt = useAppSelector((state) => state.auth.authJwt);
@@ -80,7 +95,7 @@ const BookData = (props: bookProps) => {
   return (
     <FlexRowDiv>
       <ImageManager />
-      <FlexColumnDiv>
+      <StyledFormDiv>
         <Formik
           initialValues={bookDefaultValues}
           onSubmit={handleSubmit}
@@ -92,35 +107,50 @@ const BookData = (props: bookProps) => {
                 id_
                 {id || 'undefined'}
               </span>
-              <InputStyled name="title" type="text" placeholder="title" />
-              <ErrorMessage name="title" />
-              <InputStyled name="slug" type="text" placeholder="slug" />
-              <ErrorMessage name="slug" />
-              <TextareaStyled name="description" type="text" placeholder="description" component="textarea" />
-              <ErrorMessage name="description" />
-              <InputStyled name="price" type="number" placeholder="price" />
-              <ErrorMessage name="price" />
-              <label htmlFor="publish">
-                Publish:
-                <CheckboxStyled name="publish" id="publish" type="checkbox" />
-              </label>
+              <StyledInputDiv>
+                <InputStyled name="title" type="text" placeholder="title" />
+                <ErrorMessage name="title" />
+              </StyledInputDiv>
+              <StyledInputDiv>
+                <InputStyled name="slug" type="text" placeholder="slug" />
+                <ErrorMessage name="slug" />
+              </StyledInputDiv>
+              <TextareaStyledDiv>
+                <TextareaStyled name="description" type="text" placeholder="description" component="textarea" />
+                <ErrorMessage name="description" />
+              </TextareaStyledDiv>
+              <StyledInputDiv>
+                <InputStyled name="price" type="number" placeholder="price" />
+                <ErrorMessage name="price" />
+              </StyledInputDiv>
+              <StyledInputDiv>
+                <label htmlFor="publish">
+                  Publish:
+                  <CheckboxStyled name="publish" id="publish" type="checkbox" />
+                </label>
+              </StyledInputDiv>
+
             </FormSectionWrapper>
             <FormSectionWrapper>
-              <span>
-                category:
-                {book.category}
-              </span>
-              <CategoriesInput />
-              <span>
-                author:
-                {book.author}
-              </span>
-              <AuthorInput />
+              <StyledInputDiv>
+                <span>
+                  category:
+                  {book.category}
+                </span>
+                <CategoriesInput />
+              </StyledInputDiv>
+              <StyledInputDiv>
+                <span>
+                  author:
+                  {book.author}
+                </span>
+                <AuthorInput />
+              </StyledInputDiv>
+              <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
             </FormSectionWrapper>
-            <button type="submit">Submit</button>
           </StyledRowForm>
         </Formik>
-      </FlexColumnDiv>
+      </StyledFormDiv>
     </FlexRowDiv>
   );
 };

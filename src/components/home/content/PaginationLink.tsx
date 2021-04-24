@@ -1,12 +1,13 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import qs from 'querystring';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #aaa;
+  background: #777;
   border-radius: 50%;
   width: 25px;
   height: 25px;
@@ -20,21 +21,32 @@ const Wrapper = styled.div`
 `;
 
 interface paginationLinkInterface {
-  value?: number,
-  edge?: string,
+  active?: boolean,
+  objParams: {
+    value?: number,
+    edge?: string,
+  }
 }
 
 export default (linkProp: paginationLinkInterface) => {
   let text = '';
-  const { catSlug } = useParams<{ catSlug: string }>();
-  const { value, edge } = linkProp;
-  // console.log(catSlug);
-  const link = catSlug ? `/book/category/${catSlug}/?page=${value}` : `/?page=${value}`;
+  const { objParams } = linkProp;
+  const location = useLocation();
+  const { value, edge } = objParams;
+  let link = '';
+  const queryString = useLocation().search;
+  if (queryString) {
+    const parsedQuery = qs.parse(queryString.substring(1));
+    parsedQuery.page = `${value}`;
+    const linkQuery = qs.stringify(parsedQuery);
+    link = `${location.pathname}?${linkQuery}`;
+  } else {
+    link = `${location.pathname}?page=${value}`;
+  }
   if (edge) {
     switch (edge) {
       case 'start': text = '<='; break;
       case 'end': text = '=>'; break;
-      case 'center': text = '...'; break;
       default:
         break;
     }
@@ -43,13 +55,9 @@ export default (linkProp: paginationLinkInterface) => {
   }
   return (
     <Wrapper>
-      { edge !== 'center'
-        ? (
-          <Link to={link}>
-            {text}
-          </Link>
-        )
-        : text }
+      <Link to={link}>
+        {text}
+      </Link>
     </Wrapper>
   );
 };

@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
 import PaginationLink from './PaginationLink';
 
+const paginationLimit = 4;
+
 const DivRow = styled.div`
+  width: 500px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   margin: auto;
+  justify-content: center;
 `;
 
 interface paginationPropsInterface {
@@ -14,35 +18,41 @@ interface paginationPropsInterface {
   count?: number
 }
 
+interface paginationLink {
+  edge?: 'start' | 'end',
+  value?: number,
+}
+
 const calculatePagination = ({
   page,
   count,
 }: paginationPropsInterface) => {
-  if (!page) {
+  if (!page && !count) {
     // redundant
-    console.log('not page');
-  }
-  if (count && count < 5) {
+    console.log('no have page');
     return [];
+  }
+  // if (count && count <= paginationLimit * 100) {
+  if (count) {
+    const array = Array.from(Array(Math.ceil(count / paginationLimit)).keys());
+    return array.map((obj) => ({ value: 1 + obj }));
   }
   return [];
 };
 
 export default (paginationProps: paginationPropsInterface) => {
   const { count, page } = paginationProps;
-  // console.log(count, page);
-  const tryToChangeQueryParam = useLocation().search;
-  console.log(tryToChangeQueryParam);
-  const pagination = calculatePagination({ page, count });
-  console.log(pagination);
+
+  const pagination: paginationLink[] = calculatePagination({ page, count });
   return (
     <DivRow>
-      <PaginationLink edge="start" value={1} />
-      <PaginationLink value={1} />
-      <PaginationLink value={2} />
-      <PaginationLink edge="center" />
-      <PaginationLink value={4} />
-      <PaginationLink value={52} edge="end" />
+      {
+        pagination.map((obj) => (
+          obj.value === page
+            ? <PaginationLink active objParams={obj} key={obj.value} />
+            : <PaginationLink objParams={obj} key={obj.value} />
+        ))
+      }
     </DivRow>
   );
 };

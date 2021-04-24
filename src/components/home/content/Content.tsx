@@ -14,21 +14,13 @@ const StyledContent = styled.div`
 
 function Content() {
   const { catSlug } = useParams<{ catSlug: string }>();
-  // const queryString = useLocation().search;
   const dispatch = useAppDispatch();
   const selector = useSelector;
   const queryString = selector(getQueryString);
   useEffect(() => {
     dispatch(asyncLoadBooks({ queryString, catSlug }));
   }, []);
-  // useEffect(() => {
-  //   console.log('queryStringSelector1');
-  //   console.log(queryStringSelector);
-  // }, [queryStringSelector]);
   useEffect(() => {
-    // console.log(queryString);
-    console.log('queryStringSelector');
-    console.log(queryString);
     dispatch(asyncLoadBooks({ queryString, catSlug }));
   }, [queryString, catSlug]);
   return (

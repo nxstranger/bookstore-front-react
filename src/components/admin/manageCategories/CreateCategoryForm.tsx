@@ -6,7 +6,7 @@ import {
 } from 'formik';
 import {
   InputStyled,
-  StyledColumnForm, StyledInputDiv,
+  StyledColumnForm, StyledInputDiv, StyledSubmitButton,
 } from '../../../modules/styled/styledForm';
 
 import {
@@ -66,9 +66,9 @@ export default ({ jwt, categories } : prop) => {
           <ErrorMessage name="slug" />
           <InputStyled type="text" name="slug" />
         </StyledInputDiv>
-        <button type="submit">
+        <StyledSubmitButton type="submit">
           Submit
-        </button>
+        </StyledSubmitButton>
       </StyledColumnForm>
     </Formik>
   );

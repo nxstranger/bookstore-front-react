@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import FilterForm from './FilterForm';
 import { useAppSelector } from '../../../modules/redux/hooks';
 import { authorInterface, categoriesInterface } from '../../../modules/interfaces/modelInterfaces';
@@ -8,6 +9,11 @@ interface filterProp {
   filter: filterInterface,
 }
 
+const FilterWrapper = styled.div`
+  margin-top: 50px;
+  padding-right:50px;
+`;
+
 export default ({ filter }: filterProp) => {
   const text = 'Filter';
   const authors = useAppSelector<authorInterface[]>((state) => state.content.authors);
@@ -16,11 +22,11 @@ export default ({ filter }: filterProp) => {
   // console.log(categories);
   // console.log(authors);
   return (
-    <div>
+    <FilterWrapper>
       {text}
       {authors.length && categories.length
         ? <FilterForm queryValues={filter} categories={categories} authors={authors} />
         : ''}
-    </div>
+    </FilterWrapper>
   );
 };

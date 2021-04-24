@@ -15,11 +15,11 @@ import Registration from './components/auth/registration/Registration';
 import AdminPanel from './components/admin/AdminPanel';
 import CreateBookMain from './components/admin/createBook/CreateBookMain';
 import EditBookMain from './components/admin/editBook/EditBookMain';
-import IsAuthWrapper from './components/authWrapper/IsAuthRouteWrapper';
+import IsAuthWrapper from './components/auth/authWrapper/IsAuthRouteWrapper';
 import Logout from './components/auth/logout/Logout';
 import { useAppDispatch, useAppSelector } from './modules/redux/hooks';
 import { asyncLoadUserInfo, setJwt } from './modules/redux/authSlice';
-import IsAdminRouteWrapper from './components/authWrapper/IsAdminRouteWrapper';
+import IsAdminRouteWrapper from './components/auth/authWrapper/IsAdminRouteWrapper';
 import { asyncLoadAuthors, asyncLoadCategories } from './modules/redux/contentSlice';
 
 const StyledAppWrapper = styled.div`

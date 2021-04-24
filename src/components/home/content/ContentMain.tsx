@@ -1,13 +1,11 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import BookCard from '../card/BookCard';
-import axios from '../../../modules/axios/config';
 import { bookInterface } from '../../../modules/interfaces/modelInterfaces';
 import { useAppSelector } from '../../../modules/redux/hooks';
-import { queryInterface } from '../../../modules/interfaces/filterInterface';
 
 const Main = styled.main`
+  margin: 30px 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

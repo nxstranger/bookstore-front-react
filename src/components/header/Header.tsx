@@ -3,8 +3,8 @@ import {
   Link,
 } from 'react-router-dom';
 import styled from 'styled-components';
-import IsAuthLinkWrapper from '../authWrapper/IsAuthLinkWrapper';
-import IsAdminLinkWrapper from '../authWrapper/IsAdminLinkWrapper';
+import IsAuthLinkWrapper from '../auth/authWrapper/IsAuthLinkWrapper';
+import IsAdminLinkWrapper from '../auth/authWrapper/IsAdminLinkWrapper';
 import HeaderTopContent from './HeaderTopContent';
 
 const StyledHeader = styled.header`

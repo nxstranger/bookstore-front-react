@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { DropdownInput, DropdownLabel } from '../../../modules/styled/dropDownStyled';
-import { StyledColumnForm, StyledInputDiv } from '../../../modules/styled/styledForm';
+import { StyledColumnForm, StyledInputDiv, StyledSubmitButton } from '../../../modules/styled/styledForm';
 import { useAppDispatch } from '../../../modules/redux/hooks';
 
 import { asyncDeleteCategory } from '../../../modules/redux/contentSlice';
@@ -61,7 +61,7 @@ export default ({ categories, jwt } : prop) => {
               </DropdownInput>
             </StyledInputDiv>
           </DropdownLabel>
-          <button type="submit">delete</button>
+          <StyledSubmitButton type="submit">delete</StyledSubmitButton>
         </StyledColumnForm>
       </Formik>
     </div>

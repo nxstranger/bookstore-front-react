@@ -19,7 +19,7 @@ export const StyledCard = styled.div`
   justify-content: space-between;
   padding-right: 20px;
   margin: 0 0 40px 0;
-  border: 1px darkgreen solid;
+  //border: 1px darkgreen solid;
   
   a, a:link {
     text-decoration: none
@@ -29,7 +29,7 @@ export const StyledCard = styled.div`
 export const StyledDivForImage = styled.div`
   width: 100%;
   height: 200px;
-  border: 1px solid aqua;
+  //border: 1px solid aqua;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,7 +41,7 @@ export const BookImageStyled = styled.img`
   max-height: 200px;
   object-fit: cover;
   align-self: center;
-  border: 1px solid firebrick;
+  //border: 1px solid firebrick;
 `;
 
 export const WishlistAddStyledDiv = styled.div`

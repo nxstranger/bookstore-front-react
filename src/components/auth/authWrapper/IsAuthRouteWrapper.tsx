@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
-import { useAppSelector } from '../../modules/redux/hooks';
+import { useAppSelector } from '../../../modules/redux/hooks';
 
 interface PrivateRouteProps extends RouteProps {
   component: any;

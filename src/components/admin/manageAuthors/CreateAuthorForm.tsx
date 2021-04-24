@@ -8,6 +8,7 @@ import {
   InputStyled,
   StyledColumnForm,
   StyledInputDiv,
+  StyledSubmitButton,
 } from '../../../modules/styled/styledForm';
 
 import {
@@ -56,9 +57,9 @@ const CreateAuthorForm = ({ jwt, authors } : prop) => {
           name
           <InputStyled type="text" name="name" />
         </StyledInputDiv>
-        <button type="submit">
+        <StyledSubmitButton type="submit">
           Submit
-        </button>
+        </StyledSubmitButton>
       </StyledColumnForm>
     </Formik>
   );
