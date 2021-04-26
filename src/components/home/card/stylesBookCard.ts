@@ -54,9 +54,9 @@ export const WishlistAddStyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: gray;
-  box-shadow: 0 0 2px gray;
+  //box-shadow: 0 0 2px gray;
   margin-right: 20px;
+  background: white center/60% url("http://localhost:3000/icons/heart.svg") no-repeat;
 `;
 
 export const ButtonStyledAddToCart = styled.button`

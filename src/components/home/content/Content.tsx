@@ -1,12 +1,11 @@
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ContentBoth from './ContentBoth';
 import ContentHead from './ContentHead';
 import ContentMain from './ContentMain';
 import { useAppDispatch } from '../../../modules/redux/hooks';
-import { asyncLoadBooks, getQueryString } from '../../../modules/redux/booksSlice';
+import { asyncLoadBooks } from '../../../modules/redux/booksSlice';
 
 const StyledContent = styled.div`
   width: 100%;
@@ -15,14 +14,15 @@ const StyledContent = styled.div`
 function Content() {
   const { catSlug } = useParams<{ catSlug: string }>();
   const dispatch = useAppDispatch();
-  const selector = useSelector;
-  const queryString = selector(getQueryString);
+  // const selector = useSelector;
+  const query = useLocation().search;
+  // const queryString = selector(getQueryString);
   useEffect(() => {
-    dispatch(asyncLoadBooks({ queryString, catSlug }));
+    dispatch(asyncLoadBooks({ queryString: query, catSlug }));
   }, []);
   useEffect(() => {
-    dispatch(asyncLoadBooks({ queryString, catSlug }));
-  }, [queryString, catSlug]);
+    dispatch(asyncLoadBooks({ queryString: query, catSlug }));
+  }, [query, catSlug]);
   return (
     <StyledContent>
       <ContentHead />

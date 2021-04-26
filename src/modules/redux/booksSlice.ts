@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
-import { bookInterface } from '../interfaces/modelInterfaces';
 import axios from '../axios/config';
+import { bookInterface } from '../interfaces/modelInterfaces';
 import { filterInterface } from '../interfaces/filterInterface';
 
 interface loadBooksParam {
@@ -77,22 +77,22 @@ export const { setFilterQuery, setPage, setOrdering } = booksSlice.actions;
 
 export const selectBooks = (state: RootState) => state.books;
 
-export const getQueryString = (state: RootState) => {
-  let query = '';
-  const values = state.books.queryFilter;
-  // console.log('values');
-  // console.log(values);
-  const { page, ordering } = state.books;
-  if (values && values.authorId) query += `author_id=${values.authorId}&`;
-  if (values && values.category) query += `category=${values.category}&`;
-  if (values && values.priceFrom) query += `price_from=${values.priceFrom}&`;
-  if (values && values.priceTo) query += `price_to=${values.priceTo}&`;
-  if (page) query += `page=${page}&`;
-  if (ordering) query += `ordering=${ordering}&`;
-  if (query) {
-    query = `/?${query.slice(0, -1)}`;
-  }
-  return query;
-};
+// export const getQueryString = (state: RootState) => {
+//   let query = '';
+//   const values = state.books.queryFilter;
+//   // console.log('values');
+//   // console.log(values);
+//   const { page, ordering } = state.books;
+//   if (values && values.authorId) query += `author_id=${values.authorId}&`;
+//   if (values && values.category) query += `category=${values.category}&`;
+//   if (values && values.priceFrom) query += `price_from=${values.priceFrom}&`;
+//   if (values && values.priceTo) query += `price_to=${values.priceTo}&`;
+//   if (page) query += `page=${page}&`;
+//   if (ordering) query += `ordering=${ordering}&`;
+//   if (query) {
+//     query = `/?${query.slice(0, -1)}`;
+//   }
+//   return query;
+// };
 
 export default booksSlice.reducer;

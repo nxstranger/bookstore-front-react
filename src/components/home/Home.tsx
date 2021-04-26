@@ -24,7 +24,7 @@ const getQueryObject = () => {
   const author = getQueryValue('author_id');
   const priceFrom = getQueryValue('price_from');
   const priceTo = getQueryValue('price_to');
-  const page = getQueryValue('page');
+  // const page = getQueryValue('page');
   if (ordering) {
     // @ts-ignore
     query.ordering = (
@@ -39,7 +39,7 @@ const getQueryObject = () => {
   if (author) query.authorId = author;
   if (priceFrom) query.priceFrom = +priceFrom;
   if (priceTo) query.priceTo = +priceTo;
-  if (page) query.page = +page;
+  // if (page) query.page = +page;
   // console.log(ordering);
   // console.log(category);
   // console.log(author);

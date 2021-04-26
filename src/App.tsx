@@ -17,6 +17,7 @@ import CreateBookMain from './components/admin/createBook/CreateBookMain';
 import EditBookMain from './components/admin/editBook/EditBookMain';
 import IsAuthWrapper from './components/auth/authWrapper/IsAuthRouteWrapper';
 import Logout from './components/auth/logout/Logout';
+import CartWrapper from './components/cart/CartWrapper';
 import { useAppDispatch, useAppSelector } from './modules/redux/hooks';
 import { asyncLoadUserInfo, setJwt } from './modules/redux/authSlice';
 import IsAdminRouteWrapper from './components/auth/authWrapper/IsAdminRouteWrapper';
@@ -52,6 +53,7 @@ function App() {
         <Header />
         <Switch>
           <IsAuthWrapper itTrue exact path="/profile/" component={Profile} />
+          <IsAuthWrapper itTrue exact path="/cart/" component={CartWrapper} />
           <IsAuthWrapper itTrue exact path="/wishlist" component={Wishlist} />
           <IsAdminRouteWrapper itTrue exact path="/admin" component={AdminPanel} />
           <IsAdminRouteWrapper itTrue exact path="/admin/create-book" component={CreateBookMain} />

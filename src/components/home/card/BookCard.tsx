@@ -51,7 +51,7 @@ function BookCard({ bookObj }:bookProps) {
         </Link>
         <DivFlexRow>
           <ButtonStyledAddToCart type="button">Add to cart</ButtonStyledAddToCart>
-          <WishlistAddStyledDiv>WL</WishlistAddStyledDiv>
+          <WishlistAddStyledDiv />
         </DivFlexRow>
       </StyledCard>
     </StyledCardWrapper>

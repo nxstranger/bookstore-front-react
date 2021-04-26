@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { StyledOption, StyledSelector } from '../../modules/styled/dropDownStyled';
 
@@ -7,30 +8,43 @@ const HeaderTopContent = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 `;
 
-const SelectWrapper = styled.div`
+const Wrapper = styled.div`
   font-family: Roboto, sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: gray;
 `;
 
-const UrCitySpan = styled.span`
+const StyledSpan = styled.span`
   font-family: Roboto, sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: gray;
+`;
+
+const StyledRightSpan = styled.span`
+  margin-left: 20px;
+  a {
+
+    text-decoration: none;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: gray;
+  }
 `;
 
 export default () => {
   const text = 'Your city:';
   return (
     <HeaderTopContent>
-      <SelectWrapper>
-        <UrCitySpan>
+      <Wrapper>
+        <StyledSpan>
           {text}
-        </UrCitySpan>
+        </StyledSpan>
         <StyledSelector defaultValue="Мирный">
           <StyledOption>
             Мирный
@@ -45,7 +59,19 @@ export default () => {
             Веселый
           </StyledOption>
         </StyledSelector>
-      </SelectWrapper>
+      </Wrapper>
+      <Wrapper>
+        <StyledRightSpan>
+          <Link to="/">
+            Payment and delivery
+          </Link>
+        </StyledRightSpan>
+        <StyledRightSpan>
+          <a href="tel:+7 (999) 444-33-22">
+            +7 (999) 444-33-22
+          </a>
+        </StyledRightSpan>
+      </Wrapper>
     </HeaderTopContent>
   );
 };
