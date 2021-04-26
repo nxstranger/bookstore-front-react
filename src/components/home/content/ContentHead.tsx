@@ -5,9 +5,10 @@ import SortSelector from './SortSelector';
 import { useAppSelector } from '../../../modules/redux/hooks';
 
 const DivFlexRow = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
 `;
 
 const StyledFoundBooksSpan = styled.span`

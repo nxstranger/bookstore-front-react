@@ -1,7 +1,6 @@
 import { useLocation, useParams } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import ContentBoth from './ContentBoth';
 import ContentHead from './ContentHead';
 import ContentMain from './ContentMain';
 import { useAppDispatch } from '../../../modules/redux/hooks';
@@ -27,7 +26,6 @@ function Content() {
     <StyledContent>
       <ContentHead />
       <ContentMain />
-      <ContentBoth />
     </StyledContent>
   );
 }

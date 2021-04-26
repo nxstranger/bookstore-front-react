@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Cart from './Cart';
+import { useAppDispatch, useAppSelector } from '../../modules/redux/hooks';
+import { asyncLoadCart } from '../../modules/redux/cartSlice';
 
 const StyledCartWrapper = styled.div`
-  border: 1px solid aqua;
+  margin-top: 20px;
 `;
 
 export default () => {
-  const title = 'CartWrapper';
+  const jwt = useAppSelector((state) => state.auth.authJwt);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (jwt) dispatch(asyncLoadCart(jwt));
+  });
   return (
     <StyledCartWrapper>
-      {title}
       <Cart />
     </StyledCartWrapper>
   );

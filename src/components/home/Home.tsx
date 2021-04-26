@@ -9,10 +9,10 @@ import { useAppDispatch } from '../../modules/redux/hooks';
 import { setFilterQuery, setOrdering, setPage } from '../../modules/redux/booksSlice';
 
 const Main = styled.main`
+  margin-top: 30px;  
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  padding-top: 20px;
 `;
 
 const getQueryValue = (param:string) => new URLSearchParams(useLocation().search).get(param);

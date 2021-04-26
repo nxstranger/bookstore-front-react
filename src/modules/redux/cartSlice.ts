@@ -1,56 +1,89 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../axios/config';
+import { cartInterface } from '../interfaces/modelInterfaces';
 
-export const asyncCreateOrderPosition = createAsyncThunk(
-  'cart/asyncCreateOrderPosition',
-  async (bookId) => {
-    const result = await axios.get('book');
-    console.log(bookId, result.status);
-    return [];
-  },
-);
-
-export const asyncDeleteOrderPosition = createAsyncThunk(
-  'cart/asyncDeleteOrderPosition',
-  async (bookId) => {
-    const result = await axios.post('', bookId);
-    console.log(result.status);
-    return [];
-  },
-);
-
-export const asyncIncreaseCountOrderPosition = createAsyncThunk(
-  'cart/asyncIncreaseCountOrderPosition',
-  async (bookId) => {
-    const result = await axios.post('', bookId);
-    console.log(result.status);
-    return [];
-  },
-);
-
-export const asyncDecreaseCountOrderPosition = createAsyncThunk(
-  'cart/asyncDecreaseCountOrderPosition',
-  async (bookId) => {
-    const result = await axios.post('', bookId);
-    console.log(result.status);
-    return [];
-  },
-);
-
-interface CartInterface {
+interface cartThunkInterface{
+  jwt: string,
   bookId: number,
-  count: number,
+  count?: number
 }
 
+export const asyncCreateCartPosition = createAsyncThunk('cart/asyncCreateCartPosition',
+  async ({ jwt, bookId }: cartThunkInterface) => {
+    const result = await axios.post(
+      '/cart/', { bookId },
+      {
+        headers: {
+          Authorization: jwt,
+        },
+      },
+    );
+    console.log(bookId, result.status);
+  });
+
+export const asyncLoadCart = createAsyncThunk <
+  cartInterface[],
+  string
+  >('cart/asyncLoadCart', async (jwt: string) => {
+    const result = await axios.get(
+      '/cart/',
+      {
+        headers: {
+          Authorization: jwt,
+        },
+      },
+    );
+    console.log(result.status);
+    return result.status === 200 ? result.data : [];
+  });
+
+export const asyncDeleteCartPosition = createAsyncThunk(
+  'cart/asyncDeleteCartPosition',
+  async ({ jwt, bookId }: cartThunkInterface) => {
+    const result = await axios.delete('/cart',
+      {
+        headers: {
+          Authorization: jwt,
+        },
+        data: { bookId },
+      });
+    console.log(result.status);
+    return result.status === 204 ? +bookId : null;
+  },
+);
+
+export const asyncUpdateCartCount = createAsyncThunk(
+  'cart/asyncUpdateCartCount',
+  async ({ jwt, bookId, count }: cartThunkInterface) => {
+    if ((!count) || !Number.isInteger(count) || +count < 1 || +count > 5) {
+      return null;
+    }
+    const result = await axios.put(
+      'cart/',
+      {
+        bookId,
+        count,
+      },
+      {
+        headers: {
+          Authorization: jwt,
+        },
+      },
+    );
+    console.log(result.status);
+    return result.status === 200 ? { bookId, count } : null;
+  },
+);
+
 interface CartSliceInterface {
-  cart: CartInterface[]
+  cart: cartInterface[]
 }
 
 const initialState: CartSliceInterface = {
   cart: [],
 };
 
-export const contentSlice = createSlice({
+export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
@@ -59,12 +92,31 @@ export const contentSlice = createSlice({
     // },
   },
   extraReducers: (builder) => {
-    builder.addCase(asyncCreateOrderPosition.fulfilled, (state, action) => {
-      console.log('asyncLoadCat tick');
+    builder.addCase(asyncLoadCart.fulfilled, (state, action) => {
+      console.log('asyncLoadCart tick');
       const data = action.payload;
+      data.sort((obj1, obj2) => obj1.bookId - obj2.bookId);
+      return { ...state, cart: data };
+    });
+    builder.addCase(asyncDeleteCartPosition.fulfilled, (state, action) => {
+      console.log('asyncDeleteCartPosition tick');
+      const data = action.payload
+        ? state.cart.filter((obj) => obj.Book.id !== action.payload) : state.cart;
+      data.sort((obj1, obj2) => obj1.bookId - obj2.bookId);
+      return { ...state, cart: data };
+    });
+    builder.addCase(asyncUpdateCartCount.fulfilled, (state, action) => {
+      console.log('asyncUpdateCartCount tick');
+      const data = (action.payload && action.payload.bookId && action.payload.count)
+        // @ts-ignore
+        ? state.cart.map((obj) => ((obj.Book.id === +action.payload?.bookId)
+          // @ts-ignore
+          ? { ...obj, count: +action.payload?.count } : obj))
+        : state.cart;
+      data.sort((obj1, obj2) => obj1.bookId - obj2.bookId);
       return { ...state, cart: data };
     });
   },
 });
 
-export default contentSlice.reducer;
+export default cartSlice.reducer;

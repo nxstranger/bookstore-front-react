@@ -15,14 +15,28 @@ import {
   BookIdSpan,
 } from './stylesBookCard';
 import { bookInterface } from '../../../modules/interfaces/modelInterfaces';
+import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
+import { asyncCreateCartPosition } from '../../../modules/redux/cartSlice';
 
 interface bookProps {
   bookObj: bookInterface;
 }
 
 function BookCard({ bookObj }:bookProps) {
+  const dispatch = useAppDispatch();
+  const jwt = useAppSelector((state) => state.auth.authJwt);
   const detailLink = `/book/detail/${bookObj.id}_${bookObj.slug}`;
   const titleImageLink = `http://localhost:8080/${bookObj.media}/${bookObj.BookImages[0].name}_small.jpg`;
+  const handleClick = () => {
+    if (jwt) {
+      dispatch(asyncCreateCartPosition({
+        jwt,
+        bookId: +bookObj.id,
+      }));
+    } else {
+      alert('Unauthorized');
+    }
+  };
   return (
     <StyledCardWrapper>
       <StyledCard>
@@ -50,7 +64,7 @@ function BookCard({ bookObj }:bookProps) {
           </DivBookInfo>
         </Link>
         <DivFlexRow>
-          <ButtonStyledAddToCart type="button">Add to cart</ButtonStyledAddToCart>
+          <ButtonStyledAddToCart onClick={handleClick} type="button">Add to cart</ButtonStyledAddToCart>
           <WishlistAddStyledDiv />
         </DivFlexRow>
       </StyledCard>

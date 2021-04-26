@@ -3,6 +3,7 @@ import { booksSlice } from './booksSlice';
 import { authSlice } from './authSlice';
 import { contentSlice } from './contentSlice';
 import { adminPanelSlice } from './adminPanelSlice';
+import { cartSlice } from './cartSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     auth: authSlice.reducer,
     content: contentSlice.reducer,
     adminPanel: adminPanelSlice.reducer,
+    cart: cartSlice.reducer,
   },
 });
 

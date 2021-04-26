@@ -62,3 +62,10 @@ export interface bookUpdateDataInterface {
   category?: number,
   author?: number,
 }
+
+export interface cartInterface {
+  id: number,
+  bookId: number,
+  count: number,
+  Book: bookInterface,
+}
