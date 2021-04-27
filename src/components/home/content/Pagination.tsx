@@ -29,7 +29,6 @@ const calculatePagination = ({
 }: paginationPropsInterface) => {
   if (!page && !count) {
     // redundant
-    console.log('no have page');
     return [];
   }
   // if (count && count <= paginationLimit * 100) {

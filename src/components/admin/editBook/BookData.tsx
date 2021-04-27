@@ -24,12 +24,19 @@ import {
   fieldNotFilledValidator,
 } from '../../../modules/fieldsValidator/fieldsValidator';
 import ImageManager from './imageManager/ImageManager';
-import { FlexRowDiv } from '../../../modules/styled/simpleStyledComponents';
 import { setBookInfo } from '../../../modules/redux/adminPanelSlice';
 
 interface bookProps {
   book: bookInterfaceAdmin,
 }
+
+const FlexRowDiv = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-around;
+`;
 
 const StyledFormDiv = styled.div`
   width: 50%;
@@ -80,7 +87,7 @@ const BookData = (props: bookProps) => {
         if (res.status === 200) alert('updated');
         dispatch(setBookInfo(payloadData));
       })
-      .catch((err) => alert(err));
+      .catch((err) => alert(err.message));
   };
   useEffect(() => {
   }, [stateHook]);

@@ -4,7 +4,6 @@ import OrderElem from './OrderElem';
 
 export default () => {
   const selector = useAppSelector((state) => state.cart.orders);
-  console.log(selector);
   return (
     <div>
       <ul>

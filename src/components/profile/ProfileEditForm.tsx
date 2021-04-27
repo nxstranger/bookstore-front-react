@@ -31,8 +31,6 @@ const ProfileEditForm = () => {
     dateOfBirthday: selector?.dateOfBirthday || '00-00-0000',
   };
   const handleSubmit = (values: userInfoInterface) => {
-    console.log(values);
-    alert(values.email);
     if (values.id && token) {
       dispatch(asyncUpdateUserInfo({ values, token }));
     }

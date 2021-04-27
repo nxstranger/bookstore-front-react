@@ -45,8 +45,6 @@ const StyledSpanPrice = styled.span`
 
 const BooKCardDetail = (props: BookDetail) => {
   const { book } = props;
-  console.log('book.BookImage');
-  console.log(book.BookImages);
   const history = useHistory();
   const { BookImages, media } = book;
   const dispatch = useAppDispatch();

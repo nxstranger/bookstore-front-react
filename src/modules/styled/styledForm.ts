@@ -17,7 +17,6 @@ export const StyledRowForm = styled(Form)`
 export const ErrDiv = styled.div`
   font-size: 10px;
   color: red;
-  //position: absolute;
 `;
 
 export const FormSectionWrapper = styled.div`

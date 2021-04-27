@@ -44,7 +44,6 @@ export default () => {
   const makeOrderClick = () => {
     if (selector.length) dispatch(asyncMakeOrder(jwt));
   };
-  console.log(selector);
   return (
     <StyledCart>
       <TableWrapper>

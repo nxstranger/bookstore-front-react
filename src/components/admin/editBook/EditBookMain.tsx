@@ -33,8 +33,6 @@ const EditBookMain = () => {
     setBookInfo(selector);
   }, []);
   useEffect(() => {
-    console.log('book not found in redux');
-    // dispatch(asyncLoadBookById(bookId.id));
     setBookInfo(selector);
   }, [selector]);
   return (

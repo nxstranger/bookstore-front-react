@@ -8,7 +8,6 @@ import { setBookCategory } from '../../../../modules/redux/adminPanelSlice';
 const CategoriesInput = () => {
   const dispatch = useAppDispatch();
   const currentCategorySelector = useAppSelector((state) => state.adminPanel.book?.category);
-  console.log(currentCategorySelector);
   const categoriesSelector = useAppSelector((state) => state.content.categories);
   const [categories, setCategories] = useState<categoriesInterface[]>([]);
   useEffect(() => {

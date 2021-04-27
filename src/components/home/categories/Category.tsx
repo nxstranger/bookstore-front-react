@@ -9,7 +9,6 @@ const StyledCategory = styled.li`
   list-style: none;
   margin-top: 5px;
   padding-right: 20px;
-  //border: 1px solid red;
 `;
 
 interface CategoryInterface{

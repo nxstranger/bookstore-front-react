@@ -81,34 +81,6 @@ export const asyncCreateAuthor = createAsyncThunk(
   },
 );
 
-// export const asyncDeleteAuthor = createAsyncThunk<
-//   authorInterface[],
-//   someObj,
-//   { state: RootState }
-//   >('content/asyncDeleteAuthor', async ({ token, bookId }, thunkAPI) => {
-//     const resp = await axios.delete(`/author/${bookId}`,
-//       {
-//         headers: {
-//           Authorization: token,
-//         },
-//       });
-//     console.log(resp.status);
-//     const { authors } = thunkAPI.getState().content;
-//     const filtered :authorInterface[] = authors.filter(
-//       (obj : authorInterface) => {
-//         console.log(typeof (obj.id));
-//         console.log(typeof bookId);
-//         console.log((+obj.id) !== bookId);
-//         return (+obj.id) !== bookId;
-//       },
-//     );
-//     console.log('authors AT');
-//     console.log(authors);
-//     console.log('filtered');
-//     console.log(filtered);
-//     return (resp.status === 204) ? filtered : authors;
-//   });
-
 interface CategoriesStateInterface {
   authors: authorInterface[],
   categories: categoriesInterface[],
@@ -130,41 +102,37 @@ export const contentSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(asyncLoadCategories.fulfilled, (state, action) => {
-      console.log('asyncLoadCat tick');
-      return { ...state, categories: action.payload };
-    });
+    builder.addCase(asyncLoadCategories.fulfilled, (
+      state,
+      action,
+    ) => ({ ...state, categories: action.payload }));
     builder.addCase(asyncDeleteCategory.fulfilled, (state, action) => {
-      console.log('asyncDeleteCategory tick');
       const categoriesArray = action.payload
         ? state.categories.filter((obj) => obj.id !== action.payload) : state.categories;
       return { ...state, categories: categoriesArray };
     });
     builder.addCase(asyncCreateCategory.fulfilled, (state, action) => {
-      console.log('asyncCreateCategory tick');
       const categoriesArray = action.payload
         ? [...state.categories, action.payload] : state.categories;
       return { ...state, categories: categoriesArray };
     });
-    builder.addCase(asyncLoadAuthors.fulfilled, (state, action) => {
-      console.log('asyncLoadAuthors tick');
-      return { ...state, authors: action.payload };
-    });
+    builder.addCase(asyncLoadAuthors.fulfilled, (
+      state,
+      action,
+    ) => ({ ...state, authors: action.payload }));
     builder.addCase(asyncDeleteAuthor.fulfilled, (state, action) => {
-      console.log('asyncDeleteAuthor tick');
       const authorsArray = action.payload
         ? state.authors.filter((obj) => obj.id !== action.payload) : state.authors;
       return { ...state, authors: authorsArray };
     });
     builder.addCase(asyncCreateAuthor.fulfilled, (state, action) => {
-      console.log('asyncCreateAuthor tick');
       const authorsArray = action.payload ? [...state.authors, action.payload] : state.authors;
       return { ...state, authors: authorsArray };
     });
-    builder.addCase(asyncLoadBookInfo.fulfilled, (state, action) => {
-      console.log('asyncLoadBookInfo tick');
-      return { ...state, book: action.payload };
-    });
+    builder.addCase(asyncLoadBookInfo.fulfilled, (
+      state,
+      action,
+    ) => ({ ...state, book: action.payload }));
   },
 });
 

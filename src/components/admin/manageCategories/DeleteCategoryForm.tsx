@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { DropdownInput, DropdownLabel } from '../../../modules/styled/dropDownStyled';
@@ -20,8 +19,6 @@ export default ({ categories, jwt } : prop) => {
     category: (categories.length) ? categories[0].id : 0,
   };
   const handleSubmit = () => {
-    console.log('deletedValue');
-    console.log(selectedCat);
     if (selectedCat) {
       dispatch(asyncDeleteCategory({
         token: jwt,

@@ -21,7 +21,6 @@ const UserInfoDiv = styled.div`
   width: 150px;
 
   &:hover button { display: flex}
-  //background: forestgreen;
 `;
 
 const EditUserButton = styled.button`
@@ -51,7 +50,6 @@ function Profile() {
   const clickShowEditForm = () => {
     setFormStatus(!showEditForm);
   };
-  console.log('tick');
   return (
     <ProfileSection>
       <StyledDivFlex>

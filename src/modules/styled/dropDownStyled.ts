@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const StyledUl = styled.ul`
   padding: 0;
   list-style-type: none;
-  //display: none;
   position: absolute;
   z-index: 9999;
   background: #fff;
@@ -15,7 +14,6 @@ export const StyledUl = styled.ul`
   li {
     text-align: left;
     padding: 5px;
-    //display: none;
     width: auto;
   }
   li:hover{

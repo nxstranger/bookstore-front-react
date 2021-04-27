@@ -41,8 +41,6 @@ const GallerySwiper = (prop :galleryProp) => {
       slidesPerView={1}
       navigation
       pagination={{ clickable: true }}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log('slide change')}
     >
       { mediaData.length
         ? mediaArray.map((obj:shortImagesInterface) => (

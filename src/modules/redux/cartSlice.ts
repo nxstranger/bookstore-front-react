@@ -10,7 +10,7 @@ interface cartThunkInterface{
 
 export const asyncCreateCartPosition = createAsyncThunk('cart/asyncCreateCartPosition',
   async ({ jwt, bookId }: cartThunkInterface) => {
-    const result = await axios.post(
+    await axios.post(
       '/cart/', { bookId },
       {
         headers: {
@@ -18,7 +18,6 @@ export const asyncCreateCartPosition = createAsyncThunk('cart/asyncCreateCartPos
         },
       },
     );
-    console.log(bookId, result.status);
   });
 
 export const asyncLoadCart = createAsyncThunk <
@@ -33,7 +32,6 @@ export const asyncLoadCart = createAsyncThunk <
         },
       },
     );
-    console.log(result.status);
     return result.status === 200 ? result.data : [];
   });
 
@@ -47,7 +45,6 @@ export const asyncDeleteCartPosition = createAsyncThunk(
         },
         data: { bookId },
       });
-    console.log(result.status);
     return result.status === 204 ? +bookId : null;
   },
 );
@@ -70,7 +67,6 @@ export const asyncUpdateCartCount = createAsyncThunk(
         },
       },
     );
-    console.log(result.status);
     return result.status === 200 ? { bookId, count } : null;
   },
 );
@@ -85,7 +81,6 @@ export const asyncMakeOrder = createAsyncThunk(
           Authorization: jwt,
         },
       });
-    console.log(result.status);
     return result.status === 201;
   },
 );
@@ -99,7 +94,6 @@ export const asyncLoadOrders = createAsyncThunk(
           Authorization: jwt,
         },
       });
-    console.log(result.status);
     return result.status === 200 ? result.data : [];
   },
 );
@@ -120,29 +114,26 @@ export const cartSlice = createSlice({
   reducers: {
   },
   extraReducers: (builder) => {
-    builder.addCase(asyncMakeOrder.fulfilled, (state, action) => {
-      console.log('asyncMakeOrder tick');
-      return action.payload ? { ...state, cart: [] } : { ...state };
-    });
-    builder.addCase(asyncLoadOrders.fulfilled, (state, action) => {
-      console.log('asyncLoadOrders tick');
-      return { ...state, orders: action.payload };
-    });
+    builder.addCase(asyncMakeOrder.fulfilled, (
+      state,
+      action,
+    ) => (action.payload ? { ...state, cart: [] } : { ...state }));
+    builder.addCase(asyncLoadOrders.fulfilled, (
+      state,
+      action,
+    ) => ({ ...state, orders: action.payload }));
     builder.addCase(asyncLoadCart.fulfilled, (state, action) => {
-      console.log('asyncLoadCart tick');
       const data = action.payload;
       data.sort((obj1, obj2) => obj1.bookId - obj2.bookId);
       return { ...state, cart: data };
     });
     builder.addCase(asyncDeleteCartPosition.fulfilled, (state, action) => {
-      console.log('asyncDeleteCartPosition tick');
       const data = action.payload
         ? state.cart.filter((obj) => obj.Book.id !== action.payload) : state.cart;
       data.sort((obj1, obj2) => obj1.bookId - obj2.bookId);
       return { ...state, cart: data };
     });
     builder.addCase(asyncUpdateCartCount.fulfilled, (state, action) => {
-      console.log('asyncUpdateCartCount tick');
       const data = (action.payload && action.payload.bookId && action.payload.count)
         // @ts-ignore
         ? state.cart.map((obj) => ((obj.Book.id === +action.payload?.bookId)

@@ -86,31 +86,25 @@ export const authSlice = createSlice({
       ...state,
       authJwt: action.payload,
     }),
-    // cleanUserInfo: (state) => ({
-    //   ...state,
-    //   user: undefined,
-    //   role: undefined,
-    // }),
   },
   extraReducers: (builder) => {
-    builder.addCase(asyncLoadUserInfo.fulfilled, (state, action) => {
-      console.log('asyncLoadUserInfo fulfilled tick');
-      return action.payload ? { ...state, user: action.payload } : { ...state, authJwt: '' };
-    });
+    builder.addCase(asyncLoadUserInfo.fulfilled, (
+      state,
+      action,
+    ) => (action.payload ? { ...state, user: action.payload } : { ...state, authJwt: '' }));
     builder.addCase(asyncLoadUserInfo.rejected, (state) => {
-      console.log('asyncLoadUserInfo rejected tick');
       localStorage.removeItem('RefreshToken');
       localStorage.removeItem('AccessToken');
       return { ...state, authJwt: '' };
     });
-    builder.addCase(asyncUpdateUserInfo.fulfilled, (state, action) => {
-      console.log('asyncLoadUserInfo tick');
-      return { ...state, user: action.payload };
-    });
-    builder.addCase(asyncLoadUserRole.fulfilled, (state, action) => {
-      console.log('asyncLoadUserRole tick');
-      return { ...state, role: action.payload };
-    });
+    builder.addCase(asyncUpdateUserInfo.fulfilled, (
+      state,
+      action,
+    ) => ({ ...state, user: action.payload }));
+    builder.addCase(asyncLoadUserRole.fulfilled, (
+      state,
+      action,
+    ) => ({ ...state, role: action.payload }));
   },
 });
 

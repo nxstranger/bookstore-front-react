@@ -8,7 +8,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
-  //border: 1px solid gray;
 `;
 
 const DivFlexRow = styled.div`

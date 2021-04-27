@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import PictureElement from './picture/PictureElement';
-// eslint-disable-next-line no-unused-vars
 import { useAppDispatch, useAppSelector } from '../../../../modules/redux/hooks';
-// eslint-disable-next-line no-unused-vars
 import { getBookImages, asyncLoadImagesBookId } from '../../../../modules/redux/adminPanelSlice';
 import { imagesInterface } from '../../../../modules/interfaces/modelInterfaces';
 
@@ -29,7 +27,6 @@ const EditBookGallery = () => {
   }, []);
 
   useEffect(() => {
-    console.log('EditBookGallery tick');
     setImages(selector);
   }, [selector]);
   return (

@@ -81,18 +81,18 @@ export const adminPanelSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(asyncLoadBookById.fulfilled, (state, action) => {
-      console.log('asyncLoadBook tick');
-      return { ...state, book: action.payload };
-    });
-    builder.addCase(asyncLoadImagesBookId.fulfilled, (state, action) => {
-      console.log('asyncLoadImages tick');
-      return { ...state, images: action.payload };
-    });
-    builder.addCase(asyncLoadUnpublishedBooks.fulfilled, (state, action) => {
-      console.log('asyncLoadImages tick');
-      return { ...state, unpublishedBooks: action.payload };
-    });
+    builder.addCase(asyncLoadBookById.fulfilled, (
+      state,
+      action,
+    ) => ({ ...state, book: action.payload }));
+    builder.addCase(asyncLoadImagesBookId.fulfilled, (
+      state,
+      action,
+    ) => ({ ...state, images: action.payload }));
+    builder.addCase(asyncLoadUnpublishedBooks.fulfilled, (
+      state,
+      action,
+    ) => ({ ...state, unpublishedBooks: action.payload }));
   },
 });
 

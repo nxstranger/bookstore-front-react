@@ -12,11 +12,10 @@ const Styled = styled.div`
 export default () => {
   const text = 'Create';
   const jwt = useAppSelector((state) => state.auth.authJwt);
-  const authors = useAppSelector((state) => state.content.authors);
   return (
     <Styled>
       {text}
-      <CreateAuthorForm authors={authors} jwt={jwt} />
+      <CreateAuthorForm jwt={jwt} />
     </Styled>
   );
 };

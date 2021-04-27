@@ -19,7 +19,6 @@ export const StyledCard = styled.div`
   justify-content: space-between;
   padding-right: 20px;
   margin: 0 0 40px 0;
-  //border: 1px darkgreen solid;
   
   a, a:link {
     text-decoration: none
@@ -29,7 +28,6 @@ export const StyledCard = styled.div`
 export const StyledDivForImage = styled.div`
   width: 100%;
   height: 200px;
-  //border: 1px solid aqua;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,7 +39,6 @@ export const BookImageStyled = styled.img`
   max-height: 200px;
   object-fit: cover;
   align-self: center;
-  //border: 1px solid firebrick;
 `;
 
 export const WishlistAddStyledDiv = styled.div`
@@ -54,7 +51,6 @@ export const WishlistAddStyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  //box-shadow: 0 0 2px gray;
   margin-right: 20px;
   background: white center/60% url("http://localhost:3000/icons/heart.svg") no-repeat;
 `;
@@ -102,14 +98,4 @@ export const BookPriceSpan = styled.span`
   font-weight: 500;
   font-size: 20px;
   color: red;
-`;
-
-export const BookIdSpan = styled.span`
-  position: absolute;
-  float: top;
-  font-size: 14px;
-  font-weight: 500;
-  color: cornflowerblue;
-  text-decoration: none;
-  margin-bottom: 5px;
 `;

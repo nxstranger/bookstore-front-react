@@ -15,8 +15,6 @@ const StyledHeader = styled.header`
 `;
 const StyledLogoH1 = styled.h1`
   margin: 0;
-  //padding: 10px 0;
-  //border: 1px solid gray;
   a, a:link {
 
     color: black;
@@ -25,7 +23,6 @@ const StyledLogoH1 = styled.h1`
 `;
 
 const HeaderLinkWrapper = styled.div`
-  //border: 1px solid darkblue;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -49,7 +46,6 @@ const StyledHeaderMain = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
-  
 `;
 
 function Header() {

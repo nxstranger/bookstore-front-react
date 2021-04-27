@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { DropdownInput, DropdownLabel } from '../../../modules/styled/dropDownStyled';
@@ -19,9 +18,7 @@ export default ({ authors, jwt } : prop) => {
   const initialValues = {
     author: (authors.length) ? authors[0].id : 0,
   };
-  const handleSubmit = (value: { author: number }) => {
-    console.log('deletedValue');
-    console.log(selectedAuthor);
+  const handleSubmit = () => {
     if (selectedAuthor) {
       dispatch(asyncDeleteAuthor({
         token: jwt,

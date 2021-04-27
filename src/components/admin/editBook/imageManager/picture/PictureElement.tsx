@@ -48,9 +48,8 @@ const PictureElement = (elem: prop) => {
     )
       .then(() => {
         dispatch(removeImage(elem.image.id));
-        console.log('deleted');
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.message));
   };
   return (
     <StyledPictureWrapper>

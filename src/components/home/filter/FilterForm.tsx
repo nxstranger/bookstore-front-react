@@ -11,7 +11,6 @@ import {
 import { useAppDispatch } from '../../../modules/redux/hooks';
 import { categoriesInterface, authorInterface } from '../../../modules/interfaces/modelInterfaces';
 import { filterInterface } from '../../../modules/interfaces/filterInterface';
-import { FlexRowDiv } from '../../../modules/styled/simpleStyledComponents';
 import { setOrdering, setPage } from '../../../modules/redux/booksSlice';
 
 interface prop {
@@ -19,6 +18,11 @@ interface prop {
   categories : categoriesInterface[],
   authors : authorInterface[],
 }
+
+const FlexRowDiv = styled.div`
+display: flex;
+flex-direction: row;
+`;
 
 const SubmitButton = styled.button`
   margin: 20px 0 0 auto;

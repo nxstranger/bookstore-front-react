@@ -24,7 +24,6 @@ interface BookState {
   books: bookInterface[],
   ordering: '' | 'authorASC' | 'authorDESC' | 'priceASC' | 'priceDESC',
   queryFilter: filterInterface,
-  // page: number,
   pageCount: number
 }
 
@@ -32,7 +31,6 @@ const initialState: BookState = {
   books: [],
   ordering: '',
   queryFilter: {},
-  // page: ,
   pageCount: 0,
 };
 
@@ -54,45 +52,23 @@ export const booksSlice = createSlice({
     ) => ({ ...state, ordering: action.payload, page: 0 }),
   },
   extraReducers: (builder) => {
-    builder.addCase(asyncLoadBooks.fulfilled, (state, action) => {
-      console.log('asyncLoadBooks tick');
-      return {
-        ...state,
-        pageCount: action.payload.count,
-        books: action.payload.data,
-      };
-    });
-    builder.addCase(asyncLoadBooks.rejected, (state) => {
-      console.log('asyncLoadBooks tick');
-      return {
-        ...state,
-        pageCount: 0,
-        books: [],
-      };
-    });
+    builder.addCase(asyncLoadBooks.fulfilled, (
+      state, action,
+    ) => ({
+      ...state,
+      pageCount: action.payload.count,
+      books: action.payload.data,
+    }));
+    builder.addCase(asyncLoadBooks.rejected, (state) => ({
+      ...state,
+      pageCount: 0,
+      books: [],
+    }));
   },
 });
 
 export const { setFilterQuery, setPage, setOrdering } = booksSlice.actions;
 
 export const selectBooks = (state: RootState) => state.books;
-
-// export const getQueryString = (state: RootState) => {
-//   let query = '';
-//   const values = state.books.queryFilter;
-//   // console.log('values');
-//   // console.log(values);
-//   const { page, ordering } = state.books;
-//   if (values && values.authorId) query += `author_id=${values.authorId}&`;
-//   if (values && values.category) query += `category=${values.category}&`;
-//   if (values && values.priceFrom) query += `price_from=${values.priceFrom}&`;
-//   if (values && values.priceTo) query += `price_to=${values.priceTo}&`;
-//   if (page) query += `page=${page}&`;
-//   if (ordering) query += `ordering=${ordering}&`;
-//   if (query) {
-//     query = `/?${query.slice(0, -1)}`;
-//   }
-//   return query;
-// };
 
 export default booksSlice.reducer;

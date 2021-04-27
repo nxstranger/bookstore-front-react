@@ -37,7 +37,6 @@ const StyledCartElement = styled.div`
   align-items: center;
   justify-content: space-between;
   height: ${maxHeightElement}px;
-  //border: 1px solid darkgreen;
   margin: 20px;
 `;
 
@@ -89,7 +88,6 @@ const StyledCountDiv = styled.div`
 
 const StyledPriceDiv = styled.div`
   margin-right: 40px;
-  //background: red;
 `;
 
 const StyledPriceCountWrapper = styled.div`

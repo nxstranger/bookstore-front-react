@@ -15,7 +15,6 @@ const StyledTitle = styled.div`
   a {
     color: gray;
     text-decoration: none;
-
   }
   a:hover {
     color: black;

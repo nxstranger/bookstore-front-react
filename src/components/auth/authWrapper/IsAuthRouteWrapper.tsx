@@ -15,8 +15,6 @@ const IsAuthWrapper = (props: PrivateRouteProps) => {
   } = props;
   const jwt = useAppSelector((state) => state.auth.authJwt);
   useEffect(() => {
-    console.log('selectorJwt');
-    console.log(jwt);
   }, [jwt]);
   return (
     <Route

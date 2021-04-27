@@ -12,11 +12,8 @@ function Book() {
   const link: string = (bookSlug) ? `${bookSlug}` : '';
   const dispatch = useAppDispatch();
   const roleSelector = useAppSelector((state) => state.auth.role);
-  console.log('book');
-  console.log(book);
   useEffect(() => {
     if (link) {
-      console.log('use effect asyncLoadBookInfo');
       dispatch(asyncLoadBookInfo(link));
       setBook(selector);
     }

@@ -85,14 +85,13 @@ const RegisterForm = withFormik<MyFormProps, FormValues>({
     return errors;
   },
   handleSubmit: (values, props) => {
-    console.log('submit');
     axios.post('/auth/registration', JSON.stringify(values))
       .then(() => {
         alert('You registered successfully');
         props.props.history.push('/');
       })
       .catch((err) => {
-        alert(err.response.data.message || err);
+        alert(err.response.data.message || 'Error');
       });
   },
 })(RegisterFormLayout);

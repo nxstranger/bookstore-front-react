@@ -16,7 +16,6 @@ import {
 } from '../../../modules/fieldsValidator/fieldsValidator';
 import { useAppDispatch } from '../../../modules/redux/hooks';
 import { asyncCreateAuthor } from '../../../modules/redux/contentSlice';
-import { authorInterface } from '../../../modules/interfaces/modelInterfaces';
 
 interface FormValues {
   name: string;
@@ -24,12 +23,11 @@ interface FormValues {
 
 interface prop {
   jwt: string,
-  authors : authorInterface[],
 }
 
-const CreateAuthorForm = ({ jwt, authors } : prop) => {
+const CreateAuthorForm = ({ jwt } : prop) => {
   const initialValues = {
-    name: 'AuthorName',
+    name: '',
   };
   const dispatch = useAppDispatch();
 
@@ -39,8 +37,6 @@ const CreateAuthorForm = ({ jwt, authors } : prop) => {
     return errors;
   };
   const handleSubmit = (values: FormValues) => {
-    console.log(values);
-    console.log(authors);
     if (values) {
       dispatch(asyncCreateAuthor({ token: jwt, name: values.name }));
     }
@@ -52,10 +48,9 @@ const CreateAuthorForm = ({ jwt, authors } : prop) => {
       validate={validate}
     >
       <StyledColumnForm>
-        <ErrorMessage name="name" />
         <StyledInputDiv>
-          name
-          <InputStyled type="text" name="name" />
+          <InputStyled type="text" name="name" placeholder="author name" />
+          <ErrorMessage name="name" />
         </StyledInputDiv>
         <StyledSubmitButton type="submit">
           Submit

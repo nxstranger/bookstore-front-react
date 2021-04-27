@@ -15,9 +15,6 @@ interface galleryInterface {
 }
 
 function Gallery({ media, mediaArray } : galleryInterface) {
-  console.log('media mediaArray');
-  console.log(media);
-  console.log(mediaArray?.length);
   return (
     <GalleryDiv>
       {

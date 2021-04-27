@@ -16,7 +16,6 @@ import {
 } from '../../../modules/fieldsValidator/fieldsValidator';
 import { useAppDispatch } from '../../../modules/redux/hooks';
 import { asyncCreateCategory } from '../../../modules/redux/contentSlice';
-import { categoriesInterface } from '../../../modules/interfaces/modelInterfaces';
 
 interface FormValues {
   title: string;
@@ -25,13 +24,12 @@ interface FormValues {
 
 interface prop {
   jwt: string,
-  categories : categoriesInterface[],
 }
 
-export default ({ jwt, categories } : prop) => {
+export default ({ jwt } : prop) => {
   const initialValues = {
-    title: 'title',
-    slug: 'slug',
+    title: '',
+    slug: '',
   };
   const dispatch = useAppDispatch();
 
@@ -43,8 +41,6 @@ export default ({ jwt, categories } : prop) => {
     return errors;
   };
   const handleSubmit = (values: FormValues) => {
-    console.log(values);
-    console.log(categories);
     if (values) {
       dispatch(asyncCreateCategory({ token: jwt, title: values.title, slug: values.slug }));
     }
@@ -57,14 +53,12 @@ export default ({ jwt, categories } : prop) => {
     >
       <StyledColumnForm>
         <StyledInputDiv>
-          title
+          <InputStyled type="text" name="title" placeholder="title" />
           <ErrorMessage name="title" />
-          <InputStyled type="text" name="title" />
         </StyledInputDiv>
         <StyledInputDiv>
-          slug
+          <InputStyled type="text" name="slug" placeholder="slug" />
           <ErrorMessage name="slug" />
-          <InputStyled type="text" name="slug" />
         </StyledInputDiv>
         <StyledSubmitButton type="submit">
           Submit

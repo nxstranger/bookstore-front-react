@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 
 import {
-  Field, Form, Formik, FormikValues,
+  Field, Form, Formik,
 } from 'formik';
 import axios from '../../../../modules/axios/config';
 import { useAppDispatch, useAppSelector } from '../../../../modules/redux/hooks';
@@ -22,11 +22,7 @@ const ImageUploader = () => {
   const componentName: string = 'ImageUploader';
   const [image, setImage] = useState<string | Blob>('');
   const selector = useAppSelector((state) => state.adminPanel.book);
-  console.log('image');
-  console.log(image);
-  const formOnSubmit = (values: FormikValues) => {
-    console.log('values.file');
-    console.log(values.file);
+  const formOnSubmit = () => {
     if (image && selector?.media) {
       const file = new FormData();
       file.append('image', image);
@@ -39,19 +35,16 @@ const ImageUploader = () => {
             Authorization: jwt,
           },
         })
-        .then((data) => {
-          console.log(data.data);
-          console.log(id);
+        .then(() => {
           dispatch(asyncLoadImagesBookId(+id));
         })
-        .catch((er) => console.log(er));
+        .catch((err) => alert(err.message));
     }
   };
   const changeImageInput = (e : React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.files?.length) {
       const loadedImage = e.currentTarget.files[0];
-      console.log('changeImageInput');
-      console.log(loadedImage);
+
       setImage(loadedImage);
     }
   };
