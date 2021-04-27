@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
+import qs from 'querystring';
 import Pagination from './Pagination';
 import SortSelector from './SortSelector';
 import { useAppSelector } from '../../../modules/redux/hooks';
@@ -18,7 +20,8 @@ const StyledFoundBooksSpan = styled.span`
 
 function ContentHead() {
   const title = 'Found books: ';
-  const page: number = useAppSelector((state) => state.books.page);
+
+  const { page } = qs.parse(useLocation().search.substring(1));
   const countSelector: number = useAppSelector((state) => state.books.pageCount);
   return (
     <DivFlexRow>
@@ -29,7 +32,7 @@ function ContentHead() {
         </StyledFoundBooksSpan>
       </div>
       { countSelector
-        ? <Pagination count={countSelector} page={page} />
+        ? <Pagination count={countSelector} page={page ? +page : 1} />
         : '' }
       <SortSelector />
     </DivFlexRow>

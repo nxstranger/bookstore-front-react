@@ -12,7 +12,6 @@ import {
   StyledDivForImage,
   WishlistAddStyledDiv,
   StyledCardWrapper,
-  BookIdSpan,
 } from './stylesBookCard';
 import { bookInterface } from '../../../modules/interfaces/modelInterfaces';
 import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
@@ -34,17 +33,13 @@ function BookCard({ bookObj }:bookProps) {
         bookId: +bookObj.id,
       }));
     } else {
-      alert('Unauthorized');
+      alert('Register to make order');
     }
   };
   return (
     <StyledCardWrapper>
       <StyledCard>
         <Link to={detailLink}>
-          <BookIdSpan>
-            bookId :
-            {bookObj.id}
-          </BookIdSpan>
           <StyledDivForImage>
             <BookImageStyled src={titleImageLink} alt="BookImage" />
           </StyledDivForImage>

@@ -120,7 +120,7 @@ const BookData = (props: bookProps) => {
                 <ErrorMessage name="description" />
               </TextareaStyledDiv>
               <StyledInputDiv>
-                <InputStyled name="price" type="number" placeholder="price" />
+                <InputStyled name="price" type="number" placeholder="price" min="1" />
                 <ErrorMessage name="price" />
               </StyledInputDiv>
               <StyledInputDiv>

@@ -24,7 +24,7 @@ interface BookState {
   books: bookInterface[],
   ordering: '' | 'authorASC' | 'authorDESC' | 'priceASC' | 'priceDESC',
   queryFilter: filterInterface,
-  page: number,
+  // page: number,
   pageCount: number
 }
 
@@ -32,7 +32,7 @@ const initialState: BookState = {
   books: [],
   ordering: '',
   queryFilter: {},
-  page: 0,
+  // page: ,
   pageCount: 0,
 };
 

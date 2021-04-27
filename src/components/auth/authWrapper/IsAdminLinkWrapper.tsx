@@ -8,18 +8,18 @@ interface wrapperProps extends LinkProps{
 
 const IsAuthLinkWrapper = (props: wrapperProps) => {
   const { children, itTrue, ...rest } = props;
-  const jwt = useAppSelector((state) => state.auth.authJwt);
-  const [admin, setAdmin] = useState(!!jwt);
+  const role = useAppSelector((state) => state.auth.role);
+  const [admin, setAdmin] = useState(!!(role && role.role === 2));
   useEffect(() => {
-    if (jwt) {
+    if ((role && role.role === 2)) {
       setAdmin(true);
     } else {
       setAdmin(false);
     }
-  }, [jwt]);
+  }, [role]);
   return (
     <>
-      { (jwt && itTrue && admin) || (!jwt && !itTrue && admin)
+      { (role && itTrue && admin) || (!role && !itTrue && admin)
         ? (<Link {...rest}>{children}</Link>)
         : ('')}
     </>

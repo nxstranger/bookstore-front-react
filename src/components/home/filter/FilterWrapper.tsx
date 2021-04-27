@@ -18,9 +18,6 @@ export default ({ filter }: filterProp) => {
   const text = 'Filter';
   const authors = useAppSelector<authorInterface[]>((state) => state.content.authors);
   const categories = useAppSelector<categoriesInterface[]>((state) => state.content.categories);
-  // console.log('FilterWR1');
-  // console.log(categories);
-  // console.log(authors);
   return (
     <FilterWrapper>
       {text}

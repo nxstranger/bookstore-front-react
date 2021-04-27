@@ -34,7 +34,7 @@ export default (prop: orderComponentInterface) => {
         {id}
       </StyledButton>
       { carts.length && show
-        ? carts.map((obj) => <OrderListBook Book={obj.Book} count={obj.count} />)
+        ? carts.map((obj) => <OrderListBook Book={obj.Book} count={obj.count} key={obj.id} />)
         : '' }
     </OrderWrapper>
 

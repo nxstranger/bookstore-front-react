@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import styled from 'styled-components';
 import { Field, Formik, FormikProps } from 'formik';
@@ -67,12 +66,10 @@ export default ({ queryValues, categories, authors } : prop) => {
                   id="category-filter"
                   as="select"
                 >
-                  <option key={0} value="all">0:   All</option>
+                  <option key={0} value="all">All</option>
                   {
                     categories.map((obj) => (
                       <option key={obj.id} value={obj.slug}>
-                        {+obj.id}
-                        {':   '}
                         {obj.title}
                       </option>
                     ))
@@ -88,12 +85,10 @@ export default ({ queryValues, categories, authors } : prop) => {
                   id="author-filter"
                   as="select"
                 >
-                  <option key={0} value="all">0:   All</option>
+                  <option key={0} value="all">All</option>
                   {
                     authors.map((obj) => (
                       <option key={obj.id} value={+obj.id}>
-                        {obj.id}
-                        {':   '}
                         {obj.name}
                       </option>
                     ))

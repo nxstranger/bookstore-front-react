@@ -15,7 +15,9 @@ import axios from '../../../modules/axios/config';
 import {
   ErrDiv,
   StyledColumnForm,
-  InputStyled, StyledInputDiv,
+  InputStyled,
+  StyledInputDiv,
+  StyledSubmitButton,
 } from '../../../modules/styled/styledForm';
 
 interface FormValues {
@@ -52,7 +54,7 @@ const RegisterFormLayout = (props: FormikProps<FormValues>) => {
         && errors.dateOfBirthday
         && <ErrDiv>{errors.dateOfBirthday}</ErrDiv>}
       </StyledInputDiv>
-      <button type="submit">Register</button>
+      <StyledSubmitButton type="submit">Register</StyledSubmitButton>
     </StyledColumnForm>
   );
 };
@@ -64,10 +66,10 @@ interface MyFormProps extends RouteComponentProps{
 const RegisterForm = withFormik<MyFormProps, FormValues>({
   mapPropsToValues: () => (
     {
-      name: 'kekolol',
-      email: 'lolo@pepe.lo',
-      password: 'Lolkeklol1',
-      dateOfBirthday: '12.12.2020',
+      name: '',
+      email: '',
+      password: '',
+      dateOfBirthday: '',
     }),
 
   validate: (values: FormValues) => {
@@ -85,9 +87,8 @@ const RegisterForm = withFormik<MyFormProps, FormValues>({
   handleSubmit: (values, props) => {
     console.log('submit');
     axios.post('/auth/registration', JSON.stringify(values))
-      .then((result) => {
+      .then(() => {
         alert('You registered successfully');
-        console.log((result.data));
         props.props.history.push('/');
       })
       .catch((err) => {

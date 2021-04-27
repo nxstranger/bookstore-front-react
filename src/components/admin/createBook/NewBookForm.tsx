@@ -30,9 +30,9 @@ interface FormValues {
 
 const RegisterFormLayout = () => {
   const initialValues = {
-    title: 'How to eat soup',
-    slug: 'how-to-eat-soup',
-    description: 'best soup eating instruction, and not only',
+    title: '',
+    slug: '',
+    description: '',
   };
 
   const dispatch = useDispatch();
@@ -46,7 +46,6 @@ const RegisterFormLayout = () => {
   };
   const jwt = useAppSelector((state) => state.auth.authJwt);
   const handleSubmit = (values: FormValues) => {
-    console.log('submit');
     axios.post(
       '/book/',
       JSON.stringify(values),
@@ -57,20 +56,14 @@ const RegisterFormLayout = () => {
       },
     )
       .then((result) => {
-        alert('U push button');
-        console.log('result');
-        console.log((result.data));
+        alert('Created');
         const bookId: string = result.data.id;
-        console.log('bookId');
-        console.log(bookId);
         dispatch(editableBook(result.data));
-        console.log('dispatch');
         historyPush(`/admin/book-edit/${bookId}`);
       })
       .catch((err) => {
-        alert(err || err.response.data.message || err);
+        alert(err.message);
       });
-    // console.log('Say hello!');
   };
 
   return (

@@ -19,7 +19,7 @@ import IsAuthWrapper from './components/auth/authWrapper/IsAuthRouteWrapper';
 import Logout from './components/auth/logout/Logout';
 import CartWrapper from './components/cart/CartWrapper';
 import { useAppDispatch, useAppSelector } from './modules/redux/hooks';
-import { asyncLoadUserInfo, setJwt } from './modules/redux/authSlice';
+import { asyncLoadUserInfo, asyncLoadUserRole, setJwt } from './modules/redux/authSlice';
 import IsAdminRouteWrapper from './components/auth/authWrapper/IsAdminRouteWrapper';
 import { asyncLoadAuthors, asyncLoadCategories } from './modules/redux/contentSlice';
 
@@ -27,6 +27,7 @@ const StyledAppWrapper = styled.div`
   max-width: 1200px;
   margin: auto;
   min-width: 768px;
+  padding: 0 20px;
 `;
 
 function App() {
@@ -40,12 +41,11 @@ function App() {
     const token = localStorage.getItem('AccessToken');
     if (token) {
       dispatch(asyncLoadUserInfo(token));
+      dispatch(asyncLoadUserRole(token));
       dispatch(setJwt(token));
     } else {
       dispatch(setJwt(''));
     }
-    console.log('app use effect');
-    console.log(jwtSelector);
   }, [jwtSelector]);
   return (
     <StyledAppWrapper>

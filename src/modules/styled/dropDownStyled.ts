@@ -39,7 +39,7 @@ export const StyledSelector = styled.select`
   font-size: 14px;
   font-weight: 400;
   color: gray;
-  width: 120px;
+  width: ${(p: { width?: number }) => (p.width ? p.width : 100)}px;
   padding: 0 0 0 10px;
   max-width: 100%; 
   margin: 0;

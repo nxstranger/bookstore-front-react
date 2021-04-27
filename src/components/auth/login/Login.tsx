@@ -3,13 +3,12 @@ import styled from 'styled-components';
 import LoginForm from './LoginForm';
 
 const StyledLoginForm = styled.div`
-  margin: auto;
   width: 500px;
+  margin: 20px auto;
 `;
 
 const Login = () => (
   <div>
-    <p>Hello I`m login wrapper</p>
     <StyledLoginForm>
       <LoginForm />
     </StyledLoginForm>

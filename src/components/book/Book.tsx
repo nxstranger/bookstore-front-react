@@ -11,6 +11,7 @@ function Book() {
   const [book, setBook] = useState<bookInterface | undefined>(undefined);
   const link: string = (bookSlug) ? `${bookSlug}` : '';
   const dispatch = useAppDispatch();
+  const roleSelector = useAppSelector((state) => state.auth.role);
   console.log('book');
   console.log(book);
   useEffect(() => {
@@ -27,7 +28,12 @@ function Book() {
   }, [selector]);
   return (
     <section>
-      <Link to={`/admin/book-edit/${book?.id}`}>admin: edit</Link>
+      {
+        (roleSelector && roleSelector.role === 2)
+          ? <Link to={`/admin/book-edit/${book?.id}`}>admin: edit</Link>
+          : ''
+
+      }
       { (book)
         ? <BooKCardDetail book={book} />
         : 'book not found' }

@@ -30,9 +30,14 @@ export const FormSectionWrapper = styled.div`
 export const InputStyled = styled(Field)`
   width: auto;
   box-sizing: content-box;
+  padding: 5px;
+  outline: none;
+  border: 1px solid gray;
+  border-radius: 5px;
 `;
 
 export const StyledInputDiv = styled.div`
+  margin-top: 15px;
   font-size: 12px;
   color: gray;
   height: 50px;
@@ -68,5 +73,8 @@ export const CheckboxStyled = styled(Field)`
 export const StyledSubmitButton = styled.button`
   margin: 20px auto 0;
   width: fit-content;
-  padding: 0;
+  padding: 5px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  outline: none;
 `;

@@ -13,8 +13,6 @@ const AuthorInputHelper = (props: helperProps) => {
   const { search } = props;
   const dispatch = useAppDispatch();
   const [textField, setTextField] = useState<authorInterface[]>([]);
-  console.log('tick AuthorInputHelper');
-  console.log(search);
   const setBookAuthor = (authorId: number) => {
     dispatch(dispatchAuthor(authorId));
   };

@@ -4,20 +4,26 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #777;
+
+  a, a:link {
+    color: ${(p: {current: boolean}) => (p.current ? 'white' : 'black')};
+    text-decoration: none;
+  }
+`;
+
+const StyledLink = styled.div`
+  background: ${(p: {current: boolean}) => (p.current ? '#777' : '#aaa')};
   border-radius: 50%;
   width: 25px;
   height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   user-select: none;
-  color: white;
+  color: ${(p: {current: boolean}) => (p.current ? 'white' : 'black')};
   margin: 0 3px;
-  a, a:link {
-    color: white;
-    text-decoration: none;
-  }
+
 `;
 
 interface paginationLinkInterface {
@@ -30,9 +36,15 @@ interface paginationLinkInterface {
 
 export default (linkProp: paginationLinkInterface) => {
   let text = '';
-  const { objParams } = linkProp;
+  const {
+    objParams,
+    active,
+  } = linkProp;
   const location = useLocation();
-  const { value, edge } = objParams;
+  const {
+    value,
+    edge,
+  } = objParams;
   let link = '';
   const queryString = useLocation().search;
   if (queryString) {
@@ -45,8 +57,12 @@ export default (linkProp: paginationLinkInterface) => {
   }
   if (edge) {
     switch (edge) {
-      case 'start': text = '<='; break;
-      case 'end': text = '=>'; break;
+      case 'start':
+        text = '<=';
+        break;
+      case 'end':
+        text = '=>';
+        break;
       default:
         break;
     }
@@ -54,9 +70,11 @@ export default (linkProp: paginationLinkInterface) => {
     text = `${value}`;
   }
   return (
-    <Wrapper>
+    <Wrapper current={active || false}>
       <Link to={link}>
-        {text}
+        <StyledLink current={active || false}>
+          {text}
+        </StyledLink>
       </Link>
     </Wrapper>
   );

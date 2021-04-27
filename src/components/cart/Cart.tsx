@@ -5,9 +5,9 @@ import { useAppDispatch, useAppSelector } from '../../modules/redux/hooks';
 import { asyncMakeOrder } from '../../modules/redux/cartSlice';
 
 const StyledCart = styled.div`
-  //border: 1px solid cornflowerblue;
   display: flex;
   flex-direction: row;
+  border: 1px solid gray;
 `;
 
 const TableWrapper = styled.div`
@@ -20,7 +20,6 @@ const DivTotalOrder = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //border: 1px solid cornflowerblue;
   margin: 20px;
 `;
 
@@ -60,7 +59,7 @@ export default () => {
                 key={obj.id}
               />
             ))
-            : (<div> no books </div>)
+            : ''
         }
       </TableWrapper>
       <DivTotalOrder>

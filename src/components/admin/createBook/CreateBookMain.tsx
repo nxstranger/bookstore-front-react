@@ -8,14 +8,8 @@ const StyledFormWrapper = styled.div`
   width: 500px;
 `;
 
-const CreateBookMain = () => {
-  const lolo = 'lolo';
-  console.log(lolo);
-  return (
-    <StyledFormWrapper>
-      <NewBookForm />
-    </StyledFormWrapper>
-  );
-};
-
-export default CreateBookMain;
+export default () => (
+  <StyledFormWrapper>
+    <NewBookForm />
+  </StyledFormWrapper>
+);

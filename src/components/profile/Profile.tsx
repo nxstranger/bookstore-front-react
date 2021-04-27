@@ -41,6 +41,10 @@ const ProfileEditWrapper = styled.div`
   width: 500px;
 `;
 
+const ProfileSection = styled.section`
+  margin-top: 20px;
+`;
+
 function Profile() {
   const user = useAppSelector((state) => state.auth.user);
   const [showEditForm, setFormStatus] = useState(false);
@@ -49,9 +53,7 @@ function Profile() {
   };
   console.log('tick');
   return (
-    <section>
-      Profile ID :
-      { user && user.id ? user.id : '' }
+    <ProfileSection>
       <StyledDivFlex>
         <ProfileLogo />
 
@@ -70,7 +72,7 @@ function Profile() {
         }
       </ProfileEditWrapper>
       <OrderListWrapper />
-    </section>
+    </ProfileSection>
   );
 }
 

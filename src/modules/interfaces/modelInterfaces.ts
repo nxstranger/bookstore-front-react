@@ -75,3 +75,9 @@ export interface orderInterface {
   userId: number,
   Carts: cartInterface[],
 }
+
+export interface roleInterface {
+  id: number,
+  role: number,
+  Role : { role: string }
+}

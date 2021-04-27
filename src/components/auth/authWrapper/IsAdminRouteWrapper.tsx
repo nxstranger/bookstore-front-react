@@ -8,22 +8,20 @@ interface PrivateRouteProps extends RouteProps {
 }
 
 const IsAdminWrapper = ({ itTrue, component: Component, ...rest }: PrivateRouteProps) => {
-  // const { itTrue, component: Component, ...rest } = props;
-
-  const jwt = useAppSelector((state) => state.auth.authJwt);
-  const [admin, setAdmin] = useState(!!jwt);
+  const role = useAppSelector((state) => state.auth.role);
+  const [admin, setAdmin] = useState(!!(role && role.role === 2));
   useEffect(() => {
-    if (jwt) {
+    if ((role && role.role === 2)) {
       setAdmin(true);
     } else {
       setAdmin(false);
     }
-  }, [jwt]);
+  }, [role]);
   return (
     <Route
       {...rest}
       render={(routeProps) => (
-        (jwt && itTrue && admin) || (!jwt && !itTrue && admin)
+        (role && itTrue && admin) || (!role && !itTrue && admin)
           ? <Component {...routeProps} />
           : (
             <Redirect to={{ pathname: '/', state: { from: routeProps.location } }} />

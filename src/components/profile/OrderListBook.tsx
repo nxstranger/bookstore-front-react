@@ -12,10 +12,10 @@ const StyledTitle = styled.div`
   margin-right: 20px;
   margin-top: 5px;
   width: 200px;
-  //background: red;
   a {
     color: gray;
     text-decoration: none;
+
   }
   a:hover {
     color: black;

@@ -10,11 +10,11 @@ import {
 import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
 
 const allowedValues = [
-  'newest',
-  'title_asc',
-  'title_desc',
-  'price_asc',
-  'price_desc',
+  ['newest', 'Newest'],
+  ['title_asc', 'Title A-Z'],
+  ['title_desc', 'Title Z-A'],
+  ['price_asc', 'Price Low-High'],
+  ['price_desc', 'Price High-Low'],
 ];
 
 export default () => {
@@ -33,6 +33,7 @@ export default () => {
   };
   return (
     <StyledSelector
+      width={140}
       name="sort"
       id="books-sort"
       onChange={handleSelect}
@@ -40,8 +41,8 @@ export default () => {
     >
       {
         allowedValues.map((obj) => (
-          <StyledOption key={obj} value={obj}>
-            {obj}
+          <StyledOption key={obj[0]} value={obj[0]}>
+            {obj[1]}
           </StyledOption>
         ))
       }

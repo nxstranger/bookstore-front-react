@@ -1,12 +1,29 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
-import { userInfoInterface } from '../interfaces/modelInterfaces';
+import { roleInterface, userInfoInterface } from '../interfaces/modelInterfaces';
 import axios from '../axios/config';
 
 export const asyncLoadUserInfo = createAsyncThunk(
   'content/asyncLoadUserInfo', async (token: string) => {
     const resp = await axios.get(
       'auth/token/user-info',
+      {
+        headers: {
+          Authorization: token,
+        },
+      },
+    );
+    if (resp.status === 200) {
+      return resp.data;
+    }
+    return undefined;
+  },
+);
+
+export const asyncLoadUserRole = createAsyncThunk(
+  'content/asyncLoadUserRole', async (token: string) => {
+    const resp = await axios.get(
+      'auth/token/user-role',
       {
         headers: {
           Authorization: token,
@@ -51,12 +68,14 @@ export const asyncUpdateUserInfo = createAsyncThunk(
 
 interface authState {
   authJwt: string,
-  user: userInfoInterface | undefined,
+  user?: userInfoInterface,
+  role?: roleInterface
 }
 
 const initialState: authState = {
   authJwt: '',
   user: undefined,
+  role: undefined,
 };
 
 export const authSlice = createSlice({
@@ -67,10 +86,11 @@ export const authSlice = createSlice({
       ...state,
       authJwt: action.payload,
     }),
-    cleanUserInfo: (state) => ({
-      ...state,
-      user: undefined,
-    }),
+    // cleanUserInfo: (state) => ({
+    //   ...state,
+    //   user: undefined,
+    //   role: undefined,
+    // }),
   },
   extraReducers: (builder) => {
     builder.addCase(asyncLoadUserInfo.fulfilled, (state, action) => {
@@ -86,6 +106,10 @@ export const authSlice = createSlice({
     builder.addCase(asyncUpdateUserInfo.fulfilled, (state, action) => {
       console.log('asyncLoadUserInfo tick');
       return { ...state, user: action.payload };
+    });
+    builder.addCase(asyncLoadUserRole.fulfilled, (state, action) => {
+      console.log('asyncLoadUserRole tick');
+      return { ...state, role: action.payload };
     });
   },
 });

@@ -33,7 +33,7 @@ function Footer() {
   return (
     <StyledFooter>
       <Wrapper>
-        <StyledSpan>All right ...</StyledSpan>
+        <StyledSpan>© 2021 All rights reserved</StyledSpan>
       </Wrapper>
       <Wrapper>
         <StyledSpan>

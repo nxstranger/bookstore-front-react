@@ -26,8 +26,8 @@ interface FormValues {
 
 const LoginForm = () => {
   const initialValues = {
-    email: 'lolo@pepe.lo',
-    password: 'Lolkeklol1',
+    email: '',
+    password: '',
   };
   const dispatch = useAppDispatch();
 
@@ -57,7 +57,7 @@ const LoginForm = () => {
         }
       })
       .catch((err) => {
-        alert(err);
+        alert(err.response.data.message);
       });
   };
   return (
@@ -68,12 +68,12 @@ const LoginForm = () => {
     >
       <StyledColumnForm>
         <StyledInputDiv>
+          <InputStyled type="email" name="email" placeholder="email" autoFocus />
           <ErrorMessage name="email" />
-          <InputStyled type="email" name="email" autoFocus />
         </StyledInputDiv>
         <StyledInputDiv>
+          <InputStyled type="password" name="password" placeholder="password" />
           <ErrorMessage name="password" />
-          <InputStyled type="password" name="password" />
         </StyledInputDiv>
         <StyledSubmitButton type="submit">
           LogIn

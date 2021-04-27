@@ -5,7 +5,7 @@ import PaginationLink from './PaginationLink';
 const paginationLimit = 4;
 
 const DivRow = styled.div`
-  width: 500px;
+  width: 150px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -42,13 +42,14 @@ const calculatePagination = ({
 
 export default (paginationProps: paginationPropsInterface) => {
   const { count, page } = paginationProps;
-
   const pagination: paginationLink[] = calculatePagination({ page, count });
+  console.log(page, typeof page, pagination.length, pagination);
   return (
     <DivRow>
       {
         pagination.map((obj) => (
-          obj.value === page
+          // eslint-disable-next-line max-len
+          (page && obj.value && +obj.value === +page)
             ? <PaginationLink active objParams={obj} key={obj.value} />
             : <PaginationLink objParams={obj} key={obj.value} />
         ))
