@@ -71,7 +71,7 @@ function Header() {
           <IsAuthLinkWrapper itTrue={false} to="/auth/registration">Registration</IsAuthLinkWrapper>
           <IsAuthLinkWrapper itTrue to="/wishlist">Wishlist</IsAuthLinkWrapper>
           <IsAuthLinkWrapper itTrue to="/profile/">Profile</IsAuthLinkWrapper>
-          <IsAuthLinkWrapper itTrue to="/cart/">Card</IsAuthLinkWrapper>
+          <IsAuthLinkWrapper itTrue to="/cart/">Cart</IsAuthLinkWrapper>
         </HeaderLinkWrapper>
       </StyledHeaderMain>
     </StyledHeader>

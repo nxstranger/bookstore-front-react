@@ -69,3 +69,9 @@ export interface cartInterface {
   count: number,
   Book: bookInterface,
 }
+
+export interface orderInterface {
+  id: number
+  userId: number,
+  Carts: cartInterface[],
+}

@@ -8,6 +8,8 @@ import axios from '../../../modules/axios/config';
 import {
   InputStyled,
   StyledColumnForm,
+  StyledInputDiv,
+  StyledSubmitButton,
 } from '../../../modules/styled/styledForm';
 
 import {
@@ -65,13 +67,17 @@ const LoginForm = () => {
       validate={validate}
     >
       <StyledColumnForm>
-        <ErrorMessage name="email" />
-        <InputStyled type="email" name="email" autoFocus />
-        <ErrorMessage name="password" />
-        <InputStyled type="password" name="password" />
-        <button type="submit">
-          Submit
-        </button>
+        <StyledInputDiv>
+          <ErrorMessage name="email" />
+          <InputStyled type="email" name="email" autoFocus />
+        </StyledInputDiv>
+        <StyledInputDiv>
+          <ErrorMessage name="password" />
+          <InputStyled type="password" name="password" />
+        </StyledInputDiv>
+        <StyledSubmitButton type="submit">
+          LogIn
+        </StyledSubmitButton>
       </StyledColumnForm>
     </Formik>
   );

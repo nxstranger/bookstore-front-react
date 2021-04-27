@@ -1,15 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import { bookInterfaceAdmin } from '../../../modules/interfaces/modelInterfaces';
 
 interface bookArray {
   books: bookInterfaceAdmin[],
 }
 
+const DivFlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+`;
+
 const UnpublishedBooks = ({ books }: bookArray) => {
   const unpublishedBooks = 'UnpublishedBooks: ';
   return (
-    <div>
+    <DivFlexColumn>
       {unpublishedBooks}
       {books.length}
       {(books.length)
@@ -23,7 +30,7 @@ const UnpublishedBooks = ({ books }: bookArray) => {
           </Link>
         ))
         : ''}
-    </div>
+    </DivFlexColumn>
   );
 };
 

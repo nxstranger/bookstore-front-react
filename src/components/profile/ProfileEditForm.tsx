@@ -71,7 +71,7 @@ const ProfileEditForm = () => {
           <ErrorMessage name="dateOfBirthday" />
         </StyledInputDiv>
         <StyledSubmitButton type="submit">
-          Submit
+          Apply
         </StyledSubmitButton>
       </StyledColumnForm>
     </Formik>

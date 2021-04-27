@@ -13,9 +13,7 @@ const StyledContent = styled.div`
 function Content() {
   const { catSlug } = useParams<{ catSlug: string }>();
   const dispatch = useAppDispatch();
-  // const selector = useSelector;
   const query = useLocation().search;
-  // const queryString = selector(getQueryString);
   useEffect(() => {
     dispatch(asyncLoadBooks({ queryString: query, catSlug }));
   }, []);

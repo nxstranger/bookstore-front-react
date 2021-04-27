@@ -15,7 +15,7 @@ import axios from '../../../modules/axios/config';
 import {
   ErrDiv,
   StyledColumnForm,
-  InputStyled,
+  InputStyled, StyledInputDiv,
 } from '../../../modules/styled/styledForm';
 
 interface FormValues {
@@ -34,18 +34,24 @@ const RegisterFormLayout = (props: FormikProps<FormValues>) => {
 
   return (
     <StyledColumnForm onSubmit={handleSubmit}>
-      <InputStyled required name="name" type="text" placeholder="username" />
-      {touched.name && errors.name && <ErrDiv>{errors.name}</ErrDiv>}
-
-      <InputStyled required name="email" type="text" placeholder="email" />
-      {touched.email && errors.email && <ErrDiv>{errors.email}</ErrDiv>}
-
-      <InputStyled required name="password" type="text" placeholder="password" />
-      {touched.password && errors.password && <ErrDiv>{errors.password}</ErrDiv>}
-
-      <InputStyled required name="dateOfBirthday" type="text" placeholder="birthday: mm.dd.yyyy" />
-      {touched.dateOfBirthday && errors.dateOfBirthday && <ErrDiv>{errors.dateOfBirthday}</ErrDiv>}
-
+      <StyledInputDiv>
+        <InputStyled required name="name" type="text" placeholder="username" />
+        {touched.name && errors.name && <ErrDiv>{errors.name}</ErrDiv>}
+      </StyledInputDiv>
+      <StyledInputDiv>
+        <InputStyled required name="email" type="text" placeholder="email" />
+        {touched.email && errors.email && <ErrDiv>{errors.email}</ErrDiv>}
+      </StyledInputDiv>
+      <StyledInputDiv>
+        <InputStyled required name="password" type="text" placeholder="password" />
+        {touched.password && errors.password && <ErrDiv>{errors.password}</ErrDiv>}
+      </StyledInputDiv>
+      <StyledInputDiv>
+        <InputStyled required name="dateOfBirthday" type="text" placeholder="birthday: mm.dd.yyyy" />
+        { touched.dateOfBirthday
+        && errors.dateOfBirthday
+        && <ErrDiv>{errors.dateOfBirthday}</ErrDiv>}
+      </StyledInputDiv>
       <button type="submit">Register</button>
     </StyledColumnForm>
   );

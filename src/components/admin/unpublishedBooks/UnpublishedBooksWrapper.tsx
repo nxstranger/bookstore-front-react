@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { bookInterfaceAdmin } from '../../../modules/interfaces/modelInterfaces';
 import { asyncLoadUnpublishedBooks } from '../../../modules/redux/adminPanelSlice';
 import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
 import UnpublishedBooks from './UnpublishedBooks';
 
-const UnpublishedBooksWrapper = ({ token }: { token: string }) => {
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  //border: 1px solid gray;
+`;
+
+export default ({ token }: { token: string }) => {
   const dispatch = useAppDispatch();
   const selectorUnpublished = useAppSelector((state) => state.adminPanel.unpublishedBooks);
   const [unpublishedBooks, setBooks] = useState<bookInterfaceAdmin[]>([]);
@@ -15,8 +23,8 @@ const UnpublishedBooksWrapper = ({ token }: { token: string }) => {
     setBooks(selectorUnpublished);
   }, [selectorUnpublished]);
   return (
-    <UnpublishedBooks books={unpublishedBooks} />
+    <Wrapper>
+      <UnpublishedBooks books={unpublishedBooks} />
+    </Wrapper>
   );
 };
-
-export default UnpublishedBooksWrapper;

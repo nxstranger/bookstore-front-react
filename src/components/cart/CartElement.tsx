@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { cartInterface } from '../../modules/interfaces/modelInterfaces';
 import { useAppDispatch, useAppSelector } from '../../modules/redux/hooks';
 import { asyncDeleteCartPosition, asyncUpdateCartCount } from '../../modules/redux/cartSlice';
@@ -13,6 +14,14 @@ const StyledSpan = styled.span`
   font-weight: 400;
   font-size: 18px;
   margin-bottom: 5px;
+  
+  a {
+    color: gray;
+    text-decoration: none;
+  }
+  a:hover {
+    color: black;
+  }
 `;
 
 const StyledPriceSpan = styled.span`
@@ -102,6 +111,7 @@ export default (obj: cartInterface) => {
   const jwt = useAppSelector((state) => state.auth.authJwt);
   const dispatch = useAppDispatch();
   const titleImageLink = `http://localhost:8080/${book.media}/${book.BookImages[0].name}_small.jpg`;
+  const detailLink = `/book/detail/${book.id}_${book.slug}`;
   const handleDelete = () => {
     dispatch(asyncDeleteCartPosition({ jwt, bookId }));
   };
@@ -120,7 +130,11 @@ export default (obj: cartInterface) => {
         <ButtonStyledDelete type="button" onClick={handleDelete}>delete</ButtonStyledDelete>
         <DivFlexRow>
           <StyledTitleDiv>
-            <StyledSpan>{book.title}</StyledSpan>
+            <StyledSpan>
+              <Link to={detailLink}>
+                {book.title}
+              </Link>
+            </StyledSpan>
           </StyledTitleDiv>
           <StyledPriceCountWrapper>
             <StyledPriceDiv>

@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import { bookInterface } from '../../modules/interfaces/modelInterfaces';
 import Gallery from './Gallery';
+import { useAppDispatch, useAppSelector } from '../../modules/redux/hooks';
+import { asyncCreateCartPosition } from '../../modules/redux/cartSlice';
 
 interface BookDetail {
   book: bookInterface
@@ -44,7 +47,21 @@ const BooKCardDetail = (props: BookDetail) => {
   const { book } = props;
   console.log('book.BookImage');
   console.log(book.BookImages);
+  const history = useHistory();
   const { BookImages, media } = book;
+  const dispatch = useAppDispatch();
+  const jwt = useAppSelector((state) => state.auth.authJwt);
+  const handleClick = () => {
+    if (jwt) {
+      dispatch(asyncCreateCartPosition({
+        jwt,
+        bookId: +book.id,
+      }));
+      history.push('/cart/');
+    } else {
+      alert('Unauthorized');
+    }
+  };
   return (
     <Card>
       <Gallery media={media} mediaArray={BookImages} />
@@ -58,7 +75,7 @@ const BooKCardDetail = (props: BookDetail) => {
         <StyledSpanDescription>
           {book?.description}
         </StyledSpanDescription>
-        <button type="button">
+        <button onClick={handleClick} type="button">
           <StyledSpanPrice>
             {'BUY   '}
             {book?.price}

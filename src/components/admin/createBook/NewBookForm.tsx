@@ -15,6 +15,8 @@ import {
   StyledColumnForm,
   InputStyled,
   TextareaStyled,
+  StyledInputDiv,
+  StyledSubmitButton,
 } from '../../../modules/styled/styledForm';
 import axios from '../../../modules/axios/config';
 import { editableBook } from '../../../modules/redux/adminPanelSlice';
@@ -78,16 +80,19 @@ const RegisterFormLayout = () => {
       validate={validate}
     >
       <StyledColumnForm>
-        <ErrorMessage name="title" />
-        <InputStyled required name="title" type="text" placeholder="title" />
-
-        <ErrorMessage name="slug" />
-        <InputStyled required name="slug" type="text" placeholder="slug" />
-
-        <ErrorMessage name="description" />
-        <TextareaStyled required name="description" component="textarea" placeholder="description" />
-
-        <button type="submit">Add book</button>
+        <StyledInputDiv>
+          <ErrorMessage name="title" />
+          <InputStyled required name="title" type="text" placeholder="title" />
+        </StyledInputDiv>
+        <StyledInputDiv>
+          <ErrorMessage name="slug" />
+          <InputStyled required name="slug" type="text" placeholder="slug" />
+        </StyledInputDiv>
+        <StyledInputDiv>
+          <ErrorMessage name="description" />
+          <TextareaStyled required name="description" component="textarea" placeholder="description" />
+        </StyledInputDiv>
+        <StyledSubmitButton type="submit">Add book</StyledSubmitButton>
       </StyledColumnForm>
     </Formik>
 

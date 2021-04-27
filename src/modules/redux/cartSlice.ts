@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../axios/config';
-import { cartInterface } from '../interfaces/modelInterfaces';
+import { cartInterface, orderInterface } from '../interfaces/modelInterfaces';
 
 interface cartThunkInterface{
   jwt: string,
@@ -75,23 +75,59 @@ export const asyncUpdateCartCount = createAsyncThunk(
   },
 );
 
+export const asyncMakeOrder = createAsyncThunk(
+  'cart/asyncMakeOrder',
+  async (jwt: string) => {
+    const result = await axios.post('/order',
+      {},
+      {
+        headers: {
+          Authorization: jwt,
+        },
+      });
+    console.log(result.status);
+    return result.status === 201;
+  },
+);
+
+export const asyncLoadOrders = createAsyncThunk(
+  'cart/asyncLoadOrders',
+  async (jwt: string) => {
+    const result = await axios.get('/order',
+      {
+        headers: {
+          Authorization: jwt,
+        },
+      });
+    console.log(result.status);
+    return result.status === 200 ? result.data : [];
+  },
+);
+
 interface CartSliceInterface {
   cart: cartInterface[]
+  orders: orderInterface[],
 }
 
 const initialState: CartSliceInterface = {
   cart: [],
+  orders: [],
 };
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    // saveCategories: (state, action: PayloadAction<categoriesInterface[]>) => {
-    //   action.payload.map((obj) => state.categories.push(obj));
-    // },
   },
   extraReducers: (builder) => {
+    builder.addCase(asyncMakeOrder.fulfilled, (state, action) => {
+      console.log('asyncMakeOrder tick');
+      return action.payload ? { ...state, cart: [] } : { ...state };
+    });
+    builder.addCase(asyncLoadOrders.fulfilled, (state, action) => {
+      console.log('asyncLoadOrders tick');
+      return { ...state, orders: action.payload };
+    });
     builder.addCase(asyncLoadCart.fulfilled, (state, action) => {
       console.log('asyncLoadCart tick');
       const data = action.payload;

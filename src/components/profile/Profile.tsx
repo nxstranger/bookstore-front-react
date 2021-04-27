@@ -4,6 +4,7 @@ import ProfileEditForm from './ProfileEditForm';
 import { useAppSelector } from '../../modules/redux/hooks';
 import ProfileLogo from './ProfileLogo';
 import ProfileInfo from './ProfileInfo';
+import OrderListWrapper from './OrderListWrapper';
 
 const iconPath = '/icons/pencil.svg';
 
@@ -35,6 +36,11 @@ const EditUserButton = styled.button`
   border: none;
 `;
 
+const ProfileEditWrapper = styled.div`
+  margin: auto;
+  width: 500px;
+`;
+
 function Profile() {
   const user = useAppSelector((state) => state.auth.user);
   const [showEditForm, setFormStatus] = useState(false);
@@ -56,11 +62,14 @@ function Profile() {
           <EditUserButton onClick={clickShowEditForm} type="button" />
         </UserInfoDiv>
       </StyledDivFlex>
-      {
-        showEditForm
-          ? <ProfileEditForm />
-          : ''
-      }
+      <ProfileEditWrapper>
+        {
+          showEditForm
+            ? <ProfileEditForm />
+            : ''
+        }
+      </ProfileEditWrapper>
+      <OrderListWrapper />
     </section>
   );
 }

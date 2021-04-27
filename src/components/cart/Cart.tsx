@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import CartElement from './CartElement';
-import { useAppSelector } from '../../modules/redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../modules/redux/hooks';
+import { asyncMakeOrder } from '../../modules/redux/cartSlice';
 
 const StyledCart = styled.div`
   //border: 1px solid cornflowerblue;
@@ -33,12 +34,17 @@ const StyledOrderButton = styled.button`
 
 export default () => {
   const selector = useAppSelector((state) => state.cart.cart);
+  const jwt = useAppSelector((state) => state.auth.authJwt);
+  const dispatch = useAppDispatch();
   let totalCost = 0;
   if (selector) {
     selector.forEach((obj) => {
-      totalCost += obj.Book.price;
+      totalCost += obj.Book.price * obj.count;
     });
   }
+  const makeOrderClick = () => {
+    if (selector.length) dispatch(asyncMakeOrder(jwt));
+  };
   console.log(selector);
   return (
     <StyledCart>
@@ -54,7 +60,7 @@ export default () => {
                 key={obj.id}
               />
             ))
-            : (<div> no catt </div>)
+            : (<div> no books </div>)
         }
       </TableWrapper>
       <DivTotalOrder>
@@ -65,7 +71,7 @@ export default () => {
             {' Ъ'}
           </StyledCostSpan>
         </div>
-        <StyledOrderButton type="button">Order</StyledOrderButton>
+        <StyledOrderButton onClick={makeOrderClick} type="button">Order</StyledOrderButton>
       </DivTotalOrder>
     </StyledCart>
   );
