@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Field, Formik, FormikProps } from 'formik';
+import { Formik, FormikProps } from 'formik';
 import { useHistory, useParams } from 'react-router-dom';
-import { DropdownLabel } from '../../../modules/styled/dropDownStyled';
+import { DropdownLabel, StyledSelector } from '../../../modules/styled/dropDownStyled';
 import {
   StyledColumnForm,
   StyledInputDiv,
@@ -18,6 +18,10 @@ interface prop {
   categories : categoriesInterface[],
   authors : authorInterface[],
 }
+
+const StyledSpanTitle = styled.span`
+  margin-bottom: 5px;
+`;
 
 const FlexRowDiv = styled.div`
 display: flex;
@@ -64,8 +68,11 @@ export default ({ queryValues, categories, authors } : prop) => {
           <StyledColumnForm>
             <DropdownLabel htmlFor="category-filter">
               <StyledInputDiv>
-                category
-                <Field
+                <StyledSpanTitle>
+                  category
+                </StyledSpanTitle>
+                <StyledSelector
+                  width={248}
                   name="category"
                   id="category-filter"
                   as="select"
@@ -78,13 +85,16 @@ export default ({ queryValues, categories, authors } : prop) => {
                       </option>
                     ))
                   }
-                </Field>
+                </StyledSelector>
               </StyledInputDiv>
             </DropdownLabel>
             <DropdownLabel htmlFor="author-filter">
               <StyledInputDiv>
-                authors
-                <Field
+                <StyledSpanTitle>
+                  authors
+                </StyledSpanTitle>
+                <StyledSelector
+                  width={248}
                   name="authorId"
                   id="author-filter"
                   as="select"
@@ -97,7 +107,7 @@ export default ({ queryValues, categories, authors } : prop) => {
                       </option>
                     ))
                   }
-                </Field>
+                </StyledSelector>
               </StyledInputDiv>
             </DropdownLabel>
             <DropdownLabel htmlFor="price-from-filter">

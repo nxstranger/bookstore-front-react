@@ -21,7 +21,7 @@ const StyledSlideWrapper = styled(SwiperSlide)`
   padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;  
+  align-items: center;
 `;
 
 const StyledImage = styled.img`
@@ -50,7 +50,13 @@ const GallerySwiper = (prop :galleryProp) => {
             </StyledSlideWrapper>
           </SwiperSlide>
         ))
-        : '' }
+        : (
+          <SwiperSlide key={0}>
+            <StyledSlideWrapper>
+              <StyledImage src="http://localhost:3000/logo512.png" alt="" />
+            </StyledSlideWrapper>
+          </SwiperSlide>
+        ) }
     </Swiper>
   );
 };

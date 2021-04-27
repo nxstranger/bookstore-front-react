@@ -25,7 +25,8 @@ function BookCard({ bookObj }:bookProps) {
   const dispatch = useAppDispatch();
   const jwt = useAppSelector((state) => state.auth.authJwt);
   const detailLink = `/book/detail/${bookObj.id}_${bookObj.slug}`;
-  const titleImageLink = `http://localhost:8080/${bookObj.media}/${bookObj.BookImages[0].name}_small.jpg`;
+  const titleImageLink = bookObj.BookImages.length
+    ? `http://localhost:8080/${bookObj.media}/${bookObj.BookImages[0].name}_small.jpg` : 'http://localhost:3000/logo512.png';
   const handleClick = () => {
     if (jwt) {
       dispatch(asyncCreateCartPosition({

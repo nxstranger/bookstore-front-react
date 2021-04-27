@@ -12,8 +12,8 @@ const Wrapper = styled.div`
 `;
 
 const StyledLink = styled.div`
-  background: ${(p: {current: boolean}) => (p.current ? '#777' : '#aaa')};
-  border-radius: 50%;
+  background: ${(p: {current: boolean}) => (p.current ? '#999' : '#ccc')};
+  border-radius: 20%;
   width: 25px;
   height: 25px;
   display: flex;
@@ -23,7 +23,6 @@ const StyledLink = styled.div`
   user-select: none;
   color: ${(p: {current: boolean}) => (p.current ? 'white' : 'black')};
   margin: 0 3px;
-
 `;
 
 interface paginationLinkInterface {
@@ -58,10 +57,10 @@ export default (linkProp: paginationLinkInterface) => {
   if (edge) {
     switch (edge) {
       case 'start':
-        text = '<=';
+        text = '<';
         break;
       case 'end':
-        text = '=>';
+        text = '>';
         break;
       default:
         break;
@@ -70,9 +69,9 @@ export default (linkProp: paginationLinkInterface) => {
     text = `${value}`;
   }
   return (
-    <Wrapper current={active || false}>
+    <Wrapper current={(active) || false}>
       <Link to={link}>
-        <StyledLink current={active || false}>
+        <StyledLink current={(active) || false}>
           {text}
         </StyledLink>
       </Link>

@@ -22,11 +22,6 @@ const StyledCategories = styled.ul`
   }
 `;
 
-const CategoriesSpan = styled.span`
-  color: gray;
-  font-size: 14px;
-`;
-
 function CategoryList(): JSX.Element {
   const selector: categoriesInterface[] = useAppSelector(getAllCategories);
   const [categories, setCat] = useState<categoriesInterface[]>(useAppSelector(getAllCategories));
@@ -35,9 +30,6 @@ function CategoryList(): JSX.Element {
   }, [selector]);
   return (
     <StyledCategories>
-      <CategoriesSpan>
-        Categories:
-      </CategoriesSpan>
       <Category categoryName="Все книги" slug="" />
       {
         (categories.length)

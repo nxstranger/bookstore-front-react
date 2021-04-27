@@ -7,6 +7,7 @@ import SortSelector from './SortSelector';
 import { useAppSelector } from '../../../modules/redux/hooks';
 
 const DivFlexRow = styled.div`
+  height: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
