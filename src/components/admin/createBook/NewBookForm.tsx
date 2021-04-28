@@ -74,16 +74,16 @@ const RegisterFormLayout = () => {
     >
       <StyledColumnForm>
         <StyledInputDiv>
-          <ErrorMessage name="title" />
           <InputStyled required name="title" type="text" placeholder="title" />
+          <ErrorMessage name="title" />
         </StyledInputDiv>
         <StyledInputDiv>
-          <ErrorMessage name="slug" />
           <InputStyled required name="slug" type="text" placeholder="slug" />
+          <ErrorMessage name="slug" />
         </StyledInputDiv>
         <StyledInputDiv>
-          <ErrorMessage name="description" />
           <TextareaStyled required name="description" component="textarea" placeholder="description" />
+          <ErrorMessage name="description" />
         </StyledInputDiv>
         <StyledSubmitButton type="submit">Add book</StyledSubmitButton>
       </StyledColumnForm>

@@ -86,6 +86,11 @@ export const authSlice = createSlice({
       ...state,
       authJwt: action.payload,
     }),
+    stateLogout: (state) => ({
+      ...state,
+      authJwt: '',
+      role: undefined,
+    }),
   },
   extraReducers: (builder) => {
     builder.addCase(asyncLoadUserInfo.fulfilled, (
@@ -108,7 +113,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setJwt } = authSlice.actions;
+export const { setJwt, stateLogout } = authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth.authJwt;
 
