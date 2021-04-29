@@ -5,6 +5,7 @@ import SwiperCore, {
 } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
+import { back, front } from '../../modules/conf';
 import { shortImagesInterface } from '../../modules/interfaces/modelInterfaces';
 
 SwiperCore.use([Navigation, Pagination, A11y]);
@@ -46,14 +47,14 @@ const GallerySwiper = (prop :galleryProp) => {
         ? mediaArray.map((obj:shortImagesInterface) => (
           <SwiperSlide key={obj.name}>
             <StyledSlideWrapper>
-              <StyledImage src={`http://localhost:8080/${media}/${obj.name}_large.jpg`} alt="" />
+              <StyledImage src={`${back.hostname}:${back.port}/${media}/${obj.name}_large.jpg`} alt="" />
             </StyledSlideWrapper>
           </SwiperSlide>
         ))
         : (
           <SwiperSlide key={0}>
             <StyledSlideWrapper>
-              <StyledImage src="http://localhost:3000/logo512.png" alt="" />
+              <StyledImage src={`${front.hostname}:${front.port}/logo512.png`} alt="" />
             </StyledSlideWrapper>
           </SwiperSlide>
         ) }

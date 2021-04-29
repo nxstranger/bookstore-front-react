@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { back } from '../conf';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL: `${back.hostname}:${back.port}/api`,
   timeout: 1000,
   headers: {
     'Content-Type': 'application/json',

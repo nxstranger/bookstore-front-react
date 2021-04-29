@@ -13,6 +13,7 @@ import {
   WishlistAddStyledDiv,
   StyledCardWrapper,
 } from './stylesBookCard';
+import { front, back } from '../../../modules/conf';
 import { bookInterface } from '../../../modules/interfaces/modelInterfaces';
 import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
 import { asyncCreateCartPosition } from '../../../modules/redux/cartSlice';
@@ -26,7 +27,7 @@ function BookCard({ bookObj }:bookProps) {
   const jwt = useAppSelector((state) => state.auth.authJwt);
   const detailLink = `/book/detail/${bookObj.id}_${bookObj.slug}`;
   const titleImageLink = bookObj.BookImages.length
-    ? `http://localhost:8080/${bookObj.media}/${bookObj.BookImages[0].name}_small.jpg` : 'http://localhost:3000/logo512.png';
+    ? `${back.hostname}:${back.port}/${bookObj.media}/${bookObj.BookImages[0].name}_small.jpg` : `${front.hostname}:${front.port}/logo512.png`;
   const handleClick = () => {
     if (jwt) {
       dispatch(asyncCreateCartPosition({

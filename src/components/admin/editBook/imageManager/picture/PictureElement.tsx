@@ -4,6 +4,7 @@ import { imagesInterface } from '../../../../../modules/interfaces/modelInterfac
 import { useAppDispatch, useAppSelector } from '../../../../../modules/redux/hooks';
 import axios from '../../../../../modules/axios/config';
 import { removeImage } from '../../../../../modules/redux/adminPanelSlice';
+import { back } from '../../../../../modules/conf';
 
 const StyledPictureWrapper = styled.div`
   width: 150px;
@@ -33,7 +34,7 @@ const PictureElement = (elem: prop) => {
   const jwt = useAppSelector((state) => state.auth.authJwt);
   const selector = useAppSelector((state) => state.adminPanel.book?.media);
   const [bookMedia, setMedia] = useState<string | undefined>('');
-  const link = `http://localhost:8080/${bookMedia}/${image.name}_small.jpg`;
+  const link = `${back.hostname}:${back.port}/${bookMedia}/${image.name}_small.jpg`;
   useEffect(() => {
     setMedia(selector);
   }, []);
