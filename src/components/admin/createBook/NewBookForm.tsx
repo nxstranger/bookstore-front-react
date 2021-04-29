@@ -34,7 +34,6 @@ const RegisterFormLayout = () => {
     slug: '',
     description: '',
   };
-
   const dispatch = useDispatch();
   const historyPush = useHistory().push;
   const validate = (values: FormValues) => {
@@ -65,7 +64,6 @@ const RegisterFormLayout = () => {
         alert(err.message);
       });
   };
-
   return (
     <Formik
       initialValues={initialValues}
@@ -88,7 +86,6 @@ const RegisterFormLayout = () => {
         <StyledSubmitButton type="submit">Add book</StyledSubmitButton>
       </StyledColumnForm>
     </Formik>
-
   );
 };
 
