@@ -38,15 +38,17 @@ export default ({ queryValues, categories, authors } : prop) => {
   const dispatch = useAppDispatch();
   const { catSlug } = useParams<{ catSlug: string }>();
   const history = useHistory();
+  console.log(queryValues);
   const priceRange = { min: 1, max: 1000 };
   const initialValues = {
-    authorId: (queryValues.authorId) ? queryValues.authorId : 'all',
+    authorId: queryValues.authorId || 'all',
     category: queryValues.category || 'all',
     priceFrom: queryValues.priceFrom || priceRange.min,
     priceTo: queryValues.priceTo || priceRange.max,
   };
   const handleSubmit = (values: filterInterface) => {
     let query = '';
+    console.log(values);
     if (values.authorId) query += `author_id=${values.authorId}&`;
     if (values.category) query += `category=${values.category}&`;
     if (values.priceFrom) query += `price_from=${values.priceFrom}&`;
@@ -76,6 +78,8 @@ export default ({ queryValues, categories, authors } : prop) => {
                   name="category"
                   id="category-filter"
                   as="select"
+                  value={props.values.category}
+                  onChange={props.handleChange}
                 >
                   <option key={0} value="all">All</option>
                   {
@@ -98,11 +102,13 @@ export default ({ queryValues, categories, authors } : prop) => {
                   name="authorId"
                   id="author-filter"
                   as="select"
+                  value={props.values.authorId}
+                  onChange={props.handleChange}
                 >
                   <option key={0} value="all">All</option>
                   {
                     authors.map((obj) => (
-                      <option key={obj.id} value={+obj.id}>
+                      <option key={obj.id} value={obj.id}>
                         {obj.name}
                       </option>
                     ))

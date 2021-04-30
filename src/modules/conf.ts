@@ -1,13 +1,13 @@
 export const back = {
-  hostname: 'back',
+  // hostname: 'back',
   port: 8080,
-  // hostname: 'http://localhost',
+  hostname: 'http://localhost',
   // port: 8080,
 };
 
 export const front = {
-  hostname: 'front',
+  // hostname: 'front',
   port: 3000,
-  // hostname: 'http://localhost',
+  hostname: 'http://localhost',
   // port: 3000,
 };
