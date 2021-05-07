@@ -38,7 +38,6 @@ export default ({ queryValues, categories, authors } : prop) => {
   const dispatch = useAppDispatch();
   const { catSlug } = useParams<{ catSlug: string }>();
   const history = useHistory();
-  console.log(queryValues);
   const priceRange = { min: 1, max: 1000 };
   const initialValues = {
     authorId: queryValues.authorId || 'all',
@@ -48,7 +47,6 @@ export default ({ queryValues, categories, authors } : prop) => {
   };
   const handleSubmit = (values: filterInterface) => {
     let query = '';
-    console.log(values);
     if (values.authorId) query += `author_id=${values.authorId}&`;
     if (values.category) query += `category=${values.category}&`;
     if (values.priceFrom) query += `price_from=${values.priceFrom}&`;

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import IsAuthLinkWrapper from '../auth/authWrapper/IsAuthLinkWrapper';
 import IsAdminLinkWrapper from '../auth/authWrapper/IsAdminLinkWrapper';
 import HeaderTopContent from './HeaderTopContent';
+import { useAppSelector } from '../../modules/redux/hooks';
 
 const StyledHeader = styled.header`
   background: white;
@@ -48,7 +49,12 @@ const StyledHeaderMain = styled.div`
   align-items: baseline;
 `;
 
+const CartWrapper = styled(IsAuthLinkWrapper)`
+  width: fit-content;
+`;
+
 function Header() {
+  const cartCounter = useAppSelector((state) => state.cart.cart);
   return (
     <StyledHeader>
       <div>
@@ -67,7 +73,12 @@ function Header() {
           <IsAuthLinkWrapper itTrue={false} to="/auth/registration">Registration</IsAuthLinkWrapper>
           <IsAuthLinkWrapper itTrue to="/wishlist">Wishlist</IsAuthLinkWrapper>
           <IsAuthLinkWrapper itTrue to="/profile/">Profile</IsAuthLinkWrapper>
-          <IsAuthLinkWrapper itTrue to="/cart/">Cart</IsAuthLinkWrapper>
+          <CartWrapper itTrue to="/cart/">
+            Cart
+            {' ['}
+            {cartCounter.length || '0'}
+            {'] '}
+          </CartWrapper>
         </HeaderLinkWrapper>
       </StyledHeaderMain>
     </StyledHeader>

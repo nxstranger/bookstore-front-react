@@ -53,7 +53,7 @@ const CreateAuthorForm = ({ jwt } : prop) => {
           <ErrorMessage name="name" />
         </StyledInputDiv>
         <StyledSubmitButton type="submit">
-          Submit
+          Create
         </StyledSubmitButton>
       </StyledColumnForm>
     </Formik>

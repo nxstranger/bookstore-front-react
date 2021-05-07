@@ -61,7 +61,7 @@ export default ({ jwt } : prop) => {
           <ErrorMessage name="slug" />
         </StyledInputDiv>
         <StyledSubmitButton type="submit">
-          Submit
+          Create
         </StyledSubmitButton>
       </StyledColumnForm>
     </Formik>

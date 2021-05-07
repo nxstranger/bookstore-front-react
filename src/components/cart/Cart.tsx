@@ -29,6 +29,11 @@ const StyledCostSpan = styled.span`
 
 const StyledOrderButton = styled.button`
   margin-top: 20px;
+  padding: 10px;
+  outline: none;
+  border: none;
+  background: #ccc;
+  border-radius: 5px;
 `;
 
 export default () => {
@@ -36,13 +41,13 @@ export default () => {
   const jwt = useAppSelector((state) => state.auth.authJwt);
   const dispatch = useAppDispatch();
   let totalCost = 0;
-  if (selector) {
+  if (selector && selector.length) {
     selector.forEach((obj) => {
       totalCost += obj.Book.price * obj.count;
     });
   }
   const makeOrderClick = () => {
-    if (selector.length) dispatch(asyncMakeOrder(jwt));
+    if (selector && selector.length) dispatch(asyncMakeOrder(jwt));
   };
   return (
     <StyledCart>
@@ -69,7 +74,7 @@ export default () => {
             {' Ъ'}
           </StyledCostSpan>
         </div>
-        <StyledOrderButton onClick={makeOrderClick} type="button">Order</StyledOrderButton>
+        <StyledOrderButton onClick={makeOrderClick} disabled={!selector.length} type="button">Order</StyledOrderButton>
       </DivTotalOrder>
     </StyledCart>
   );

@@ -16,7 +16,7 @@ import {
 import { front, back } from '../../../modules/conf';
 import { bookInterface } from '../../../modules/interfaces/modelInterfaces';
 import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
-import { asyncCreateCartPosition } from '../../../modules/redux/cartSlice';
+import { asyncCreateCartPosition, asyncLoadCart } from '../../../modules/redux/cartSlice';
 
 interface bookProps {
   bookObj: bookInterface;
@@ -34,6 +34,7 @@ function BookCard({ bookObj }:bookProps) {
         jwt,
         bookId: +bookObj.id,
       }));
+      setTimeout(() => dispatch(asyncLoadCart(jwt)), 300);
     } else {
       alert('Register to make order');
     }

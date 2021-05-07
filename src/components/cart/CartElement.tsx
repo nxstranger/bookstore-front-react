@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { cartInterface } from '../../modules/interfaces/modelInterfaces';
 import { useAppDispatch, useAppSelector } from '../../modules/redux/hooks';
 import { asyncDeleteCartPosition, asyncUpdateCartCount } from '../../modules/redux/cartSlice';
+import { back, front } from '../../modules/conf';
 
 const maxHeightElement = 100;
 
@@ -38,6 +39,8 @@ const StyledCartElement = styled.div`
   justify-content: space-between;
   height: ${maxHeightElement}px;
   margin: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid gray;
 `;
 
 const DivFlexColumn = styled.div`
@@ -76,6 +79,12 @@ const StyledButton = styled.button`
   padding: 5px;
   outline: none;
   border: none;
+  background: #ccc;
+  border-radius: 5px;
+  &:disabled {
+    background: white;
+    color: white;
+  }
 `;
 
 const StyledTitleDiv = styled.div`
@@ -96,10 +105,11 @@ const StyledPriceCountWrapper = styled.div`
 `;
 
 const ButtonStyledDelete = styled.button`
+  padding: 3px;
+  border-radius: 3px;
   align-self: flex-end;
   border: none;
   margin-right: 20px;
-  padding: 0;
   color: gray;
   font-size: 12px;
 `;
@@ -108,7 +118,9 @@ export default (obj: cartInterface) => {
   const { Book: book, count, bookId } = obj;
   const jwt = useAppSelector((state) => state.auth.authJwt);
   const dispatch = useAppDispatch();
-  const titleImageLink = `http://localhost:8080/${book.media}/${book.BookImages[0].name}_small.jpg`;
+  const titleImageLink = book.BookImages.length
+    ? `${back.hostname}:${back.port}/${book.media}/${book.BookImages[0].name}_small.jpg`
+    : `${front.hostname}:${front.port}/logo512.png`;
   const detailLink = `/book/detail/${book.id}_${book.slug}`;
   const handleDelete = () => {
     dispatch(asyncDeleteCartPosition({ jwt, bookId }));
@@ -122,7 +134,7 @@ export default (obj: cartInterface) => {
   return (
     <StyledCartElement>
       <StyledImgDiv>
-        <StyledImage src={titleImageLink} alt="hello mtfck" />
+        <StyledImage src={titleImageLink} alt="book image" />
       </StyledImgDiv>
       <DivFlexColumn>
         <ButtonStyledDelete type="button" onClick={handleDelete}>delete</ButtonStyledDelete>
@@ -142,9 +154,9 @@ export default (obj: cartInterface) => {
               </StyledPriceSpan>
             </StyledPriceDiv>
             <StyledCountDiv>
-              <StyledButton type="button" onClick={handleDecrease}>-</StyledButton>
+              <StyledButton type="button" disabled={count < 2} onClick={handleDecrease}>-</StyledButton>
               <StyledSpan>{count}</StyledSpan>
-              <StyledButton type="button" onClick={handleIncrease}>+</StyledButton>
+              <StyledButton type="button" disabled={count > 4} onClick={handleIncrease}>+</StyledButton>
             </StyledCountDiv>
           </StyledPriceCountWrapper>
         </DivFlexRow>

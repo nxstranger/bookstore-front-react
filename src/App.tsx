@@ -22,6 +22,7 @@ import { useAppDispatch, useAppSelector } from './modules/redux/hooks';
 import { asyncLoadUserInfo, asyncLoadUserRole, setJwt } from './modules/redux/authSlice';
 import IsAdminRouteWrapper from './components/auth/authWrapper/IsAdminRouteWrapper';
 import { asyncLoadAuthors, asyncLoadCategories } from './modules/redux/contentSlice';
+import { asyncLoadCart } from './modules/redux/cartSlice';
 
 const StyledAppWrapper = styled.div`
   max-width: 1200px;
@@ -42,6 +43,7 @@ function App() {
     if (token) {
       dispatch(asyncLoadUserInfo(token));
       dispatch(asyncLoadUserRole(token));
+      dispatch(asyncLoadCart(token));
       dispatch(setJwt(token));
     } else {
       dispatch(setJwt(''));

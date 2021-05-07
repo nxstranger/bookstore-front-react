@@ -58,7 +58,7 @@ export default ({ categories, jwt } : prop) => {
               </DropdownInput>
             </StyledInputDiv>
           </DropdownLabel>
-          <StyledSubmitButton type="submit">delete</StyledSubmitButton>
+          <StyledSubmitButton type="submit">Delete</StyledSubmitButton>
         </StyledColumnForm>
       </Formik>
     </div>

@@ -16,7 +16,11 @@ export default () => {
   return (
     <Styled>
       {text}
-      <DeleteAuthorForm authors={authorsState} jwt={jwt} />
+      {
+        authorsState.length
+          ? <DeleteAuthorForm authors={authorsState} jwt={jwt} />
+          : <span>No have authors</span>
+      }
     </Styled>
   );
 };
