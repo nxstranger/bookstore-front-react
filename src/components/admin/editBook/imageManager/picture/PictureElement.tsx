@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 import { imagesInterface } from '../../../../../modules/interfaces/modelInterfaces';
 import { useAppDispatch, useAppSelector } from '../../../../../modules/redux/hooks';
 import axios from '../../../../../modules/axios/config';
@@ -50,7 +51,15 @@ const PictureElement = (elem: prop) => {
       .then(() => {
         dispatch(removeImage(elem.image.id));
       })
-      .catch((err) => alert(err.message));
+      .catch((err) => toast.error(err.message || 'Error', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }));
   };
   return (
     <StyledPictureWrapper>

@@ -1,6 +1,7 @@
 import { ErrorMessage, Formik, FormikErrors } from 'formik';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { toast, ToastContainer } from 'react-toastify';
 import {
   bookInterfaceAdmin,
   bookUpdateDataInterface,
@@ -84,10 +85,28 @@ const BookData = (props: bookProps) => {
         },
       })
       .then((res) => {
-        if (res.status === 200) alert('updated');
-        dispatch(setBookInfo(payloadData));
+        if (res.status === 200) {
+          toast.success('Updated', {
+            position: 'top-center',
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          dispatch(setBookInfo(payloadData));
+        }
       })
-      .catch((err) => alert(err.message));
+      .catch((err) => toast.error(err.message || 'Error', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }));
   };
   useEffect(() => {
   }, [stateHook]);
@@ -102,6 +121,7 @@ const BookData = (props: bookProps) => {
   return (
     <FlexRowDiv>
       <ImageManager />
+      <ToastContainer limit={1} />
       <StyledFormDiv>
         <Formik
           initialValues={bookDefaultValues}

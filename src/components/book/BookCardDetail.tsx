@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { toast, ToastContainer } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import { bookInterface } from '../../modules/interfaces/modelInterfaces';
 import Gallery from './Gallery';
@@ -57,11 +58,22 @@ const BooKCardDetail = (props: BookDetail) => {
       }));
       history.push('/cart/');
     } else {
-      alert('Unauthorized');
+      toast.error('Unauthorized', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
   return (
     <Card>
+      <ToastContainer
+        limit={1}
+      />
       <Gallery media={media} mediaArray={BookImages} />
       <BookInfoDiv>
         <StyledSpanAuthor>

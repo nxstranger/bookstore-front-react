@@ -1,17 +1,18 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import {
   FormikErrors,
   Formik,
   ErrorMessage,
 } from 'formik';
 import axios from '../../../modules/axios/config';
+
 import {
   InputStyled,
   StyledColumnForm,
   StyledInputDiv,
   StyledSubmitButton,
 } from '../../../modules/styled/styledForm';
-
 import {
   fieldNotFilledValidator,
   emailValidate,
@@ -53,11 +54,27 @@ const LoginForm = () => {
           localStorage.setItem('AccessToken', result.data.access);
           localStorage.setItem('RefreshToken', result.data.refresh);
         } else {
-          alert('cannot get access');
+          toast.error('cannot get access', {
+            position: 'top-center',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         }
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        toast.error(err.response && err.response.data ? err.response.data.message : 'Error', {
+          position: 'top-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
   return (

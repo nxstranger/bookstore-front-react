@@ -1,5 +1,6 @@
 import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
   withFormik,
   FormikProps,
@@ -32,6 +33,7 @@ const RegisterFormLayout = (props: FormikProps<FormValues>) => {
     touched,
     errors,
     handleSubmit,
+    isSubmitting,
   } = props;
 
   return (
@@ -54,7 +56,7 @@ const RegisterFormLayout = (props: FormikProps<FormValues>) => {
         && errors.dateOfBirthday
         && <ErrDiv>{errors.dateOfBirthday}</ErrDiv>}
       </StyledInputDiv>
-      <StyledSubmitButton type="submit">Register</StyledSubmitButton>
+      <StyledSubmitButton disabled={isSubmitting} type="submit">Register</StyledSubmitButton>
     </StyledColumnForm>
   );
 };
@@ -87,11 +89,27 @@ const RegisterForm = withFormik<MyFormProps, FormValues>({
   handleSubmit: (values, props) => {
     axios.post('/auth/registration', JSON.stringify(values))
       .then(() => {
-        alert('You registered successfully');
-        props.props.history.push('/');
+        toast.success('You registered successfully', {
+          position: 'top-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => props.props.history.push('/'), 1000);
       })
       .catch((err) => {
-        alert(err.response.data.message || 'Error');
+        toast.error(err.response || err.response.data ? err.response.data.message : 'Error', {
+          position: 'top-center',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   },
 })(RegisterFormLayout);

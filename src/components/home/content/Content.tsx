@@ -1,5 +1,6 @@
 import { useLocation, useParams } from 'react-router-dom';
 import React, { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 import styled from 'styled-components';
 import ContentHead from './ContentHead';
 import ContentMain from './ContentMain';
@@ -22,6 +23,7 @@ function Content() {
   }, [query, catSlug]);
   return (
     <StyledContent>
+      <ToastContainer limit={1} />
       <ContentHead />
       <ContentMain />
     </StyledContent>

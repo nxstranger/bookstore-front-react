@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
+import { useParams } from 'react-router-dom';
 import {
   Field, Form, Formik,
 } from 'formik';
@@ -38,7 +39,15 @@ const ImageUploader = () => {
         .then(() => {
           dispatch(asyncLoadImagesBookId(+id));
         })
-        .catch((err) => alert(err.message));
+        .catch((err) => toast.error(err.message || 'Error', {
+          position: 'top-center',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }));
     }
   };
   const changeImageInput = (e : React.ChangeEvent<HTMLInputElement>) => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
   AuthorSpan,
   BookImageStyled,
@@ -36,7 +37,15 @@ function BookCard({ bookObj }:bookProps) {
       }));
       setTimeout(() => dispatch(asyncLoadCart(jwt)), 300);
     } else {
-      alert('Register to make order');
+      toast.error('Register to make order', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
   return (

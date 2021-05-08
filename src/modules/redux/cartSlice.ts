@@ -10,7 +10,7 @@ interface cartThunkInterface{
 
 export const asyncCreateCartPosition = createAsyncThunk('cart/asyncCreateCartPosition',
   async ({ jwt, bookId }: cartThunkInterface) => {
-    const result = await axios.post(
+    await axios.post(
       '/cart/', { bookId },
       {
         headers: {
@@ -18,7 +18,6 @@ export const asyncCreateCartPosition = createAsyncThunk('cart/asyncCreateCartPos
         },
       },
     );
-    console.log(result);
   });
 
 export const asyncLoadCart = createAsyncThunk <

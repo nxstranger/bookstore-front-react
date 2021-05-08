@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ToastContainer } from 'react-toastify';
 import LoginForm from './LoginForm';
 
 const StyledLoginForm = styled.div`
@@ -10,6 +11,7 @@ const StyledLoginForm = styled.div`
 const Login = () => (
   <div>
     <StyledLoginForm>
+      <ToastContainer limit={1} />
       <LoginForm />
     </StyledLoginForm>
   </div>

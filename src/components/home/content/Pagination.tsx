@@ -19,7 +19,7 @@ interface paginationPropsInterface {
 }
 
 interface paginationLink {
-  edge?: 'start' | 'end' | '...',
+  edge?: 'start' | 'end',
   value?: number,
 }
 

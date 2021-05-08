@@ -1,10 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
   FormikErrors,
   Formik,
-  ErrorMessage,
+  ErrorMessage, FormikProps,
 } from 'formik';
 import {
   fieldNotFilledValidator,
@@ -55,37 +58,60 @@ const RegisterFormLayout = () => {
       },
     )
       .then((result) => {
-        alert('Created');
+        toast.success('Created', {
+          position: 'top-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         const bookId: string = result.data.id;
         dispatch(editableBook(result.data));
-        historyPush(`/admin/book-edit/${bookId}`);
+        setTimeout(() => {
+          historyPush(`/admin/book-edit/${bookId}`);
+        }, 2000);
       })
       .catch((err) => {
-        alert(err.message);
+        toast.error(err.message || 'Error', {
+          position: 'top-center',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      validate={validate}
-    >
-      <StyledColumnForm>
-        <StyledInputDiv>
-          <InputStyled required name="title" type="text" placeholder="title" />
-          <ErrorMessage name="title" />
-        </StyledInputDiv>
-        <StyledInputDiv>
-          <InputStyled required name="slug" type="text" placeholder="slug" />
-          <ErrorMessage name="slug" />
-        </StyledInputDiv>
-        <StyledInputDiv>
-          <TextareaStyled required name="description" component="textarea" placeholder="description" />
-          <ErrorMessage name="description" />
-        </StyledInputDiv>
-        <StyledSubmitButton type="submit">Add book</StyledSubmitButton>
-      </StyledColumnForm>
-    </Formik>
+    <div>
+      <ToastContainer limit={1} />
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validate={validate}
+      >
+        { (props: FormikProps<any>) => (
+          <StyledColumnForm>
+            <StyledInputDiv>
+              <InputStyled required name="title" type="text" placeholder="title" />
+              <ErrorMessage name="title" />
+            </StyledInputDiv>
+            <StyledInputDiv>
+              <InputStyled required name="slug" type="text" placeholder="slug" />
+              <ErrorMessage name="slug" />
+            </StyledInputDiv>
+            <StyledInputDiv>
+              <TextareaStyled required name="description" component="textarea" placeholder="description" />
+              <ErrorMessage name="description" />
+            </StyledInputDiv>
+            <StyledSubmitButton disabled={props.isSubmitting} type="submit">Add book</StyledSubmitButton>
+          </StyledColumnForm>
+        )}
+      </Formik>
+    </div>
   );
 };
 

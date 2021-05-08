@@ -57,10 +57,10 @@ export default (linkProp: paginationLinkInterface) => {
   if (edge) {
     switch (edge) {
       case 'start':
-        text = '<';
+        text = '<<';
         break;
       case 'end':
-        text = '>';
+        text = '>>';
         break;
       default:
         break;
