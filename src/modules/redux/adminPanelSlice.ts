@@ -11,6 +11,19 @@ export const asyncLoadBookById = createAsyncThunk(
   },
 );
 
+export const asyncDeleteUnpublishedBookById = createAsyncThunk(
+  'adminPanel/asyncDeleteUnpublishedBookById',
+  async ({ id, token }: { id: string, token: string }) => {
+    const resp = await axios.delete(`book/id/${id}`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      });
+    return (resp.status === 200) ? +id : undefined;
+  },
+);
+
 export const asyncLoadImagesBookId = createAsyncThunk(
   'adminPanel/asyncLoadImagesByBookId',
   async (id:number) => {
@@ -93,6 +106,15 @@ export const adminPanelSlice = createSlice({
       state,
       action,
     ) => ({ ...state, unpublishedBooks: action.payload }));
+    builder.addCase(asyncDeleteUnpublishedBookById.fulfilled, (
+      state,
+      action,
+    ) => (action.payload
+      ? {
+        ...state,
+        unpublishedBooks: state.unpublishedBooks.filter((obj) => +obj.id !== action.payload),
+      }
+      : { ...state }));
   },
 });
 
@@ -103,8 +125,6 @@ export const {
   setBookInfo,
   removeImage,
 } = adminPanelSlice.actions;
-
-export const selectAdminPanel = (state: RootState) => state.adminPanel;
 
 export const getBookImages = (state: RootState) => state.adminPanel.images;
 
