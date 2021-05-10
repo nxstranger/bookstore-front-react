@@ -37,7 +37,7 @@ export const StyledDivForImage = styled.div`
 export const BookImageStyled = styled.img`
   width: 150px;
   max-height: 200px;
-  object-fit: cover;
+  object-fit: contain;
   align-self: center;
 `;
 

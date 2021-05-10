@@ -14,8 +14,14 @@ const Card = styled.div`
   display: flex;
   flex-direction: row;
   border: 1px darkgreen solid;
-  margin: 10px;
+  margin: 10px 0;
   padding: 20px;
+  @media (max-width: 1199px) {
+    flex-direction: row;
+  }
+  @media (max-width: 999px) {
+    flex-direction: column;
+  }
 `;
 
 const BookInfoDiv = styled.div`
@@ -23,7 +29,7 @@ const BookInfoDiv = styled.div`
   flex-direction: column;
   padding: 0 20px;
   color: #333;
-  background: #efefef;
+  background: white;
 `;
 
 const StyledSpanAuthor = styled.span`
@@ -36,12 +42,18 @@ const StyledSpanTitle = styled.span`
 `;
 const StyledSpanDescription = styled.span`
   padding: 0 20px 20px 20px;
+  text-align: justify;
 `;
-const StyledSpanPrice = styled.span`
-  padding: 0 0 20px 20px;
-  font-size: 20px;
-  color: #c00;
+const StyledButtonBuy = styled.button`
+  width: fit-content;
+  margin: 20px 20px auto auto;
+  padding: 5px 5px;
+  border: none;
+  color: white;
   font-weight: 500;
+  background: #f64444;
+  font-size: 18px;
+  box-shadow: 0 0 2px #f64444;
 `;
 
 const BooKCardDetail = (props: BookDetail) => {
@@ -59,6 +71,7 @@ const BooKCardDetail = (props: BookDetail) => {
       history.push('/cart/');
     } else {
       toast.error('Unauthorized', {
+        toastId: 'cartUnregisterError',
         position: 'top-center',
         autoClose: 2000,
         hideProgressBar: false,
@@ -71,11 +84,11 @@ const BooKCardDetail = (props: BookDetail) => {
   };
   return (
     <Card>
-      <ToastContainer
-        limit={1}
-      />
       <Gallery media={media} mediaArray={BookImages} />
       <BookInfoDiv>
+        <ToastContainer
+          limit={1}
+        />
         <StyledSpanAuthor>
           {(book?.BookAuthor) ? book?.BookAuthor.name : ' undefined'}
         </StyledSpanAuthor>
@@ -85,13 +98,11 @@ const BooKCardDetail = (props: BookDetail) => {
         <StyledSpanDescription>
           {book?.description}
         </StyledSpanDescription>
-        <button onClick={handleClick} type="button">
-          <StyledSpanPrice>
-            {'BUY   '}
-            {book?.price}
-            {'Ъ '}
-          </StyledSpanPrice>
-        </button>
+        <StyledButtonBuy onClick={handleClick} type="button">
+          {'Buy   '}
+          {book?.price}
+          {'Ъ '}
+        </StyledButtonBuy>
       </BookInfoDiv>
     </Card>
   );

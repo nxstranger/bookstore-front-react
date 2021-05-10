@@ -38,8 +38,9 @@ function BookCard({ bookObj }:bookProps) {
       setTimeout(() => dispatch(asyncLoadCart(jwt)), 300);
     } else {
       toast.error('Register to make order', {
+        toastId: 'cartUnregisterError',
         position: 'top-center',
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
