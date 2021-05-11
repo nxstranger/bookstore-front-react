@@ -55,6 +55,7 @@ const CartWrapper = styled(IsAuthLinkWrapper)`
 
 function Header() {
   const cartCounter = useAppSelector((state) => state.cart.cart);
+  const wishlist = useAppSelector((state) => state.wishlist.wishedBooks);
   return (
     <StyledHeader>
       <div>
@@ -71,7 +72,12 @@ function Header() {
           <IsAuthLinkWrapper itTrue to="/auth/logout">Logout</IsAuthLinkWrapper>
           <IsAdminLinkWrapper itTrue to="/admin">Admin</IsAdminLinkWrapper>
           <IsAuthLinkWrapper itTrue={false} to="/auth/registration">Registration</IsAuthLinkWrapper>
-          <Link to="/wishlist">Wishlist</Link>
+          <Link to="/wishlist">
+            Wishlist
+            {' ['}
+            {wishlist.length || '0'}
+            {'] '}
+          </Link>
           <IsAuthLinkWrapper itTrue to="/profile/">Profile</IsAuthLinkWrapper>
           <CartWrapper itTrue to="/cart/">
             Cart
