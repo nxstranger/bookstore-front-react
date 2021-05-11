@@ -1,9 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import styled from 'styled-components';
 import { bookInterface } from '../../modules/interfaces/modelInterfaces';
 import BooKCardDetail from './BookCardDetail';
 import { useAppDispatch, useAppSelector } from '../../modules/redux/hooks';
 import { asyncLoadBookInfo } from '../../modules/redux/contentSlice';
+
+const StyledDivNoContent = styled.div`
+  padding: 40px 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Span404Value = styled.div`
+  margin: auto;
+  font-size: 40px;
+`;
+
+const Span404Message = styled.div`
+  margin: auto;
+`;
 
 function Book() {
   const { bookSlug } = useParams<{ bookSlug: string}>();
@@ -33,7 +50,12 @@ function Book() {
       }
       { (book)
         ? <BooKCardDetail book={book} />
-        : 'book not found' }
+        : (
+          <StyledDivNoContent>
+            <Span404Value>404</Span404Value>
+            <Span404Message>Not found</Span404Message>
+          </StyledDivNoContent>
+        ) }
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { front } from '../conf';
 
 export const StyledCardWrapper = styled.div`
   width: 25%;
@@ -40,8 +41,15 @@ export const BookImageStyled = styled.img`
   object-fit: contain;
   align-self: center;
 `;
+export const ButtonStyledAddToCart = styled.button`
+  border: none;
+  width: 120px;
+  background: #f64444;
+  font-size: 18px;
+  box-shadow: 0 0 2px #f64444;
+`;
 
-export const WishlistAddStyledDiv = styled.div`
+export const ButtonStyledToWishlist = styled.button`
   width: 40px;
   height: 40px;
   display: flex;
@@ -50,17 +58,11 @@ export const WishlistAddStyledDiv = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  border: none;
   border-radius: 50%;
   margin-right: 20px;
-  background: white center/60% url("http://localhost:3000/icons/heart.svg") no-repeat;
-`;
 
-export const ButtonStyledAddToCart = styled.button`
-  border: none;
-  width: 120px;
-  background: #f64444;
-  font-size: 18px;
-  box-shadow: 0 0 2px #f64444;
+  background: white center/60% url("${front.hostname}:${front.port}/icons/${(p:{wished: boolean}) => (p.wished ? 'heart-wished.svg' : 'heart.svg')}") no-repeat;
 `;
 
 export const DivFlexRow = styled.div`

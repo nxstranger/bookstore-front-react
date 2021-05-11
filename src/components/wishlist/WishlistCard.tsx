@@ -1,23 +1,18 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react';
+import axios from '../../modules/axios/config';
+import { bookInterface } from '../../modules/interfaces/modelInterfaces';
+import BookCard from '../home/card/BookCard';
 
-const Card = styled.div`
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  border: 1px darkgreen solid;
-  margin: 10px;
-  padding: 10px;
-`;
-
-function WishlistCard() {
+export default ({ bookId }: { bookId: number }) => {
+  const [bookInfo, setBookInfo] = useState<bookInterface | undefined>(undefined);
+  useEffect(() => {
+    const getBookData = async () => {
+      const req = await axios.get(`/book/id/${bookId}`);
+      setBookInfo(req.status === 200 ? req.data : undefined);
+    };
+    getBookData();
+  }, []);
   return (
-    <Card>
-      <span>Cart</span>
-      <img src="/src/logo.svg" alt="BookImage" />
-      <span>book description</span>
-    </Card>
+    bookInfo ? <BookCard bookObj={bookInfo} wished /> : <span>not found</span>
   );
-}
-
-export default WishlistCard;
+};

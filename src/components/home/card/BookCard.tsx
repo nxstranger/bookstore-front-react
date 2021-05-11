@@ -11,25 +11,27 @@ import {
   DivBookInfo,
   DivFlexRow,
   StyledDivForImage,
-  WishlistAddStyledDiv,
   StyledCardWrapper,
-} from './stylesBookCard';
+  ButtonStyledToWishlist,
+} from '../../../modules/styled/stylesBookCard';
 import { front, back } from '../../../modules/conf';
 import { bookInterface } from '../../../modules/interfaces/modelInterfaces';
 import { useAppDispatch, useAppSelector } from '../../../modules/redux/hooks';
 import { asyncCreateCartPosition, asyncLoadCart } from '../../../modules/redux/cartSlice';
+import { addWishedBook, removeWishedBook } from '../../../modules/redux/wishlistSlice';
 
 interface bookProps {
-  bookObj: bookInterface;
+  bookObj: bookInterface,
+  wished: boolean
 }
 
-function BookCard({ bookObj }:bookProps) {
+function BookCard({ bookObj, wished }:bookProps) {
   const dispatch = useAppDispatch();
   const jwt = useAppSelector((state) => state.auth.authJwt);
   const detailLink = `/book/detail/${bookObj.id}_${bookObj.slug}`;
   const titleImageLink = bookObj.BookImages.length
     ? `${back.hostname}:${back.port}/${bookObj.media}/${bookObj.BookImages[0].name}_small.jpg` : `${front.hostname}:${front.port}/logo512.png`;
-  const handleClick = () => {
+  const clickToCart = () => {
     if (jwt) {
       dispatch(asyncCreateCartPosition({
         jwt,
@@ -48,6 +50,9 @@ function BookCard({ bookObj }:bookProps) {
         progress: undefined,
       });
     }
+  };
+  const clickToWishlist = () => {
+    dispatch(wished ? removeWishedBook(bookObj.id) : addWishedBook(bookObj.id));
   };
   return (
     <StyledCardWrapper>
@@ -72,8 +77,8 @@ function BookCard({ bookObj }:bookProps) {
           </DivBookInfo>
         </Link>
         <DivFlexRow>
-          <ButtonStyledAddToCart onClick={handleClick} type="button">Add to cart</ButtonStyledAddToCart>
-          <WishlistAddStyledDiv />
+          <ButtonStyledAddToCart onClick={clickToCart} type="button">Add to cart</ButtonStyledAddToCart>
+          <ButtonStyledToWishlist type="button" onClick={clickToWishlist} wished={wished} />
         </DivFlexRow>
       </StyledCard>
     </StyledCardWrapper>

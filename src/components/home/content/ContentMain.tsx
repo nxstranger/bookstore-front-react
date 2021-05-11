@@ -13,10 +13,22 @@ const Main = styled.main`
 
 const StyledDivNoContent = styled.div`
   margin: auto;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Span404Value = styled.div`
+  margin: auto;
+  font-size: 40px;
+`;
+
+const Span404Message = styled.div`
+  margin: auto;
 `;
 
 function ContentMain() {
   const booksSelector = useAppSelector((state) => state.books.books);
+  const wishlistSelector = useAppSelector((state) => state.wishlist.wishedBooks);
   return (
     <Main>
       { booksSelector.length
@@ -24,11 +36,13 @@ function ContentMain() {
           <BookCard
             bookObj={obj}
             key={obj.id}
+            wished={wishlistSelector && wishlistSelector.includes(obj.id)}
           />
         )))
         : (
           <StyledDivNoContent>
-            No have books
+            <Span404Value>404</Span404Value>
+            <Span404Message>No have books</Span404Message>
           </StyledDivNoContent>
         )}
     </Main>

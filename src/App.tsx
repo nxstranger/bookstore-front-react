@@ -23,6 +23,7 @@ import { asyncLoadUserInfo, asyncLoadUserRole, setJwt } from './modules/redux/au
 import IsAdminRouteWrapper from './components/auth/authWrapper/IsAdminRouteWrapper';
 import { asyncLoadAuthors, asyncLoadCategories } from './modules/redux/contentSlice';
 import { asyncLoadCart } from './modules/redux/cartSlice';
+import { asyncLoadWishlist } from './modules/redux/wishlistSlice';
 
 const StyledAppWrapper = styled.div`
   max-width: 1200px;
@@ -34,11 +35,13 @@ const StyledAppWrapper = styled.div`
 function App() {
   const dispatch = useAppDispatch();
   const jwtSelector = useAppSelector((state) => state.auth.authJwt);
+  const wishlist = useAppSelector((state) => state.wishlist.wishedBooks);
   useEffect(() => {
     dispatch(asyncLoadCategories());
     dispatch(asyncLoadAuthors());
   }, []);
   useEffect(() => {
+    dispatch(asyncLoadWishlist());
     const token = localStorage.getItem('AccessToken');
     if (token) {
       dispatch(asyncLoadUserInfo(token));
@@ -49,6 +52,9 @@ function App() {
       dispatch(setJwt(''));
     }
   }, [jwtSelector]);
+  useEffect(() => {
+    localStorage.setItem('Wishlist', JSON.stringify(wishlist));
+  }, [wishlist]);
   return (
     <StyledAppWrapper>
       <div className="App">
@@ -56,7 +62,7 @@ function App() {
         <Switch>
           <IsAuthWrapper itTrue exact path="/profile/" component={Profile} />
           <IsAuthWrapper itTrue exact path="/cart/" component={CartWrapper} />
-          <IsAuthWrapper itTrue exact path="/wishlist" component={Wishlist} />
+          <Route exact path="/wishlist" component={Wishlist} />
           <IsAdminRouteWrapper itTrue exact path="/admin" component={AdminPanel} />
           <IsAdminRouteWrapper itTrue exact path="/admin/create-book" component={CreateBookMain} />
           <IsAdminRouteWrapper itTrue exact path="/admin/book-edit/:id" component={EditBookMain} />
