@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Formik, FormikProps } from 'formik';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { DropdownLabel, StyledSelector } from '../../../modules/styled/dropDownStyled';
 import {
   StyledColumnForm,
@@ -36,7 +36,6 @@ const SubmitButton = styled.button`
 
 export default ({ queryValues, categories, authors } : prop) => {
   const dispatch = useAppDispatch();
-  const { catSlug } = useParams<{ catSlug: string }>();
   const history = useHistory();
   const priceRange = { min: 1, max: 1000 };
   const initialValues = {
@@ -53,7 +52,7 @@ export default ({ queryValues, categories, authors } : prop) => {
     if (values.priceTo) query += `price_to=${values.priceTo}&`;
     if (query) {
       query = `/?${query.slice(0, -1)}`;
-      history.push(catSlug ? `/book/category/${catSlug}${query}` : query);
+      history.push(query);
       dispatch(setOrdering(''));
       dispatch(setPage(0));
     }

@@ -44,13 +44,14 @@ function Home() {
     dispatch(setFilterQuery(filter));
     if (queryObject.page) dispatch(setPage(queryObject.page));
     if (queryObject.ordering) dispatch(setOrdering(queryObject.ordering));
-  }, [selectLocation]);
+  }, [selectLocation.pathname]);
   return (
     <Main>
       <div>
         <CategoryList />
         <FilterWrapper
           filter={filter}
+          key={selectLocation.search}
         />
       </div>
       <Content />
